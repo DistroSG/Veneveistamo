@@ -35,6 +35,10 @@ public class PaaIkkuna extends JFrame {
     public PaaIkkuna() {
         pohjapaneeli.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pohjapaneeli.add(lisaaNappi);
+        pohjapaneeli.add(poistaNappi);
+        pohjapaneeli.add(muutuNappi);
+        pohjapaneeli.add(haeNappi);
+        pohjapaneeli.add(haeKaikkiNappi);
     
         
         this.add(pohjapaneeli);
