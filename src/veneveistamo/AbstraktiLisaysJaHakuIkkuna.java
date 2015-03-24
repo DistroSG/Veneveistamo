@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *penis
+ *
  * @author s1300778
  */
 public abstract class AbstraktiLisaysJaHakuIkkuna extends JFrame {
