@@ -27,14 +27,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
-
+ */
 package veneveistamo;
 
 /*
  * SimpleTableDemo.java requires no other files.
  */
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -43,35 +41,49 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
+import javax.swing.table.TableColumn;
 
 public class SimpleTableDemo extends JPanel {
+
     private boolean DEBUG = false;
 
     public SimpleTableDemo() {
-        super(new GridLayout(1,0));
-
+        super(new GridLayout(1, 0));
+       
         String[] columnNames = {"First Name",
-                                "Last Name",
-                                "Sport",
-                                "# of Years",
-                                "Vegetarian"};
+            "Last Name",
+            "Sport",
+            "# of Years",
+            "Vegetarian"};
 
         Object[][] data = {
-	    {"Kathy", "Smith",
-	     "Snowboarding", new Integer(5), new Boolean(false)},
-	    {"John", "Doe",
-	     "Rowing", new Integer(3), new Boolean(true)},
-	    {"Sue", "Black",
-	     "Knitting", new Integer(2), new Boolean(false)},
-	    {"Jane", "White",
-	     "Speed reading", new Integer(20), new Boolean(true)},
-	    {"Joe", "Brown",
-	     "Pool", new Integer(10), new Boolean(false)}
+            {"Kathy", "Smith",
+                "Snowboarding", new Integer(5), new Boolean(false)},
+            {"John", "Doe",
+                "Rowing", new Integer(3), new Boolean(true)},
+            {"Sue", "Black",
+                "Knitting", new Integer(2), new Boolean(false)},
+            {"Jane", "White",
+                "Speed reading", new Integer(20), new Boolean(true)},
+            {"Joe", "Brown",
+                "Pool", new Integer(10), new Boolean(false)}
         };
 
         final JTable table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
+
+        //makes third column bigger than the other columns:
+        TableColumn column = null;
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            column = table.getColumnModel().getColumn(i);
+            if (i == 2) {
+                column.setPreferredWidth(100); //third column is bigger
+            } else {
+                column.setPreferredWidth(50);
+            }
+        }
 
         if (DEBUG) {
             table.addMouseListener(new MouseAdapter() {
@@ -94,9 +106,9 @@ public class SimpleTableDemo extends JPanel {
         javax.swing.table.TableModel model = table.getModel();
 
         System.out.println("Value of data: ");
-        for (int i=0; i < numRows; i++) {
+        for (int i = 0; i < numRows; i++) {
             System.out.print("    row " + i + ":");
-            for (int j=0; j < numCols; j++) {
+            for (int j = 0; j < numCols; j++) {
                 System.out.print("  " + model.getValueAt(i, j));
             }
             System.out.println();
@@ -105,9 +117,8 @@ public class SimpleTableDemo extends JPanel {
     }
 
     /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
+     * Create the GUI and show it. For thread safety, this method should be
+     * invoked from the event-dispatching thread.
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
@@ -122,6 +133,13 @@ public class SimpleTableDemo extends JPanel {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+        
+         try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
+        } catch (Exception e) {
+        }
+
     }
 
     public static void main(String[] args) {
