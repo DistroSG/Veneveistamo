@@ -16,15 +16,11 @@ public class Veneveistamo {
     /**
      * @param args the command line arguments
      */
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-
             @Override
-
             public void run() {
-
                 new PaaIkkuna().setVisible(true);
-
             }
         });
     }

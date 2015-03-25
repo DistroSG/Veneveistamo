@@ -22,15 +22,35 @@ import javax.swing.JTextArea;
  */
 public class PaaIkkuna extends JFrame {
     
-    private final JPanel pohjapaneeli = new JPanel(new GridLayout(5, 1, 5, 5));
+    private final JPanel pohjapaneeli = new JPanel(new GridLayout(6, 1, 5, 5));
     
     private final JButton lisaaNappi = new JButton("Lisää");
     private final JButton poistaNappi = new JButton("Poista");
     private final JButton muutuNappi = new JButton("Muuta");
     private final JButton haeNappi = new JButton("Hae");
     private final JButton haeKaikkiNappi = new JButton("Hae kaikki");
+    private final JButton testNappi = new JButton("Test");
     
     private final Tietovarasto rekisteri = new Tietovarasto();
+    
+    String[] columnNames = {"First Name",
+            "Last Name",
+            "Sport",
+            "# of Years",
+            "Vegetarian"};
+    
+    Object[][] data = {
+            {"Kathy", "Smith",
+                "Snowboarding", new Integer(5), new Boolean(false)},
+            {"John", "Doe",
+                "Rowing", new Integer(3), new Boolean(true)},
+            {"Sue", "Black",
+                "Knitting", new Integer(2), new Boolean(false)},
+            {"Jane", "White",
+                "Speed reading", new Integer(20), new Boolean(true)},
+            {"Joe", "Brown",
+                "Pool", new Integer(10), new Boolean(false)}
+        };
     
     public PaaIkkuna() {
         pohjapaneeli.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -39,6 +59,7 @@ public class PaaIkkuna extends JFrame {
         pohjapaneeli.add(muutuNappi);
         pohjapaneeli.add(haeNappi);
         pohjapaneeli.add(haeKaikkiNappi);
+        pohjapaneeli.add(testNappi);
     
         
         this.add(pohjapaneeli);
@@ -92,7 +113,19 @@ public class PaaIkkuna extends JFrame {
             
         });
         
+        testNappi.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suoritaTestaus();
+            }
+
+            
+            
+        });
+        
     }
+    
     
     private void suoritalisays() {
         new LisaysIkkuna(rekisteri).setVisible(true);
@@ -109,6 +142,12 @@ public class PaaIkkuna extends JFrame {
     private void suoritaHakeminen() {
         new HakuIkkuna(rekisteri).setVisible(true);
     }
+     
+    private void suoritaTestaus() {
+       Ikkuna test = new Ikkuna(rekisteri, columnNames, data, "Test");     
+       test.setVisible(true);
+        
+            }
     
     private void suorihaekaikki() {
         JTextArea hakulause = new JTextArea(10, 40);
