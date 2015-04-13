@@ -36,6 +36,7 @@ public class HakuIkkuna extends AbstraktiLisaysJaHakuIkkuna {
         this.pack();
 
         lista.addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 //jos valinta on juuri vaihtumassa palataan kuuntelemaan
                 if (e.getValueIsAdjusting()) {

@@ -48,10 +48,18 @@ public class Taulukkomalli extends AbstractTableModel {
         return data.get(row).get(col);
     }
 
- 
     public void addRow(List rowData) {
         data.add(rowData);
         fireTableRowsInserted(data.size() - 1, data.size() - 1);
+    }
+
+    public void removeRow(int row) {
+        data.remove(row);
+        fireTableRowsDeleted(row, row);
+    }
+
+    public void updateTabel() {
+        fireTableDataChanged();
     }
 
     public String[] getColumnNames() {

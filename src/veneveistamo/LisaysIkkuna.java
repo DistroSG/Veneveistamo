@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class LisaysIkkuna extends AbstraktiLisaysJaHakuIkkuna {
 
@@ -76,6 +75,7 @@ public class LisaysIkkuna extends AbstraktiLisaysJaHakuIkkuna {
                     ohjaaja.getText(), vuosi));
             Onnistuminen("Lisäys onnistui");
             tyhjennaKentat();
+            
         } catch (NumberFormatException e) {
             virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
         }
@@ -83,5 +83,8 @@ public class LisaysIkkuna extends AbstraktiLisaysJaHakuIkkuna {
 
     private void suoritaSuljetus() {
         this.dispose();
+        
+        
     }
+    
 }
