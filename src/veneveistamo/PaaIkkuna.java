@@ -41,11 +41,6 @@ public class PaaIkkuna extends JFrame {
 
     public PaaIkkuna() {
         pohjapaneeli.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        pohjapaneeli.add(lisaaNappi);
-        pohjapaneeli.add(poistaNappi);
-        pohjapaneeli.add(muutuNappi);
-        pohjapaneeli.add(haeNappi);
-        pohjapaneeli.add(haeKaikkiNappi);
         pohjapaneeli.add(testNappi);
 
         this.add(pohjapaneeli);
@@ -53,42 +48,6 @@ public class PaaIkkuna extends JFrame {
         this.setTitle("PääIkkuna");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-
-        lisaaNappi.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suoritalisays();
-            }
-
-        });
-
-        poistaNappi.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suoripoisto();
-            }
-
-        });
-
-        muutuNappi.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suoritaMuutos();
-            }
-
-        });
-
-        haeNappi.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suoritaHakeminen();
-            }
-
-        });
 
         haeKaikkiNappi.addActionListener(new ActionListener() {
 
@@ -108,22 +67,6 @@ public class PaaIkkuna extends JFrame {
 
         });
 
-    }
-
-    private void suoritalisays() {
-        new LisaysIkkuna(rekisteri).setVisible(true);
-    }
-
-    private void suoripoisto() {
-        new PoistoCombo(rekisteri).setVisible(true);
-    }
-
-    private void suoritaMuutos() {
-        new MuutosIkkuna(rekisteri).setVisible(true);
-    }
-
-    private void suoritaHakeminen() {
-        new HakuIkkuna(rekisteri).setVisible(true);
     }
 
     private void suoritaTestaus() {

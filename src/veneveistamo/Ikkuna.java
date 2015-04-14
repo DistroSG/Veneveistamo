@@ -338,8 +338,6 @@ public class Ikkuna extends JFrame {
         GroupLayout asetteluVasenosa = new GroupLayout(vasenosa);
         vasenosa.setLayout(asetteluVasenosa);
 
-//        asetteluVasenosa.setAutoCreateContainerGaps(true);
-//        asetteluVasenosa.setAutoCreateGaps(true);
 
         //asetellaan X-suuntaan
         GroupLayout.ParallelGroup pohjaXV = asetteluVasenosa.createParallelGroup();
@@ -350,7 +348,6 @@ public class Ikkuna extends JFrame {
 
         //asetellaan Y-suuntaan
         GroupLayout.SequentialGroup pohjaYV = asetteluVasenosa.createSequentialGroup();
-//        pohjaYV.addPreferredGap(LayoutStyle.ComponentPlacement.INDENT)
         pohjaYV.addComponent(vasenylaosa);
         pohjaYV.addComponent(vasenalaosa);
 
@@ -360,8 +357,6 @@ public class Ikkuna extends JFrame {
         GroupLayout asetteluPohja = new GroupLayout(pohjapaneeli);
         pohjapaneeli.setLayout(asetteluPohja);
 
-//        asetteluPohja.setAutoCreateContainerGaps(true);
-//        asetteluPohja.setAutoCreateGaps(true);
 
         //asetellaan X-suuntaan
         GroupLayout.SequentialGroup pohjaXP = asetteluPohja.createSequentialGroup();
