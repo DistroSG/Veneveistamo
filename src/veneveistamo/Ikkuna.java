@@ -60,8 +60,8 @@ public class Ikkuna extends JFrame {
 
     private final JButton tyhjennaValintaNappi = new JButton("Tyhjennä valinta");
     private final JButton lisaaNappi = new JButton("Lisää");
-    private final JButton muutuNappi = new JButton("Muutu");
-    private final JButton poistaNappi = new JButton("Poistaa");
+    private final JButton muutuNappi = new JButton("Muuta");
+    private final JButton poistaNappi = new JButton("Poista");
 
     private final Tietovarasto rekisteri;
 
