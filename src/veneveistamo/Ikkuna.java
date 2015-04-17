@@ -5,24 +5,27 @@
  */
 package veneveistamo;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import static javax.swing.GroupLayout.Alignment.LEADING;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -45,6 +48,7 @@ public class Ikkuna extends JFrame {
     private final JPanel vasenylaosa = new JPanel();
     private final JPanel vasenalaosa = new JPanel();
     private final JPanel pohjapaneeli = new JPanel();
+    private final JPanel menupaneeli = new JPanel(new FlowLayout(FlowLayout.LEADING));
 
     private final JLabel hakuSelite = new JLabel("Haku");
     private final JLabel elokuvaNroSelite = new JLabel("ElokuvaNro: ");
@@ -70,10 +74,21 @@ public class Ikkuna extends JFrame {
     private final JScrollPane vieritettavaRuutu;
     private final Taulukkomalli malli;
 
+    private final JMenuBar menu1 = new JMenuBar();
+    
+    private final JMenu valinta1=new JMenu("Valinnat");
+    
+    private final JMenuItem item1 = new JMenuItem("Testi nappula :-)");
+
     public Ikkuna(Tietovarasto rekisteri, Taulukkomalli malli, String otsikko) {
 
         this.rekisteri = rekisteri;
         this.malli = malli;
+        
+        
+        menupaneeli.add(menu1);
+        menu1.add(valinta1);
+        valinta1.add(item1);
 
         muutuNappi.setEnabled(false);
         poistaNappi.setEnabled(false);
@@ -122,6 +137,15 @@ public class Ikkuna extends JFrame {
                     }
                 }
         );
+        
+        
+        item1.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
 
         lisaaNappi.addActionListener(new ActionListener() {
 
@@ -228,9 +252,7 @@ public class Ikkuna extends JFrame {
         //asetellaan X-suuntaan
         GroupLayout.SequentialGroup ylaosaRyhmaXO = oikeanosanAsettelu.createSequentialGroup();
         ylaosaRyhmaXO.addComponent(hakuSelite);
-        ylaosaRyhmaXO.addComponent(hakuKentta, GroupLayout.PREFERRED_SIZE,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.PREFERRED_SIZE);
+        ylaosaRyhmaXO.addComponent(hakuKentta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
         ylaosaRyhmaXO.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE);
         ylaosaRyhmaXO.addComponent(tyhjennaValintaNappi);
 
@@ -338,7 +360,6 @@ public class Ikkuna extends JFrame {
         GroupLayout asetteluVasenosa = new GroupLayout(vasenosa);
         vasenosa.setLayout(asetteluVasenosa);
 
-
         //asetellaan X-suuntaan
         GroupLayout.ParallelGroup pohjaXV = asetteluVasenosa.createParallelGroup();
         pohjaXV.addComponent(vasenylaosa);
@@ -357,20 +378,30 @@ public class Ikkuna extends JFrame {
         GroupLayout asetteluPohja = new GroupLayout(pohjapaneeli);
         pohjapaneeli.setLayout(asetteluPohja);
 
-
         //asetellaan X-suuntaan
         GroupLayout.SequentialGroup pohjaXP = asetteluPohja.createSequentialGroup();
         pohjaXP.addComponent(vasenosa);
         pohjaXP.addComponent(oikeanosa);
+        
+        GroupLayout.ParallelGroup pohjaXF = asetteluPohja.createParallelGroup();
+        pohjaXF.addComponent(menupaneeli, LEADING);
+        pohjaXF.addGroup(pohjaXP);
 
-        asetteluPohja.setHorizontalGroup(pohjaXP);
+        asetteluPohja.setHorizontalGroup(pohjaXF);
 
         //asetellaan Y-suuntaan
         GroupLayout.ParallelGroup pohjaYP = asetteluPohja.createParallelGroup();
+        pohjaYP.addComponent(menupaneeli);
         pohjaYP.addComponent(vasenosa);
         pohjaYP.addComponent(oikeanosa);
+        
+        GroupLayout.SequentialGroup pohjaYF = asetteluPohja.createSequentialGroup();
+        pohjaYF.addComponent(menupaneeli);
+        pohjaYF.addGroup(pohjaYP);
+        
+                
 
-        asetteluPohja.setVerticalGroup(pohjaYP);
+        asetteluPohja.setVerticalGroup(pohjaYF);
 
     }
 

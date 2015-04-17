@@ -12,6 +12,9 @@ import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,7 +33,17 @@ public class PaaIkkuna extends JFrame {
     private final JButton muutuNappi = new JButton("Muuta");
     private final JButton haeNappi = new JButton("Hae");
     private final JButton haeKaikkiNappi = new JButton("Hae kaikki");
-    private final JButton testNappi = new JButton("Test");
+ 
+    private final JMenuItem testNappi = new JMenuItem("Test");
+    
+    private final JMenuBar menu= new JMenuBar();
+    
+    private final JMenu valinta=new JMenu("Valinnat");
+
+    
+    private final JMenuItem lel=new JMenuItem("heei :)");
+    
+   
 
     private final Tietovarasto rekisteri = new Tietovarasto();
 
@@ -40,8 +53,13 @@ public class PaaIkkuna extends JFrame {
     private Taulukkomalli malli;
 
     public PaaIkkuna() {
+        pohjapaneeli.add(menu);
         pohjapaneeli.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pohjapaneeli.add(testNappi);
+        
+ 
+        valinta.add(testNappi);
+        menu.add(valinta);
 
         this.add(pohjapaneeli);
         this.pack();

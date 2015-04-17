@@ -8,6 +8,8 @@ public class Elokuva {
     private final String nimi;
     private final String ohjaaja;
     private final int vuosi;
+    
+
 
     public Elokuva(int elokuvaNro, String nimi, String ohjaaja, int vuosi) {
         this.elokuvaNro = elokuvaNro;
