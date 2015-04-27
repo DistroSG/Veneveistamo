@@ -5,6 +5,7 @@
  */
 package veneveistamo;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -73,22 +75,21 @@ public class Ikkuna extends JFrame {
     private final TableRowSorter<TableModel> sorter;
     private final JScrollPane vieritettavaRuutu;
     private final Taulukkomalli malli;
+    
+    private final JSplitPane splitPane;
 
-    private final JMenuBar menu1 = new JMenuBar();
-    
-    private final JMenu valinta1=new JMenu("Valinnat");
-    
-    private final JMenuItem item1 = new JMenuItem("Testi nappula :-)");
+    private final JMenuBar menu = new JMenuBar();
+    private final JMenu valinta = new JMenu("Valinnat");
+    private final JMenuItem testi = new JMenuItem("Testi nappula :-)");
 
     public Ikkuna(Tietovarasto rekisteri, Taulukkomalli malli, String otsikko) {
 
         this.rekisteri = rekisteri;
         this.malli = malli;
-        
-        
-        menupaneeli.add(menu1);
-        menu1.add(valinta1);
-        valinta1.add(item1);
+
+        menupaneeli.add(menu);
+        menu.add(valinta);
+        valinta.add(testi);
 
         muutuNappi.setEnabled(false);
         poistaNappi.setEnabled(false);
@@ -101,6 +102,16 @@ public class Ikkuna extends JFrame {
         asennaSorting();
         vieritettavaRuutu = new JScrollPane(taulukko);
         asennaTaulukkoTyylit(malli.getColumnNames());
+
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                vasenosa, oikeanosa);
+
+//Provide minimum sizes for the two components in the split pane
+        Dimension minimumSize = new Dimension();
+        vasenosa.setMinimumSize(minimumSize);
+        oikeanosa.setMinimumSize(minimumSize);
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerSize(15);
 
         asetteleKomponentit();
 
@@ -137,13 +148,12 @@ public class Ikkuna extends JFrame {
                     }
                 }
         );
-        
-        
-        item1.addActionListener(new ActionListener() {
+
+        testi.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
 
@@ -379,29 +389,18 @@ public class Ikkuna extends JFrame {
         pohjapaneeli.setLayout(asetteluPohja);
 
         //asetellaan X-suuntaan
-        GroupLayout.SequentialGroup pohjaXP = asetteluPohja.createSequentialGroup();
-        pohjaXP.addComponent(vasenosa);
-        pohjaXP.addComponent(oikeanosa);
-        
-        GroupLayout.ParallelGroup pohjaXF = asetteluPohja.createParallelGroup();
-        pohjaXF.addComponent(menupaneeli, LEADING);
-        pohjaXF.addGroup(pohjaXP);
+        GroupLayout.ParallelGroup pohjaXP = asetteluPohja.createParallelGroup();
+        pohjaXP.addComponent(menupaneeli, LEADING);
+        pohjaXP.addComponent(splitPane);
 
-        asetteluPohja.setHorizontalGroup(pohjaXF);
+        asetteluPohja.setHorizontalGroup(pohjaXP);
 
         //asetellaan Y-suuntaan
-        GroupLayout.ParallelGroup pohjaYP = asetteluPohja.createParallelGroup();
+        GroupLayout.SequentialGroup pohjaYP = asetteluPohja.createSequentialGroup();
         pohjaYP.addComponent(menupaneeli);
-        pohjaYP.addComponent(vasenosa);
-        pohjaYP.addComponent(oikeanosa);
-        
-        GroupLayout.SequentialGroup pohjaYF = asetteluPohja.createSequentialGroup();
-        pohjaYF.addComponent(menupaneeli);
-        pohjaYF.addGroup(pohjaYP);
-        
-                
+        pohjaYP.addComponent(splitPane);
 
-        asetteluPohja.setVerticalGroup(pohjaYF);
+        asetteluPohja.setVerticalGroup(pohjaYP);
 
     }
 
