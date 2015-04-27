@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package veneveistamo;
+package kayttoliittymapakkaus;
 
+import taulukkopakkaus.Taulukkomalli;
+import taulukkopakkaus.HeaderRenderer;
+import tietovarastopakkaus.Tietovarasto;
+import datapakkaus.Elokuva;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -75,7 +80,7 @@ public class Ikkuna extends JFrame {
     private final TableRowSorter<TableModel> sorter;
     private final JScrollPane vieritettavaRuutu;
     private final Taulukkomalli malli;
-    
+
     private final JSplitPane splitPane;
 
     private final JMenuBar menu = new JMenuBar();
@@ -86,6 +91,7 @@ public class Ikkuna extends JFrame {
 
         this.rekisteri = rekisteri;
         this.malli = malli;
+        
 
         menupaneeli.add(menu);
         menu.add(valinta);
@@ -102,6 +108,7 @@ public class Ikkuna extends JFrame {
         asennaSorting();
         vieritettavaRuutu = new JScrollPane(taulukko);
         asennaTaulukkoTyylit(malli.getColumnNames());
+        
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                 vasenosa, oikeanosa);
@@ -112,6 +119,7 @@ public class Ikkuna extends JFrame {
         oikeanosa.setMinimumSize(minimumSize);
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerSize(15);
+        
 
         asetteleKomponentit();
 

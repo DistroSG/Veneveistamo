@@ -1,4 +1,4 @@
-package veneveistamo;
+package taulukkopakkaus;
 
 import java.util.ArrayList;
 import java.util.List;

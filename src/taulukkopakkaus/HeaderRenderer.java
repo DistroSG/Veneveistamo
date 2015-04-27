@@ -1,5 +1,4 @@
-
-package veneveistamo;
+package taulukkopakkaus;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -17,7 +16,7 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author s1300778
  */
-class HeaderRenderer extends JLabel implements TableCellRenderer {
+public class HeaderRenderer extends JLabel implements TableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table,
@@ -49,9 +48,9 @@ class HeaderRenderer extends JLabel implements TableCellRenderer {
         if (SortOrder.UNSORTED == sortOrder) {
             return null;
         }
-        return SortOrder.ASCENDING 
+        return SortOrder.ASCENDING
                 == sortOrder ? UIManager.getIcon("Table.ascendingSortIcon")
-                : UIManager.getIcon("Table.descendingSortIcon");
+                        : UIManager.getIcon("Table.descendingSortIcon");
 
     }
 
