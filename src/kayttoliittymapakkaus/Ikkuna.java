@@ -58,10 +58,6 @@ public class Ikkuna extends JFrame {
     private final JLabel hakuSelite = new JLabel("Haku");
 
     private final JTextField hakuKentta = new JTextField(10);
-    private final JTextField elokuvaNroKentta = new JTextField(10);
-    private final JTextField nimiKentta = new JTextField(10);
-    private final JTextField ohjaajaKentta = new JTextField(10);
-    private final JTextField vuosiKentta = new JTextField(10);
 
     private final JButton tyhjennaValintaNappi = new JButton("Tyhjennä valinta");
     private final JButton lisaaNappi = new JButton("Lisää");
@@ -87,6 +83,7 @@ public class Ikkuna extends JFrame {
 
         this.rekisteri = rekisteri;
         this.malli = malli;
+        values = new String[malli.getColumnCount()];
         syottopaneeli = new Syottopaneeli(malli.getColumnNames());
 
         menupaneeli.add(menu);
@@ -190,17 +187,14 @@ public class Ikkuna extends JFrame {
             muutuNappi.setEnabled(false);
             poistaNappi.setEnabled(false);
         } else {
-            values = new String[malli.getColumnCount()];
+
             for (int i = 0; i < malli.getColumnCount(); i++) {
                 try {
                     values[i] = malli.getValueAt(taulukko.getSelectedRow(), i).toString();
-                    System.out.println(malli.getColumnCount());
                 } catch (NullPointerException e) {
                     System.out.println(e);
                 }
-
             }
-
             syottopaneeli.setArvot(values);
             syottopaneeli.setEditoitavissa(0, false);
             lisaaNappi.setEnabled(false);
@@ -210,10 +204,11 @@ public class Ikkuna extends JFrame {
     }
 
     private void suoritaMuutos() {
-        int hid = Integer.parseInt(elokuvaNroKentta.getText());
-        int vuosi = Integer.parseInt(vuosiKentta.getText());
-        rekisteri.paivitaElokuva(new Elokuva(hid, nimiKentta.getText(),
-                ohjaajaKentta.getText(), vuosi));
+        values = syottopaneeli.getArvot();
+
+        int hid = Integer.parseInt(values[0]);
+        int vuosi = Integer.parseInt(values[3]);
+        rekisteri.paivitaElokuva(new Elokuva(hid, values[1], values[2], vuosi));
         paivitaValintaLista();
 
     }
@@ -225,31 +220,36 @@ public class Ikkuna extends JFrame {
 
     }
 
+    private void suoritaLisays() {
+        values = syottopaneeli.getArvot();
+        try {
+            int eid = Integer.parseInt(values[0]);
+            int vuosi = Integer.parseInt(values[3]);
+            rekisteri.lisaaElokuva(new Elokuva(eid, values[1],
+                    values[2], vuosi));
+            syottopaneeli.tyhjennaKentat();
+            paivitaValintaLista();
+
+        } catch (NumberFormatException e) {
+            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+        }
+    }
+
     private void paivitaValintaLista() {
+        
         int rowCount = malli.getRowCount();
 
         for (int i = rowCount - 1; i >= 0; i--) {
             malli.removeRow(i);
 
         }
-        for (Elokuva elokuva : rekisteri.haeKaikkElokuvat()) {
-            malli.addRow(Arrays.asList(elokuva.getElokuvaNro(), elokuva.getNimi(), elokuva.getOhjaaja(), elokuva.getVuosi()));
-        }
+        haeElovat();
 
     }
 
-    private void suoritaLisays() {
-
-        try {
-            int eid = Integer.parseInt(elokuvaNroKentta.getText());
-            int vuosi = Integer.parseInt(vuosiKentta.getText());
-            rekisteri.lisaaElokuva(new Elokuva(eid, nimiKentta.getText(),
-                    ohjaajaKentta.getText(), vuosi));
-            syottopaneeli.tyhjennaKentat();
-            paivitaValintaLista();
-
-        } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+    private void haeElovat() {
+        for (Elokuva elokuva : rekisteri.haeKaikkElokuvat()) {
+            malli.addRow(Arrays.asList(elokuva.getElokuvaNro(), elokuva.getNimi(), elokuva.getOhjaaja(), elokuva.getVuosi()));
         }
     }
 
@@ -360,6 +360,7 @@ public class Ikkuna extends JFrame {
                 } else {
                     try {
                         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        
                     } catch (PatternSyntaxException pse) {
                         JOptionPane.showMessageDialog(null, "Bad regex pattern", "Bad regex pattern", JOptionPane.ERROR_MESSAGE);
                     }
