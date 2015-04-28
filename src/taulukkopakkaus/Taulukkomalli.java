@@ -73,6 +73,13 @@ public class Taulukkomalli extends AbstractTableModel {
         return columnNames;
 
     }
+        public Object getValittu(int indeksi) {
+        if (indeksi < 0 || indeksi >= data.size()) {
+            return null;
+        }
+        return data.get(indeksi);
+    }
+
   
 
 }

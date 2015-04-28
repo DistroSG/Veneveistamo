@@ -190,7 +190,8 @@ public class Ikkuna extends JFrame {
             muutuNappi.setEnabled(false);
             poistaNappi.setEnabled(false);
         } else {
-            for (int i = 0; i < malli.getRowCount(); i++) {
+            values = new String[malli.getColumnCount()];
+            for (int i = 0; i < malli.getColumnCount(); i++) {
                 try {
                     values[i] = malli.getValueAt(taulukko.getSelectedRow(), i).toString();
                     System.out.println(malli.getColumnCount());
