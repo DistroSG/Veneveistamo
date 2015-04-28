@@ -31,10 +31,6 @@ public class PaaIkkuna extends JFrame {
 
     private final JPanel pohjapaneeli = new JPanel(new GridLayout(6, 1, 5, 5));
 
-    private final JButton lisaaNappi = new JButton("Lisää");
-    private final JButton poistaNappi = new JButton("Poista");
-    private final JButton muutuNappi = new JButton("Muuta");
-    private final JButton haeNappi = new JButton("Hae");
     private final JButton haeKaikkiNappi = new JButton("Hae kaikki");
  
     private final JMenuItem testNappi = new JMenuItem("Test");
@@ -43,16 +39,10 @@ public class PaaIkkuna extends JFrame {
     
     private final JMenu valinta=new JMenu("Valinnat");
 
-    
-    private final JMenuItem lel=new JMenuItem("heei :)");
-    
-   
-
     private final Tietovarasto rekisteri = new Tietovarasto();
 
     private String[] columnNames;
 
-    private Object[][] data;
     private Taulukkomalli malli;
 
     public PaaIkkuna() {
