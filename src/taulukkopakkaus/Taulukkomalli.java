@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 public class Taulukkomalli extends AbstractTableModel {
 
     private final String[] sarakkeenOtsikot;
-    private List<List> data = new ArrayList();
+    private final List<List> data = new ArrayList();
 
     public Taulukkomalli(String[] sarakkeenOtsikot) {
         this.sarakkeenOtsikot = sarakkeenOtsikot;
@@ -73,5 +73,6 @@ public class Taulukkomalli extends AbstractTableModel {
         return columnNames;
 
     }
+  
 
 }

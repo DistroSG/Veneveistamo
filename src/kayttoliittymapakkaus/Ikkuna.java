@@ -11,7 +11,6 @@ import tietovarastopakkaus.Tietovarasto;
 import datapakkaus.Elokuva;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -52,16 +51,11 @@ public class Ikkuna extends JFrame {
 
     private final JPanel oikeanosa = new JPanel();
     private final JPanel vasenosa = new JPanel();
-    private final JPanel vasenylaosa = new JPanel();
-    private final JPanel vasenalaosa = new JPanel();
     private final JPanel pohjapaneeli = new JPanel();
+    private final Syottopaneeli syottopaneeli;
     private final JPanel menupaneeli = new JPanel(new FlowLayout(FlowLayout.LEADING));
 
     private final JLabel hakuSelite = new JLabel("Haku");
-    private final JLabel elokuvaNroSelite = new JLabel("ElokuvaNro: ");
-    private final JLabel nimiSelite = new JLabel("Nimi: ");
-    private final JLabel ohjaajaSelite = new JLabel("Ohjaaja: ");
-    private final JLabel vuosiSelite = new JLabel("Vuosi: ");
 
     private final JTextField hakuKentta = new JTextField(10);
     private final JTextField elokuvaNroKentta = new JTextField(10);
@@ -83,6 +77,8 @@ public class Ikkuna extends JFrame {
 
     private final JSplitPane splitPane;
 
+    private String[] values;
+
     private final JMenuBar menu = new JMenuBar();
     private final JMenu valinta = new JMenu("Valinnat");
     private final JMenuItem testi = new JMenuItem("Testi nappula :-)");
@@ -91,7 +87,7 @@ public class Ikkuna extends JFrame {
 
         this.rekisteri = rekisteri;
         this.malli = malli;
-        
+        syottopaneeli = new Syottopaneeli(malli.getColumnNames());
 
         menupaneeli.add(menu);
         menu.add(valinta);
@@ -108,7 +104,6 @@ public class Ikkuna extends JFrame {
         asennaSorting();
         vieritettavaRuutu = new JScrollPane(taulukko);
         asennaTaulukkoTyylit(malli.getColumnNames());
-        
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                 vasenosa, oikeanosa);
@@ -119,7 +114,6 @@ public class Ikkuna extends JFrame {
         oikeanosa.setMinimumSize(minimumSize);
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerSize(15);
-        
 
         asetteleKomponentit();
 
@@ -135,25 +129,9 @@ public class Ikkuna extends JFrame {
                 new ListSelectionListener() {
                     @Override
                     public void valueChanged(ListSelectionEvent event) {
-                        int viewRow = taulukko.getSelectedRow();
-                        if (viewRow < 0) {
-                            //Selection got filtered away.
-                            tyhjennaKentat();
-                            elokuvaNroKentta.setEditable(true);
-                            lisaaNappi.setEnabled(true);
-                            muutuNappi.setEnabled(false);
-                            poistaNappi.setEnabled(false);
-                        } else {
-                            elokuvaNroKentta.setText("" + malli.getValueAt(taulukko.getSelectedRow(), 0));
-                            nimiKentta.setText("" + malli.getValueAt(taulukko.getSelectedRow(), 1));
-                            ohjaajaKentta.setText("" + malli.getValueAt(taulukko.getSelectedRow(), 2));
-                            vuosiKentta.setText("" + malli.getValueAt(taulukko.getSelectedRow(), 3));
-                            elokuvaNroKentta.setEditable(false);
-                            lisaaNappi.setEnabled(false);
-                            muutuNappi.setEnabled(true);
-                            poistaNappi.setEnabled(true);
-                        }
+                        rivinValinta();
                     }
+
                 }
         );
 
@@ -202,6 +180,34 @@ public class Ikkuna extends JFrame {
         });
     }
 
+    private void rivinValinta() {
+        int viewRow = taulukko.getSelectedRow();
+        if (viewRow < 0) {
+            //Selection got filtered away.
+            syottopaneeli.tyhjennaKentat();
+            syottopaneeli.setEditoitavissa(0, true);
+            lisaaNappi.setEnabled(true);
+            muutuNappi.setEnabled(false);
+            poistaNappi.setEnabled(false);
+        } else {
+            for (int i = 0; i < malli.getRowCount(); i++) {
+                try {
+                    values[i] = malli.getValueAt(taulukko.getSelectedRow(), i).toString();
+                    System.out.println(malli.getColumnCount());
+                } catch (NullPointerException e) {
+                    System.out.println(e);
+                }
+
+            }
+
+            syottopaneeli.setArvot(values);
+            syottopaneeli.setEditoitavissa(0, false);
+            lisaaNappi.setEnabled(false);
+            muutuNappi.setEnabled(true);
+            poistaNappi.setEnabled(true);
+        }
+    }
+
     private void suoritaMuutos() {
         int hid = Integer.parseInt(elokuvaNroKentta.getText());
         int vuosi = Integer.parseInt(vuosiKentta.getText());
@@ -238,7 +244,7 @@ public class Ikkuna extends JFrame {
             int vuosi = Integer.parseInt(vuosiKentta.getText());
             rekisteri.lisaaElokuva(new Elokuva(eid, nimiKentta.getText(),
                     ohjaajaKentta.getText(), vuosi));
-            tyhjennaKentat();
+            syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
@@ -251,16 +257,14 @@ public class Ikkuna extends JFrame {
                 viesti, "Virhe", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void tyhjennaKentat() {
-        elokuvaNroKentta.setText("");
-        nimiKentta.setText("");
-        ohjaajaKentta.setText("");
-        vuosiKentta.setText("");
+    private void asetteleKomponentit() {
+        asetteleOikeanosanKomponentit();
+        asetteleVasenosanKomponentit();
+        asettelePohjanKomponentit();
+
     }
 
-    private void asetteleKomponentit() {
-
-        //oikeanosa 
+    private void asetteleOikeanosanKomponentit() {
         GroupLayout oikeanosanAsettelu = new GroupLayout(oikeanosa);
         oikeanosa.setLayout(oikeanosanAsettelu);
 
@@ -291,107 +295,40 @@ public class Ikkuna extends JFrame {
         pohjaYO.addComponent(vieritettavaRuutu);
 
         oikeanosanAsettelu.setVerticalGroup(pohjaYO);
+    }
 
-        //vasenylaosa
-        GroupLayout vasenylaosanAsettelu = new GroupLayout(vasenylaosa);
-        vasenylaosa.setLayout(vasenylaosanAsettelu);
-
-        vasenylaosanAsettelu.setAutoCreateContainerGaps(true);
-        vasenylaosanAsettelu.setAutoCreateGaps(true);
-
-        //asetellaan X-suuntaan
-        GroupLayout.ParallelGroup seliteRyhmaXVY = vasenylaosanAsettelu.createParallelGroup();
-        seliteRyhmaXVY.addComponent(elokuvaNroSelite);
-        seliteRyhmaXVY.addComponent(nimiSelite);
-        seliteRyhmaXVY.addComponent(ohjaajaSelite);
-        seliteRyhmaXVY.addComponent(vuosiSelite);
-
-        GroupLayout.ParallelGroup kenttaRyhmaXVY = vasenylaosanAsettelu.createParallelGroup();
-        kenttaRyhmaXVY.addComponent(elokuvaNroKentta, GroupLayout.PREFERRED_SIZE,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.PREFERRED_SIZE);
-        kenttaRyhmaXVY.addComponent(nimiKentta, GroupLayout.PREFERRED_SIZE,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.PREFERRED_SIZE);
-        kenttaRyhmaXVY.addComponent(ohjaajaKentta, GroupLayout.PREFERRED_SIZE,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.PREFERRED_SIZE);
-        kenttaRyhmaXVY.addComponent(vuosiKentta, GroupLayout.PREFERRED_SIZE,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.PREFERRED_SIZE);
-
-        GroupLayout.SequentialGroup pohjaXVY = vasenylaosanAsettelu.createSequentialGroup();
-        pohjaXVY.addGroup(seliteRyhmaXVY);
-        pohjaXVY.addGroup(kenttaRyhmaXVY);
-
-        vasenylaosanAsettelu.setHorizontalGroup(pohjaXVY);
-
-        //asetellaan Y-suuntaan
-        GroupLayout.ParallelGroup elokuvaNroRyhmaYVY = vasenylaosanAsettelu.createParallelGroup();
-        elokuvaNroRyhmaYVY.addComponent(elokuvaNroSelite);
-        elokuvaNroRyhmaYVY.addComponent(elokuvaNroKentta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
-
-        GroupLayout.ParallelGroup nimiRyhmaYVY = vasenylaosanAsettelu.createParallelGroup();
-        nimiRyhmaYVY.addComponent(nimiSelite);
-        nimiRyhmaYVY.addComponent(nimiKentta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
-
-        GroupLayout.ParallelGroup ohjaajaRyhmaYVY = vasenylaosanAsettelu.createParallelGroup();
-        ohjaajaRyhmaYVY.addComponent(ohjaajaSelite);
-        ohjaajaRyhmaYVY.addComponent(ohjaajaKentta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
-
-        GroupLayout.ParallelGroup vuosiRyhmaYVY = vasenylaosanAsettelu.createParallelGroup();
-        vuosiRyhmaYVY.addComponent(vuosiSelite);
-        vuosiRyhmaYVY.addComponent(vuosiKentta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
-
-        GroupLayout.SequentialGroup pohjaYVY = vasenylaosanAsettelu.createSequentialGroup();
-        pohjaYVY.addGroup(elokuvaNroRyhmaYVY);
-        pohjaYVY.addGroup(nimiRyhmaYVY);
-        pohjaYVY.addGroup(ohjaajaRyhmaYVY);
-        pohjaYVY.addGroup(vuosiRyhmaYVY);
-
-        vasenylaosanAsettelu.setVerticalGroup(pohjaYVY);
-
-        //vasenalaosa 
-        GroupLayout vasenalaosanAsettelu = new GroupLayout(vasenalaosa);
-        vasenalaosa.setLayout(vasenalaosanAsettelu);
-
-        vasenalaosanAsettelu.setAutoCreateContainerGaps(true);
-        vasenalaosanAsettelu.setAutoCreateGaps(true);
+    private void asetteleVasenosanKomponentit() {
+        GroupLayout asetteluVasenosa = new GroupLayout(vasenosa);
+        vasenosa.setLayout(asetteluVasenosa);
+        asetteluVasenosa.setAutoCreateContainerGaps(true);
+        asetteluVasenosa.setAutoCreateGaps(true);
 
         //asetellaan X-suuntaan
-        GroupLayout.SequentialGroup pohjaXVA = vasenalaosanAsettelu.createSequentialGroup();
+        GroupLayout.SequentialGroup pohjaXVA = asetteluVasenosa.createSequentialGroup();
         pohjaXVA.addComponent(lisaaNappi);
         pohjaXVA.addComponent(muutuNappi);
         pohjaXVA.addComponent(poistaNappi);
 
-        vasenalaosanAsettelu.setHorizontalGroup(pohjaXVA);
-
-        //asetellaan Y-suuntaan
-        GroupLayout.ParallelGroup pohjaYVA = vasenalaosanAsettelu.createParallelGroup();
-        pohjaYVA.addComponent(lisaaNappi);
-        pohjaYVA.addComponent(muutuNappi);
-        pohjaYVA.addComponent(poistaNappi);
-
-        vasenalaosanAsettelu.setVerticalGroup(pohjaYVA);
-
-        //vasenosa
-        GroupLayout asetteluVasenosa = new GroupLayout(vasenosa);
-        vasenosa.setLayout(asetteluVasenosa);
-
-        //asetellaan X-suuntaan
         GroupLayout.ParallelGroup pohjaXV = asetteluVasenosa.createParallelGroup();
-        pohjaXV.addComponent(vasenylaosa);
-        pohjaXV.addComponent(vasenalaosa);
+        pohjaXV.addComponent(syottopaneeli);
+        pohjaXV.addGroup(pohjaXVA);
 
         asetteluVasenosa.setHorizontalGroup(pohjaXV);
 
         //asetellaan Y-suuntaan
+        GroupLayout.ParallelGroup pohjaYVA = asetteluVasenosa.createParallelGroup();
+        pohjaYVA.addComponent(lisaaNappi);
+        pohjaYVA.addComponent(muutuNappi);
+        pohjaYVA.addComponent(poistaNappi);
+
         GroupLayout.SequentialGroup pohjaYV = asetteluVasenosa.createSequentialGroup();
-        pohjaYV.addComponent(vasenylaosa);
-        pohjaYV.addComponent(vasenalaosa);
+        pohjaYV.addComponent(syottopaneeli);
+        pohjaYV.addGroup(pohjaYVA);
 
         asetteluVasenosa.setVerticalGroup(pohjaYV);
+    }
 
+    private void asettelePohjanKomponentit() {
         //pohja
         GroupLayout asetteluPohja = new GroupLayout(pohjapaneeli);
         pohjapaneeli.setLayout(asetteluPohja);
@@ -409,7 +346,6 @@ public class Ikkuna extends JFrame {
         pohjaYP.addComponent(splitPane);
 
         asetteluPohja.setVerticalGroup(pohjaYP);
-
     }
 
     private void asennaSorting() {
