@@ -8,7 +8,6 @@ package kayttoliittymapakkaus;
 import taulukkopakkaus.Taulukkomalli;
 import taulukkopakkaus.HeaderRenderer;
 import tietovarastopakkaus.Tietovarasto;
-import datapakkaus.Elokuva;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
