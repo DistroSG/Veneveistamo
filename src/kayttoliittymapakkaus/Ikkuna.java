@@ -228,6 +228,13 @@ public class Ikkuna extends JFrame {
 //            this.dispose();
 
         }
+        
+        else if(combo.getSelectedItem()=="Maksu"){
+            
+            columnNames = new String[]{"Eränumero", "VeneTilausID", "Hinta", "Maksettupäivä"};
+            
+            new Ikkuna("Maksu", columnNames, 2).setVisible(true);
+        }
 
     }
 

@@ -535,7 +535,7 @@ public class Tietovarasto {
     
     
     
-    
+   //Hakee tiedot Maksu taulusta
         public List<Maksu> haeMaksut() {
         List<Maksu> maksut = new ArrayList<>();
         Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
