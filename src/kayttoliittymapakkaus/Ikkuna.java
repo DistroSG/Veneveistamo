@@ -10,7 +10,7 @@ import taulukkopakkaus.HeaderRenderer;
 import tietovarastopakkaus.Tietovarasto;
 import datapakkaus.Elokuva;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -18,13 +18,10 @@ import java.util.regex.PatternSyntaxException;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import static javax.swing.GroupLayout.Alignment.LEADING;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,7 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -53,7 +49,6 @@ public class Ikkuna extends JFrame {
     private final JPanel vasenosa = new JPanel();
     private final JPanel pohjapaneeli = new JPanel();
     private final Syottopaneeli syottopaneeli;
-    private final JPanel menupaneeli = new JPanel(new FlowLayout(FlowLayout.LEADING));
 
     private final JLabel hakuSelite = new JLabel("Haku");
 
@@ -64,82 +59,62 @@ public class Ikkuna extends JFrame {
     private final JButton muutuNappi = new JButton("Muuta");
     private final JButton poistaNappi = new JButton("Poista");
 
-    private final Tietovarasto rekisteri;
+    private final Tietovarasto rekisteri = new Tietovarasto();
 
-    private final JTable taulukko;
-    private final TableRowSorter<TableModel> sorter;
-    private final JScrollPane vieritettavaRuutu;
+    private JTable taulukko;
+    private TableRowSorter<TableModel> sorter;
+    private JScrollPane vieritettavaRuutu;
     private final Taulukkomalli malli;
 
-    private final JSplitPane splitPane;
+    private final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+            vasenosa, oikeanosa);
 
     private String[] values;
+    private String[] columnNames;
 
-    private final JMenuBar menu = new JMenuBar();
-    private final JMenu valinta = new JMenu("Valinnat");
-    private final JMenuItem testi = new JMenuItem("Testi nappula :-)");
+    private final JComboBox combo = new JComboBox(new String[]{"Elokuva", "Kuva"});
 
-    public Ikkuna(Tietovarasto rekisteri, Taulukkomalli malli, String otsikko) {
-
-        this.rekisteri = rekisteri;
-        this.malli = malli;
+    public Ikkuna(String otsikko) {
+        columnNames = new String[]{};
+        malli = new Taulukkomalli(columnNames);
+        haeElovat();
         values = new String[malli.getColumnCount()];
         syottopaneeli = new Syottopaneeli(malli.getColumnNames());
-
-        menupaneeli.add(menu);
-        menu.add(valinta);
-        valinta.add(testi);
 
         muutuNappi.setEnabled(false);
         poistaNappi.setEnabled(false);
 
-        taulukko = new JTable(malli);
-        taulukko.setFillsViewportHeight(true);
-        sorter = new TableRowSorter<>(malli);
-        taulukko.setRowSorter(sorter);
-        taulukko.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        asennaSorting();
-        vieritettavaRuutu = new JScrollPane(taulukko);
-        asennaTaulukkoTyylit(malli.getColumnNames());
-
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                vasenosa, oikeanosa);
-
-//Provide minimum sizes for the two components in the split pane
-        Dimension minimumSize = new Dimension();
-        vasenosa.setMinimumSize(minimumSize);
-        oikeanosa.setMinimumSize(minimumSize);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerSize(15);
-
+        taulukonasetus();
+        splitPaneasetus();
         asetteleKomponentit();
-
-        this.add(pohjapaneeli);
-        this.setTitle(otsikko);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.pack();
-
+        ikkunaasetus(otsikko);
         keyEvents();
+        comboasetus(0);
+        combo.setSelectedItem(null); //tyhjennetaan valinta
+        nappiasetus();
+    }
 
-        taulukko.getSelectionModel().addListSelectionListener(
-                new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(ListSelectionEvent event) {
-                        rivinValinta();
-                    }
+    public Ikkuna(String otsikko, String[] columnNames, int comboIndex) {
+        this.columnNames = columnNames;
+        malli = new Taulukkomalli(columnNames);
+        haeElovat();
+        values = new String[malli.getColumnCount()];
+        syottopaneeli = new Syottopaneeli(malli.getColumnNames());
 
-                }
-        );
+        muutuNappi.setEnabled(false);
+        poistaNappi.setEnabled(false);
 
-        testi.addActionListener(new ActionListener() {
+        taulukonasetus();
+        splitPaneasetus();
+        asetteleKomponentit();
+        ikkunaasetus(otsikko);
+        keyEvents();
+        comboasetus(comboIndex);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        nappiasetus();
+    }
 
-            }
-        });
-
+    private void nappiasetus() {
         lisaaNappi.addActionListener(new ActionListener() {
 
             @Override
@@ -177,6 +152,82 @@ public class Ikkuna extends JFrame {
         });
     }
 
+    private void comboasetus(int index) {
+        combo.setMaximumSize(combo.getPreferredSize());
+        combo.setSelectedIndex(index);
+        combo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                kasitteleValinta();
+
+            }
+
+        });
+    }
+
+    private void ikkunaasetus(String otsikko) {
+        this.add(pohjapaneeli);
+        this.setTitle(otsikko);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setUndecorated(true);
+        this.pack();
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        this.setSize(xSize, ySize);
+
+    }
+
+    private void splitPaneasetus() {
+        //Provide minimum sizes for the two components in the split pane
+        Dimension minimumSize = new Dimension();
+        vasenosa.setMinimumSize(minimumSize);
+        oikeanosa.setMinimumSize(minimumSize);
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerSize(15);
+    }
+
+    private void taulukonasetus() {
+        taulukko = new JTable(malli);
+        taulukko.setFillsViewportHeight(true);
+        sorter = new TableRowSorter<>(malli);
+        taulukko.setRowSorter(sorter);
+        taulukko.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        asennaSorting();
+        vieritettavaRuutu = new JScrollPane(taulukko);
+        asennaTaulukkoTyylit(malli.getColumnNames());
+
+        taulukko.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent event) {
+                        rivinValinta();
+                    }
+
+                }
+        );
+    }
+
+    private void kasitteleValinta() {
+
+        if (combo.getSelectedItem() == "Elokuva") {
+
+            columnNames = new String[]{"№", "Nimi", "Ohjaja", "Vuosi"};
+            new Ikkuna("Elokuva", columnNames, 0).setVisible(true);
+
+//            this.dispose();
+        } else if (combo.getSelectedItem() == "Kuva") {
+            columnNames = new String[]{"№Kuva", "Nimi", "Ohjaja", "Vuosi"};
+
+            new Ikkuna("Elokuva", columnNames, 1).setVisible(true);
+//            this.dispose();
+
+        }
+
+    }
+
     private void rivinValinta() {
         int viewRow = taulukko.getSelectedRow();
         if (viewRow < 0) {
@@ -190,7 +241,7 @@ public class Ikkuna extends JFrame {
 
             for (int i = 0; i < malli.getColumnCount(); i++) {
                 try {
-                    values[i] = malli.getValueAt(taulukko.getSelectedRow(), i).toString();
+                    values[i] = taulukko.getValueAt(taulukko.getSelectedRow(), i).toString();
                 } catch (NullPointerException e) {
                     System.out.println(e);
                 }
@@ -236,7 +287,7 @@ public class Ikkuna extends JFrame {
     }
 
     private void paivitaValintaLista() {
-        
+
         int rowCount = malli.getRowCount();
 
         for (int i = rowCount - 1; i >= 0; i--) {
@@ -336,14 +387,14 @@ public class Ikkuna extends JFrame {
 
         //asetellaan X-suuntaan
         GroupLayout.ParallelGroup pohjaXP = asetteluPohja.createParallelGroup();
-        pohjaXP.addComponent(menupaneeli, LEADING);
+        pohjaXP.addComponent(combo);
         pohjaXP.addComponent(splitPane);
 
         asetteluPohja.setHorizontalGroup(pohjaXP);
 
         //asetellaan Y-suuntaan
         GroupLayout.SequentialGroup pohjaYP = asetteluPohja.createSequentialGroup();
-        pohjaYP.addComponent(menupaneeli);
+        pohjaYP.addComponent(combo);
         pohjaYP.addComponent(splitPane);
 
         asetteluPohja.setVerticalGroup(pohjaYP);
@@ -360,7 +411,7 @@ public class Ikkuna extends JFrame {
                 } else {
                     try {
                         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        
+
                     } catch (PatternSyntaxException pse) {
                         JOptionPane.showMessageDialog(null, "Bad regex pattern", "Bad regex pattern", JOptionPane.ERROR_MESSAGE);
                     }

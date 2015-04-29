@@ -10,18 +10,16 @@ import javax.swing.SwingUtilities;
 /**
  *
  * ayy lmao wow
+ *
  * @author s1300778
  */
 public class Veneveistamo {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new PaaIkkuna().setVisible(true);
+                new Ikkuna("Test").setVisible(true);
             }
         });
     }
