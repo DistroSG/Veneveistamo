@@ -1,6 +1,5 @@
 package tietovarastopakkaus;
 
-import datapakkaus.Elokuva;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,150 +21,167 @@ public class Tietovarasto {
     }
 
     public Tietovarasto() {
-        this("org.apache.derby.jdbc.EmbeddedDriver", "jdbc:derby:elokuva",
-                "saku", "salainen");
+        this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
+                "bb372d8eaf1594", "c887b8c8");
     }
 
-    public List<Elokuva> haeKaikkElokuvat() {
-        List<Elokuva> elokuvat = new ArrayList<Elokuva>();
-        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-        if (yhteys != null) {
-            PreparedStatement hakulause = null;
-            ResultSet tulosjoukko = null;
-            try {
+//    public List<Malli> haeMallit() {
+//        List<Malli> mallit = new ArrayList<>();
+//        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+//        if (yhteys != null) {
+//            PreparedStatement hakulause = null;
+//            ResultSet tulosjoukko = null;
+//            try {
+//                String hakuSql = "SELECT id, malli, masto FROM malli;";
+//                hakulause = yhteys.prepareStatement(hakuSql);
+//                tulosjoukko = hakulause.executeQuery();
+//
+//                while (tulosjoukko.next()) {
+//                    mallit.add(new Malli(tulosjoukko.getInt(1),
+//                            tulosjoukko.getString(2), tulosjoukko.getInt(3)));
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
+//                YhteydenHallinta.suljeLause(hakulause);
+//                YhteydenHallinta.suljeYhteys(yhteys);
+//            }
+//        }
+//        return mallit;
+//    }
+//
+//    public List<Varusteet> haeKaikkiVarusteet() {
+//        List<Varusteet> varusteet = new ArrayList<>();
+//        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+//        if (yhteys != null) {
+//            PreparedStatement hakulause = null;
+//            ResultSet tulosjoukko = null;
+//            try {
+//                String hakuSql = "SELECT id, varusteet, kuvaus, hinta FROM varusteet;";
+//                hakulause = yhteys.prepareStatement(hakuSql);
+//                tulosjoukko = hakulause.executeQuery();
+//
+//                while (tulosjoukko.next()) {
+//                    varusteet.add(new Varusteet(tulosjoukko.getInt(1),
+//                            tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getDouble(4)));
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
+//                YhteydenHallinta.suljeLause(hakulause);
+//                YhteydenHallinta.suljeYhteys(yhteys);
+//            }
+//        }
+//        return varusteet;
+//    }
+//
+//    public Varusteet haeVaruste(int varustenNumero) {
+//
+//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url,
+//                kayttaja, salasana);
+//        if (yhteys == null) {
+//            return null;
+//        }
+//        PreparedStatement hakulause = null;
+//        ResultSet tulosjoukko = null;
+//        try {
+//            String hakuSql = "SELECT id, varusteet, kuvaus, hinta FROM varusteet where id=?";
+//            hakulause = yhteys.prepareStatement(hakuSql);
+//            hakulause.setInt(1, varustenNumero);
+//            tulosjoukko = hakulause.executeQuery();
+//            if (tulosjoukko.next()) {
+//                return new Varusteet(tulosjoukko.getInt(1),
+//                        tulosjoukko.getString(2),
+//                        tulosjoukko.getString(3),
+//                        tulosjoukko.getDouble(4));
+//            } else {
+//                return null;
+//            }
+//
+//        } catch (Exception e) {
+//            return null;
+//        } finally {
+//            YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
+//            YhteydenHallinta.suljeLause(hakulause);
+//            YhteydenHallinta.suljeYhteys(yhteys);
+//        }
+//    }
 
-                String hakuSql = "select elokuvaNro,nimi,ohjaaja,vuosi from elokuva";
-
-                hakulause = yhteys.prepareStatement(hakuSql);
-                tulosjoukko = hakulause.executeQuery();
-
-                while (tulosjoukko.next()) {
-                    elokuvat.add(new Elokuva(tulosjoukko.getInt(1),
-                            tulosjoukko.getString(2),
-                            tulosjoukko.getString(3),
-                            tulosjoukko.getInt(4)));
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
-                YhteydenHallinta.suljeLause(hakulause);
-                YhteydenHallinta.suljeYhteys(yhteys);
-            }
-        }
-        return elokuvat;
-    }
-
-    public Elokuva haeElokuva(int ElokuvaNro) {
-        Elokuva elokuva = null;
-        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-        if (yhteys != null) {
-            PreparedStatement hakulause = null;
-            ResultSet tulosjoukko = null;
-            try {
-
-                String hakuSql = "select elokuvaNro,nimi,ohjaaja,vuosi from elokuva WHERE elokuvaNro = ?";
-
-                hakulause = yhteys.prepareStatement(hakuSql);
-                hakulause.setInt(1, ElokuvaNro);
-                tulosjoukko = hakulause.executeQuery();
-                if (tulosjoukko.next()) {
-                    elokuva = new Elokuva(tulosjoukko.getInt(1),
-                            tulosjoukko.getString(2),
-                            tulosjoukko.getString(3),
-                            tulosjoukko.getInt(4));
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            } finally {
-                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
-                YhteydenHallinta.suljeLause(hakulause);
-                YhteydenHallinta.suljeYhteys(yhteys);
-            }
-        }
-        return elokuva;
-    }
-
-    public void lisaaElokuva(Elokuva uusielokuva) {
-        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-        if (yhteys == null) {
-            return;
-        }
-        PreparedStatement lisayslause = null;
-        try {
-
-            String lisaaSql = "insert into elokuva "
-                    + "(elokuvaNro,nimi,ohjaaja,vuosi) "
-                    + "values (?,?,?,?)";
-            lisayslause = yhteys.prepareStatement(lisaaSql);
-
-            lisayslause.setInt(1, uusielokuva.getElokuvaNro());
-            lisayslause.setString(2, uusielokuva.getNimi());
-            lisayslause.setString(3, uusielokuva.getOhjaaja());
-            lisayslause.setInt(4, uusielokuva.getVuosi());
-
-            lisayslause.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            YhteydenHallinta.suljeLause(lisayslause);
-            YhteydenHallinta.suljeYhteys(yhteys);
-        }
-    }
-
-    public boolean poistaElokuva(int elokuvaNro) {
-        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-        if (yhteys == null) {
-            return false;
-        }
-        PreparedStatement poistaminenlause = null;
-        try {
-            String poistaaSql = "delete from elokuva WHERE elokuvaNro = ?";
-
-            poistaminenlause = yhteys.prepareStatement(poistaaSql);
-
-            poistaminenlause.setInt(1, elokuvaNro);
-            if (poistaminenlause.executeUpdate() > 0) {
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            YhteydenHallinta.suljeLause(poistaminenlause);
-            YhteydenHallinta.suljeYhteys(yhteys);
-        }
-    }
-
-    public boolean paivitaElokuva(Elokuva elokuva) {
-        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-        if (yhteys == null) {
-            return false;
-        }
-        PreparedStatement paivitaminenlause = null;
-        try {
-
-            String paivitaSql = "UPDATE Elokuva "
-                    + "SET nimi = ?, ohjaaja = ?, vuosi = ? "
-                    + "WHERE elokuvaNro = ?";
-            paivitaminenlause = yhteys.prepareStatement(paivitaSql);
-
-            paivitaminenlause.setString(1, elokuva.getNimi());
-            paivitaminenlause.setString(2, elokuva.getOhjaaja());
-            paivitaminenlause.setInt(3, elokuva.getVuosi());
-            paivitaminenlause.setInt(4, elokuva.getElokuvaNro());
-            paivitaminenlause.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            YhteydenHallinta.suljeLause(paivitaminenlause);
-            YhteydenHallinta.suljeYhteys(yhteys);
-        }
-        return false;
-    }
-
+//    public void lisaaHenkilo(Henkilo uusihenkilo) {
+//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+//        if (yhteys == null) {
+//            return;
+//        }
+//        PreparedStatement lisayslause = null;
+//        try {
+//            String lisaaSql = "insert into henkilo "
+//                    + "(henkiloID,etunimi,sukunimi,syntymavuosi) "
+//                    + "values (?,?,?,?)";
+//            lisayslause = yhteys.prepareStatement(lisaaSql);
+//
+//            lisayslause.setInt(1, uusihenkilo.getHenkiloID());
+//            lisayslause.setString(2, uusihenkilo.getEtunimi());
+//            lisayslause.setString(3, uusihenkilo.getSukunimi());
+//            lisayslause.setInt(4, uusihenkilo.getSyntymavuosi());
+//            lisayslause.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            YhteydenHallinta.suljeLause(lisayslause);
+//            YhteydenHallinta.suljeYhteys(yhteys);
+//        }
+//    }
+//
+//    public boolean muutaHenkilonTietoja(Henkilo uusihenkilo) {
+//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+//        if (yhteys == null) {
+//            return false;
+//        }
+//        PreparedStatement muutoslause = null;
+//        try {
+//            String muutaSql = "update henkilo "
+//                    + " set etunimi=?,sukunimi=?,syntymavuosi=? "
+//                    + "where henkiloID=?";
+//            muutoslause = yhteys.prepareStatement(muutaSql);
+//
+//            muutoslause.setInt(4, uusihenkilo.getHenkiloID());
+//            muutoslause.setString(1, uusihenkilo.getEtunimi());
+//            muutoslause.setString(2, uusihenkilo.getSukunimi());
+//            muutoslause.setInt(3, uusihenkilo.getSyntymavuosi());
+//            if(muutoslause.executeUpdate()>0) {
+//                return true;
+//            }
+//            else {
+//                return false;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        } finally {
+//            YhteydenHallinta.suljeLause(muutoslause);
+//            YhteydenHallinta.suljeYhteys(yhteys);
+//        }     
+//    }
+//    public void poistaHenkilo(int henkiloID) {
+//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+//        if (yhteys == null) {
+//            return;
+//        }
+//        PreparedStatement poistolause = null;
+//        try {
+//            String poistoSql = "delete from henkilo where henkiloID=?";               
+//            poistolause = yhteys.prepareStatement(poistoSql);
+//            poistolause.setInt(1, henkiloID);
+//            
+//            poistolause.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            YhteydenHallinta.suljeLause(poistolause);
+//            YhteydenHallinta.suljeYhteys(yhteys);
+//        }
+//    }
+//    
 }

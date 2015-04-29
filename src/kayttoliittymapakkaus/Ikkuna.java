@@ -263,14 +263,14 @@ public class Ikkuna extends JFrame {
 
         int hid = Integer.parseInt(values[0]);
         int vuosi = Integer.parseInt(values[3]);
-        rekisteri.paivitaElokuva(new Elokuva(hid, values[1], values[2], vuosi));
+//        rekisteri.paivitaElokuva(new Elokuva(hid, values[1], values[2], vuosi));
         paivitaValintaLista();
 
     }
 
     private void suoritaPoisto() {
         int i = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
-        rekisteri.poistaElokuva(i);
+//        rekisteri.poistaElokuva(i);
         paivitaValintaLista();
 
     }
@@ -280,8 +280,8 @@ public class Ikkuna extends JFrame {
         try {
             int eid = Integer.parseInt(values[0]);
             int vuosi = Integer.parseInt(values[3]);
-            rekisteri.lisaaElokuva(new Elokuva(eid, values[1],
-                    values[2], vuosi));
+//            rekisteri.lisaaElokuva(new Elokuva(eid, values[1],
+//                    values[2], vuosi));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -303,9 +303,9 @@ public class Ikkuna extends JFrame {
     }
 
     private void haeElovat() {
-        for (Elokuva elokuva : rekisteri.haeKaikkElokuvat()) {
-            malli.addRow(Arrays.asList(elokuva.getElokuvaNro(), elokuva.getNimi(), elokuva.getOhjaaja(), elokuva.getVuosi()));
-        }
+//        for (Elokuva elokuva : rekisteri.haeKaikkElokuvat()) {
+//            malli.addRow(Arrays.asList(elokuva.getElokuvaNro(), elokuva.getNimi(), elokuva.getOhjaaja(), elokuva.getVuosi()));
+//        }
     }
 
     private void virhe(String viesti) {
