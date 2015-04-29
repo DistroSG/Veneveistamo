@@ -2,6 +2,7 @@ package tietovarastopakkaus;
 
 import datapakkaus.Henkilosto;
 import datapakkaus.HenkilostoHasTehtava;
+import datapakkaus.Maksu;
 import datapakkaus.Puhelinumero;
 import datapakkaus.Tehtava;
 import datapakkaus.Toimisto;
@@ -527,5 +528,41 @@ public class Tietovarasto {
             YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+        public List<Maksu> haeMaksut() {
+        List<Maksu> maksut = new ArrayList<>();
+        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys != null) {
+            PreparedStatement hakulause = null;
+            ResultSet tulosjoukko = null;
+            try {
+                String hakuSql = "Select eranumero, veneTilaus_id, hinta, maksettupaiva, erapaiva from maksu";
+                hakulause = yhteys.prepareStatement(hakuSql);
+                tulosjoukko = hakulause.executeQuery();
+
+                while (tulosjoukko.next()) {
+                    maksut.add(new Maksu(tulosjoukko.getInt(1), tulosjoukko.getInt(2),
+                            tulosjoukko.getDouble(3), tulosjoukko.getString(4),
+                            tulosjoukko.getString(5)));
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
+                YhteydenHallinta.suljeLause(hakulause);
+                YhteydenHallinta.suljeYhteys(yhteys);
+
+            }
+        }
+        return maksut;
     }
 }

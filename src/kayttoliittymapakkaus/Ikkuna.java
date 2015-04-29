@@ -71,7 +71,7 @@ public class Ikkuna extends JFrame {
     private String[] values;
     private String[] columnNames;
 
-    private final JComboBox combo = new JComboBox(new String[]{"Elokuva", "Kuva"});
+    private final JComboBox combo = new JComboBox(new String[]{"Elokuva", "Kuva", "Maksu"});
 
     public Ikkuna(String otsikko) {
         columnNames = new String[]{};
