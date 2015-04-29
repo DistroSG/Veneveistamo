@@ -231,7 +231,7 @@ public class Ikkuna extends JFrame {
         
         else if(combo.getSelectedItem()=="Maksu"){
             
-            columnNames = new String[]{"Eränumero", "VeneTilausID", "Hinta", "Maksettupäivä"};
+            columnNames = new String[]{"Eränumero", "VeneTilausID", "Hinta", "Maksettupäivä", "Eräpäivä"};
             
             new Ikkuna("Maksu", columnNames, 2).setVisible(true);
             this.dispose();
