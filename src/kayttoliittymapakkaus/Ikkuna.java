@@ -114,6 +114,10 @@ public class Ikkuna extends JFrame {
         nappiasetus();
     }
 
+    Ikkuna(Tietovarasto rekisteri, Taulukkomalli malli, String test) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private void nappiasetus() {
         lisaaNappi.addActionListener(new ActionListener() {
 
