@@ -220,20 +220,22 @@ public class Ikkuna extends JFrame {
             columnNames = new String[]{"№", "Nimi", "Ohjaja", "Vuosi"};
             new Ikkuna("Elokuva", columnNames, 0).setVisible(true);
 
-//            this.dispose();
+            this.dispose();
         } else if (combo.getSelectedItem() == "Kuva") {
             columnNames = new String[]{"№Kuva", "Nimi", "Ohjaja", "Vuosi"};
 
             new Ikkuna("Elokuva", columnNames, 1).setVisible(true);
-//            this.dispose();
+            this.dispose();
 
         }
         
         else if(combo.getSelectedItem()=="Maksu"){
             
-            columnNames = new String[]{"Eränumero", "VeneTilausID", "Hinta", "Maksettupäivä"};
+            columnNames = new String[]{"Eränumero", "VeneTilausID", "Hinta", "Maksettupäivä", "Eräpäivä"};
             
             new Ikkuna("Maksu", columnNames, 2).setVisible(true);
+                        this.dispose();
+
         }
 
     }
