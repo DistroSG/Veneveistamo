@@ -1,6 +1,7 @@
 package tietovarastopakkaus;
 
 import datapakkaus.Henkilosto;
+import datapakkaus.HenkilostoHasTehtava;
 import datapakkaus.Puhelinumero;
 import datapakkaus.Tehtava;
 import datapakkaus.Toimisto;
@@ -412,7 +413,7 @@ public class Tietovarasto {
         }
     }
 
-    public void poistaTehtava(int tehtavaID ){
+    public void poistaTehtava(int tehtavaID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
@@ -431,5 +432,100 @@ public class Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
+    
+//henkilosto_has_tehtava
+    public List<HenkilostoHasTehtava> haeHenkilostoHasTehtava() {
+        List<HenkilostoHasTehtava> haeHenkilostoHasTehtava = new ArrayList<>();
+        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys != null) {
+            PreparedStatement hakulause = null;
+            ResultSet tulosjoukko = null;
+            try {
+                String hakuSql = "SELECT henkilosto_id, tehtava_id FROM henkilosto_has_tehtava;";
+                hakulause = yhteys.prepareStatement(hakuSql);
+                tulosjoukko = hakulause.executeQuery();
 
+                while (tulosjoukko.next()) {
+                    haeHenkilostoHasTehtava.add(new HenkilostoHasTehtava(tulosjoukko.getInt(1),
+                            tulosjoukko.getInt(2)));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
+                YhteydenHallinta.suljeLause(hakulause);
+                YhteydenHallinta.suljeYhteys(yhteys);
+            }
+        }
+        return haeHenkilostoHasTehtava;
+    }
+
+    public void lisaaHenkilostoHasTehtava(HenkilostoHasTehtava uusiHenkilostoHasTehtava) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return;
+        }
+        PreparedStatement lisayslause = null;
+        try {
+            String lisaaSql = "insert into henkilosto_has_tehtava "
+                    + "(henkilosto_id, tehtava_id) values (?,?)";
+            lisayslause = yhteys.prepareStatement(lisaaSql);
+
+            lisayslause.setInt(1, uusiHenkilostoHasTehtava.getHenkilostoID());
+            lisayslause.setInt(2, uusiHenkilostoHasTehtava.getTehtavaID());
+            lisayslause.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            YhteydenHallinta.suljeLause(lisayslause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
+    }
+
+    public boolean muutaHenkilostoHasTehtava(HenkilostoHasTehtava uusiHenkilostoHasTehtava) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return false;
+        }
+        PreparedStatement muutoslause = null;
+        try {
+            String muutaSql = "update henkilosto_has_tehtava "
+                    + " set henkilosto_id=?,tehtava_id=? where henkilosto_id=?";
+            muutoslause = yhteys.prepareStatement(muutaSql);
+
+            muutoslause.setInt(1, uusiHenkilostoHasTehtava.getHenkilostoID());
+            muutoslause.setInt(2, uusiHenkilostoHasTehtava.getTehtavaID());
+            if (muutoslause.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            YhteydenHallinta.suljeLause(muutoslause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
+    }
+
+    public void poistaHenkilostoHasTehtava(int henkilostoID) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return;
+        }
+        PreparedStatement poistolause = null;
+        try {
+            String poistoSql = "delete from henkilosto_has_tehtava where henkilosto_id=?";
+            poistolause = yhteys.prepareStatement(poistoSql);
+            poistolause.setInt(1, henkilostoID);
+
+            poistolause.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            YhteydenHallinta.suljeLause(poistolause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
+    }
 }
