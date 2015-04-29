@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * ayy lmao wow
+ * ayy lmao wow g
  *
  * @author s1300778
  */
