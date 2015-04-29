@@ -1,5 +1,6 @@
 package tietovarastopakkaus;
 
+import datapakkaus.Puhelinumero;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,166 +25,104 @@ public class Tietovarasto {
         this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
                 "bb372d8eaf1594", "c887b8c8");
     }
+
+    //puhelinnimero
+    public List<Puhelinumero> haePuhelinumerot() {
+        List<Puhelinumero> puhelinumerot = new ArrayList<>();
+        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys != null) {
+            PreparedStatement hakulause = null;
+            ResultSet tulosjoukko = null;
+            try {
+                String hakuSql = "SELECT id, puhelinumero, toimisto_id FROM puhelinumero;";
+                hakulause = yhteys.prepareStatement(hakuSql);
+                tulosjoukko = hakulause.executeQuery();
+
+                while (tulosjoukko.next()) {
+                    puhelinumerot.add(new Puhelinumero(tulosjoukko.getInt(1),
+                            tulosjoukko.getInt(2), tulosjoukko.getInt(3)));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
+                YhteydenHallinta.suljeLause(hakulause);
+                YhteydenHallinta.suljeYhteys(yhteys);
+            }
+        }
+        return puhelinumerot;
+    }
+
+    public void lisaaPuhelinumero(Puhelinumero uusiPuhelinumero) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return;
+        }
+        PreparedStatement lisayslause = null;
+        try {
+            String lisaaSql = "insert into puhelinumero "
+                    + "(id,puhelinumero,toimisto_id) values (?,?,?)";
+            lisayslause = yhteys.prepareStatement(lisaaSql);
+
+            lisayslause.setInt(1, uusiPuhelinumero.getId());
+            lisayslause.setInt(2, uusiPuhelinumero.getPuhelinnumero());
+            lisayslause.setInt(3, uusiPuhelinumero.getToimistoID());
+            lisayslause.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            YhteydenHallinta.suljeLause(lisayslause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
+    }
+
+    public boolean muutaPuhelinumeroTietoja(Puhelinumero uusiPuhelinumero) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return false;
+        }
+        PreparedStatement muutoslause = null;
+        try {
+            String muutaSql = "update puhelinnumero "
+                    + " set id=?,puhelinumero=?,toimisto_id=? "
+                    + "where id=?";
+            muutoslause = yhteys.prepareStatement(muutaSql);
+
+            muutoslause.setInt(4, uusiPuhelinumero.getId());
+            muutoslause.setInt(1, uusiPuhelinumero.getPuhelinnumero());
+            muutoslause.setInt(2, uusiPuhelinumero.getToimistoID());
+            if (muutoslause.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            YhteydenHallinta.suljeLause(muutoslause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
+    }
+
+    public void poistaPuhelinumero(int puhelinID) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return;
+        }
+        PreparedStatement poistolause = null;
+        try {
+            String poistoSql = "delete from puhelinumero where id=?";               
+            poistolause = yhteys.prepareStatement(poistoSql);
+            poistolause.setInt(1, puhelinID);
+            
+            poistolause.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            YhteydenHallinta.suljeLause(poistolause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
+    }
     
-    //
-
-//    public List<Malli> haeMallit() {
-//        List<Malli> mallit = new ArrayList<>();
-//        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-//        if (yhteys != null) {
-//            PreparedStatement hakulause = null;
-//            ResultSet tulosjoukko = null;
-//            try {
-//                String hakuSql = "SELECT id, malli, masto FROM malli;";
-//                hakulause = yhteys.prepareStatement(hakuSql);
-//                tulosjoukko = hakulause.executeQuery();
-//
-//                while (tulosjoukko.next()) {
-//                    mallit.add(new Malli(tulosjoukko.getInt(1),
-//                            tulosjoukko.getString(2), tulosjoukko.getInt(3)));
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
-//                YhteydenHallinta.suljeLause(hakulause);
-//                YhteydenHallinta.suljeYhteys(yhteys);
-//            }
-//        }
-//        return mallit;
-//    }
-//
-//    public List<Varusteet> haeKaikkiVarusteet() {
-//        List<Varusteet> varusteet = new ArrayList<>();
-//        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-//        if (yhteys != null) {
-//            PreparedStatement hakulause = null;
-//            ResultSet tulosjoukko = null;
-//            try {
-//                String hakuSql = "SELECT id, varusteet, kuvaus, hinta FROM varusteet;";
-//                hakulause = yhteys.prepareStatement(hakuSql);
-//                tulosjoukko = hakulause.executeQuery();
-//
-//                while (tulosjoukko.next()) {
-//                    varusteet.add(new Varusteet(tulosjoukko.getInt(1),
-//                            tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getDouble(4)));
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
-//                YhteydenHallinta.suljeLause(hakulause);
-//                YhteydenHallinta.suljeYhteys(yhteys);
-//            }
-//        }
-//        return varusteet;
-//    }
-//
-//    public Varusteet haeVaruste(int varustenNumero) {
-//
-//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url,
-//                kayttaja, salasana);
-//        if (yhteys == null) {
-//            return null;
-//        }
-//        PreparedStatement hakulause = null;
-//        ResultSet tulosjoukko = null;
-//        try {
-//            String hakuSql = "SELECT id, varusteet, kuvaus, hinta FROM varusteet where id=?";
-//            hakulause = yhteys.prepareStatement(hakuSql);
-//            hakulause.setInt(1, varustenNumero);
-//            tulosjoukko = hakulause.executeQuery();
-//            if (tulosjoukko.next()) {
-//                return new Varusteet(tulosjoukko.getInt(1),
-//                        tulosjoukko.getString(2),
-//                        tulosjoukko.getString(3),
-//                        tulosjoukko.getDouble(4));
-//            } else {
-//                return null;
-//            }
-//
-//        } catch (Exception e) {
-//            return null;
-//        } finally {
-//            YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
-//            YhteydenHallinta.suljeLause(hakulause);
-//            YhteydenHallinta.suljeYhteys(yhteys);
-//        }
-//    }
-
-//    public void lisaaHenkilo(Henkilo uusihenkilo) {
-//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-//        if (yhteys == null) {
-//            return;
-//        }
-//        PreparedStatement lisayslause = null;
-//        try {
-//            String lisaaSql = "insert into henkilo "
-//                    + "(henkiloID,etunimi,sukunimi,syntymavuosi) "
-//                    + "values (?,?,?,?)";
-//            lisayslause = yhteys.prepareStatement(lisaaSql);
-//
-//            lisayslause.setInt(1, uusihenkilo.getHenkiloID());
-//            lisayslause.setString(2, uusihenkilo.getEtunimi());
-//            lisayslause.setString(3, uusihenkilo.getSukunimi());
-//            lisayslause.setInt(4, uusihenkilo.getSyntymavuosi());
-//            lisayslause.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            YhteydenHallinta.suljeLause(lisayslause);
-//            YhteydenHallinta.suljeYhteys(yhteys);
-//        }
-//    }
-//
-//    public boolean muutaHenkilonTietoja(Henkilo uusihenkilo) {
-//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-//        if (yhteys == null) {
-//            return false;
-//        }
-//        PreparedStatement muutoslause = null;
-//        try {
-//            String muutaSql = "update henkilo "
-//                    + " set etunimi=?,sukunimi=?,syntymavuosi=? "
-//                    + "where henkiloID=?";
-//            muutoslause = yhteys.prepareStatement(muutaSql);
-//
-//            muutoslause.setInt(4, uusihenkilo.getHenkiloID());
-//            muutoslause.setString(1, uusihenkilo.getEtunimi());
-//            muutoslause.setString(2, uusihenkilo.getSukunimi());
-//            muutoslause.setInt(3, uusihenkilo.getSyntymavuosi());
-//            if(muutoslause.executeUpdate()>0) {
-//                return true;
-//            }
-//            else {
-//                return false;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        } finally {
-//            YhteydenHallinta.suljeLause(muutoslause);
-//            YhteydenHallinta.suljeYhteys(yhteys);
-//        }     
-//    }
-//    public void poistaHenkilo(int henkiloID) {
-//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-//        if (yhteys == null) {
-//            return;
-//        }
-//        PreparedStatement poistolause = null;
-//        try {
-//            String poistoSql = "delete from henkilo where henkiloID=?";               
-//            poistolause = yhteys.prepareStatement(poistoSql);
-//            poistolause.setInt(1, henkiloID);
-//            
-//            poistolause.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            YhteydenHallinta.suljeLause(poistolause);
-//            YhteydenHallinta.suljeYhteys(yhteys);
-//        }
-//    }
-//    
 }
