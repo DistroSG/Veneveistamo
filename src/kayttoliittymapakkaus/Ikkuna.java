@@ -71,7 +71,7 @@ public class Ikkuna extends JFrame {
     private String[] values;
     private String[] columnNames;
 
-    private final JComboBox combo = new JComboBox(new String[]{"Elokuva", "Kuva", "Maksu"});
+    private final JComboBox combo = new JComboBox(new String[]{"Elokuva", "Kuva", "Maksu", "Asiakas"});
 
     public Ikkuna(String otsikko) {
         columnNames = new String[]{};
@@ -220,12 +220,12 @@ public class Ikkuna extends JFrame {
             columnNames = new String[]{"№", "Nimi", "Ohjaja", "Vuosi"};
             new Ikkuna("Elokuva", columnNames, 0).setVisible(true);
 
-//            this.dispose();
+            this.dispose();
         } else if (combo.getSelectedItem() == "Kuva") {
             columnNames = new String[]{"№Kuva", "Nimi", "Ohjaja", "Vuosi"};
 
             new Ikkuna("Elokuva", columnNames, 1).setVisible(true);
-//            this.dispose();
+            this.dispose();
 
         }
         
@@ -234,6 +234,14 @@ public class Ikkuna extends JFrame {
             columnNames = new String[]{"Eränumero", "VeneTilausID", "Hinta", "Maksettupäivä"};
             
             new Ikkuna("Maksu", columnNames, 2).setVisible(true);
+            this.dispose();
+        }
+        else if (combo.getSelectedItem() == "Asiakas") {
+            columnNames = new String[]{"ID", "Henkilötunnus", "Salasana", "Etunimi", "Sähköposti", "Sukupuoli", "Puhelinnumero", "Asiakastyyppi"};
+
+            new Ikkuna("Asiakas", columnNames, 3).setVisible(true);
+            this.dispose();
+
         }
 
     }
