@@ -3,7 +3,7 @@ package tietovarastopakkaus;
 import datapakkaus.Henkilosto;
 import datapakkaus.HenkilostoHasTehtava;
 import datapakkaus.Maksu;
-import datapakkaus.Puhelinumero;
+import datapakkaus.Puhelinnumero;
 import datapakkaus.Tehtava;
 import datapakkaus.Toimisto;
 import java.sql.Connection;
@@ -32,19 +32,19 @@ public class Tietovarasto {
     }
 
     //puhelinnimero
-    public List<Puhelinumero> haePuhelinumerot() {
-        List<Puhelinumero> puhelinumerot = new ArrayList<>();
+    public List<Puhelinnumero> haePuhelinnumerot() {
+        List<Puhelinnumero> puhelinnumerot = new ArrayList<>();
         Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT id, puhelinumero, toimisto_id FROM puhelinumero;";
+                String hakuSql = "SELECT id, puhelinnumero, toimisto_id FROM puhelinnumero;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
                 while (tulosjoukko.next()) {
-                    puhelinumerot.add(new Puhelinumero(tulosjoukko.getInt(1),
+                    puhelinnumerot.add(new Puhelinnumero(tulosjoukko.getInt(1),
                             tulosjoukko.getInt(2), tulosjoukko.getInt(3)));
                 }
             } catch (Exception e) {
@@ -55,23 +55,23 @@ public class Tietovarasto {
                 YhteydenHallinta.suljeYhteys(yhteys);
             }
         }
-        return puhelinumerot;
+        return puhelinnumerot;
     }
 
-    public void lisaaPuhelinumero(Puhelinumero uusiPuhelinumero) {
+    public void lisaaPuhelinnumero(Puhelinnumero uusiPuhelinnumero) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
         }
         PreparedStatement lisayslause = null;
         try {
-            String lisaaSql = "insert into puhelinumero "
-                    + "(id,puhelinumero,toimisto_id) values (?,?,?)";
+            String lisaaSql = "insert into puhelinnumero "
+                    + "(id,puhelinnumero,toimisto_id) values (?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
-            lisayslause.setInt(1, uusiPuhelinumero.getId());
-            lisayslause.setInt(2, uusiPuhelinumero.getPuhelinnumero());
-            lisayslause.setInt(3, uusiPuhelinumero.getToimistoID());
+            lisayslause.setInt(1, uusiPuhelinnumero.getId());
+            lisayslause.setInt(2, uusiPuhelinnumero.getPuhelinnumero());
+            lisayslause.setInt(3, uusiPuhelinnumero.getToimistoID());
             lisayslause.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,21 +81,21 @@ public class Tietovarasto {
         }
     }
 
-    public boolean muutaPuhelinumeroTietoja(Puhelinumero uusiPuhelinumero) {
+    public boolean muutaPuhelinumeroTietoja(Puhelinnumero uusiPuhelinnumero) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return false;
         }
         PreparedStatement muutoslause = null;
         try {
-            String muutaSql = "update puhelinnumero "
-                    + " set id=?,puhelinumero=?,toimisto_id=? "
+            String muutaSql = "update puhelinnumero"
+                    + " set puhelinnumero=?,toimisto_id=? "
                     + "where id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
-            muutoslause.setInt(1, uusiPuhelinumero.getId());
-            muutoslause.setInt(2, uusiPuhelinumero.getPuhelinnumero());
-            muutoslause.setInt(3, uusiPuhelinumero.getToimistoID());
+            muutoslause.setInt(1, uusiPuhelinnumero.getPuhelinnumero());
+            muutoslause.setInt(2, uusiPuhelinnumero.getToimistoID());
+            muutoslause.setInt(3, uusiPuhelinnumero.getId());
             if (muutoslause.executeUpdate() > 0) {
                 return true;
             } else {
@@ -117,7 +117,7 @@ public class Tietovarasto {
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from puhelinumero where id=?";
+            String poistoSql = "delete from puhelinnumero where id=?";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, puhelinID);
 

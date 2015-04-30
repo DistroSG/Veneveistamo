@@ -9,13 +9,13 @@ package datapakkaus;
  *
  * @author s1300778
  */
-public class Puhelinumero {
+public class Puhelinnumero {
 
     private final int id;
     private final int puhelinnumero;
     private final int toimistoID;
 
-    public Puhelinumero(int id, int puhelinnumero, int toimistoID) {
+    public Puhelinnumero(int id, int puhelinnumero, int toimistoID) {
         this.id = id;
         this.puhelinnumero = puhelinnumero;
         this.toimistoID = toimistoID;
@@ -35,7 +35,7 @@ public class Puhelinumero {
 
     @Override
     public String toString() {
-        return "Puhelinumero{" + "id=" + id + ", puhelinnumero=" + puhelinnumero + ", toimistoID=" + toimistoID + '}';
+        return "Puhelinnumero{" + "id=" + id + ", puhelinnumero=" + puhelinnumero + ", toimistoID=" + toimistoID + '}';
     }
 
 }

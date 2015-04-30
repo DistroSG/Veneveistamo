@@ -5,7 +5,7 @@
  */
 package kayttoliittymapakkaus;
 
-import datapakkaus.Puhelinumero;
+import datapakkaus.Puhelinnumero;
 import java.util.Arrays;
 
 /**
@@ -25,7 +25,7 @@ public class PuhelinumeroIkkuna extends Ikkuna {
         int hid = Integer.parseInt(values[0]);
         int puhelinumero = Integer.parseInt(values[1]);
         int toimistoID = Integer.parseInt(values[2]);
-        rekisteri.muutaPuhelinumeroTietoja(new Puhelinumero(hid, puhelinumero, toimistoID));
+        rekisteri.muutaPuhelinumeroTietoja(new Puhelinnumero(hid, puhelinumero, toimistoID));
         paivitaValintaLista();
 
     }
@@ -44,7 +44,7 @@ public class PuhelinumeroIkkuna extends Ikkuna {
             int hid = Integer.parseInt(values[0]);
             int puhelinumero = Integer.parseInt(values[1]);
             int toimistoID = Integer.parseInt(values[2]);
-            rekisteri.lisaaPuhelinumero(new Puhelinumero(hid, puhelinumero, toimistoID));
+            rekisteri.lisaaPuhelinnumero(new Puhelinnumero(hid, puhelinumero, toimistoID));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -55,21 +55,18 @@ public class PuhelinumeroIkkuna extends Ikkuna {
 
     @Override
     public void paivitaValintaLista() {
-          int rowCount = malli.getRowCount();
+        int rowCount = malli.getRowCount();
 
         for (int i = rowCount - 1; i >= 0; i--) {
             malli.removeRow(i);
-            
 
         }
         haeKaikkiTiedot();
     }
-    
 
     @Override
     public void haeKaikkiTiedot() {
-        for (Puhelinumero puhelinumero : rekisteri.haePuhelinumerot()) {
-            System.out.println(puhelinumero);
+        for (Puhelinnumero puhelinumero : rekisteri.haePuhelinnumerot()) {
             malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));
         }
     }
