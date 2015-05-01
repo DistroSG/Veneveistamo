@@ -56,17 +56,6 @@ public final class ToimistoIkkuna extends Ikkuna {
     }
 
     @Override
-    public void paivitaValintaLista() {
-        int rowCount = malli.getRowCount();
-
-        for (int id = rowCount - 1; id >= 0; id--) {
-            malli.removeRow(id);
-
-        }
-        haeKaikkiTiedot();
-    }
-
-    @Override
     public void haeKaikkiTiedot() {
         for (Toimisto toimisto : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList(toimisto.getId(), toimisto.getAukioloajat(), toimisto.getKatuosoite(), toimisto.getPostinumero(), toimisto.getToimipaikka()));

@@ -58,17 +58,6 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
     }
 
     @Override
-    public void paivitaValintaLista() {
-        int rowCount = malli.getRowCount();
-
-        for (int id = rowCount - 1; id >= 0; id--) {
-            malli.removeRow(id);
-
-        }
-        haeKaikkiTiedot();
-    }
-
-    @Override
     public void haeKaikkiTiedot() {
         for (Puhelinnumero puhelinumero : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));

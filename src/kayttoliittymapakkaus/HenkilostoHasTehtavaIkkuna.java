@@ -15,7 +15,7 @@ import tietovarastopakkaus.HenkilostoHasTehtavaTietovarasto;
  */
 public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
 
-    private HenkilostoHasTehtavaTietovarasto rekisteri = new HenkilostoHasTehtavaTietovarasto();
+    private final HenkilostoHasTehtavaTietovarasto rekisteri = new HenkilostoHasTehtavaTietovarasto();
 
     public HenkilostoHasTehtavaIkkuna(String otsikko, String[] columnNames, int comboIndex) {
         super(otsikko, columnNames, comboIndex);
@@ -55,17 +55,6 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
         } catch (NumberFormatException e) {
             virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
         }
-    }
-
-    @Override
-    public void paivitaValintaLista() {
-        int rowCount = malli.getRowCount();
-
-        for (int rowID = rowCount - 1; rowID >= 0; rowID--) {
-            malli.removeRow(rowID);
-
-        }
-        haeKaikkiTiedot();
     }
 
     @Override

@@ -54,17 +54,6 @@ public final class TehtavaIkkuna extends Ikkuna {
     }
 
     @Override
-    public void paivitaValintaLista() {
-        int rowCount = malli.getRowCount();
-
-        for (int id = rowCount - 1; id >= 0; id--) {
-            malli.removeRow(id);
-
-        }
-        haeKaikkiTiedot();
-    }
-
-    @Override
     public void haeKaikkiTiedot() {
         for (Tehtava tehtava : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList(tehtava.getId(), tehtava.getTehtava()));

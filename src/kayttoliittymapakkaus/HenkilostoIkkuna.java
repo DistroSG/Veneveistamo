@@ -55,17 +55,6 @@ public final class HenkilostoIkkuna extends Ikkuna {
     }
 
     @Override
-    public void paivitaValintaLista() {
-        int rowCount = malli.getRowCount();
-
-        for (int id = rowCount - 1; id >= 0; id--) {
-            malli.removeRow(id);
-
-        }
-        haeKaikkiTiedot();
-    }
-
-    @Override
     public void haeKaikkiTiedot() {
         for (Henkilosto henkilo : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList(henkilo.getId(), henkilo.getSukunimi(), henkilo.getEtunimi(), henkilo.getOsasto(), henkilo.getToimistoID()));

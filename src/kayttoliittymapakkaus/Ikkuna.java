@@ -7,7 +7,6 @@ package kayttoliittymapakkaus;
  */
 import taulukkopakkaus.Taulukkomalli;
 import taulukkopakkaus.HeaderRenderer;
-import tietovarastopakkaus.Tietovarasto;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +34,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import tietovarastopakkaus.ToimistoTietovarasto;
 
 /**
  *
@@ -64,8 +62,6 @@ public abstract class Ikkuna extends JFrame {
 
     private final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
             vasenosa, oikeanosa);
-
- 
 
     protected String[] values;
     private String[] columnNames;
@@ -182,11 +178,11 @@ public abstract class Ikkuna extends JFrame {
             columnNames = new String[]{"ID", "Sukunimi", "Etunimi", "Osasto", "Toimisto ID"};
 
             new HenkilostoIkkuna("Henkilosto", columnNames, 2).setVisible(true);
-        }else if (combo.getSelectedItem() == "Tehtävä") {
+        } else if (combo.getSelectedItem() == "Tehtävä") {
             columnNames = new String[]{"ID", "Tehtävä"};
 
             new TehtavaIkkuna("Tehtävä", columnNames, 3).setVisible(true);
-        }else if (combo.getSelectedItem() == "Henkilöstö has tehtävä") {
+        } else if (combo.getSelectedItem() == "Henkilöstö has tehtävä") {
             columnNames = new String[]{"Henkilöstö ID", "Tehtävä ID"};
 
             new HenkilostoHasTehtavaIkkuna("Henkilöstö has tehtävä", columnNames, 4).setVisible(true);
@@ -266,9 +262,17 @@ public abstract class Ikkuna extends JFrame {
 
     public abstract void suoritaPoisto();
 
-    public abstract void paivitaValintaLista();
-
     public abstract void haeKaikkiTiedot();
+
+    public void paivitaValintaLista() {
+        int rowCount = malli.getRowCount();
+
+        for (int rowID = rowCount - 1; rowID >= 0; rowID--) {
+            malli.removeRow(rowID);
+
+        }
+        haeKaikkiTiedot();
+    }
 
     protected void virhe(String viesti) {
         JOptionPane.showMessageDialog(this,
