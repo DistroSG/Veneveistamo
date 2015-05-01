@@ -35,6 +35,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import tietovarastopakkaus.ToimistoTietovarasto;
 
 /**
  *
@@ -64,13 +65,13 @@ public abstract class Ikkuna extends JFrame {
     private final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
             vasenosa, oikeanosa);
 
-    protected Tietovarasto rekisteri = new Tietovarasto();
-            
+ 
+
     protected String[] values;
     private String[] columnNames;
 
     private final JComboBox combo = new JComboBox(new String[]{
-        "Puhelinumero", "Toimisto", "Henkilosto", "Tehtava", "Henkilosto has tehtava"
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä"
     });
 
     public Ikkuna(String otsikko) {
@@ -99,7 +100,6 @@ public abstract class Ikkuna extends JFrame {
         this.columnNames = columnNames;
         malli = new Taulukkomalli(columnNames);
         values = new String[malli.getColumnCount()];
-        haeKaikkiTiedot();
         syottopaneeli = new Syottopaneeli(malli.getColumnNames());
 
         muutuNappi.setEnabled(false);
@@ -114,8 +114,6 @@ public abstract class Ikkuna extends JFrame {
 
         nappiasetus();
     }
-
-
 
     private void nappiasetus() {
         lisaaNappi.addActionListener(new ActionListener() {
@@ -168,25 +166,35 @@ public abstract class Ikkuna extends JFrame {
 
         });
     }
-    
-     private void kasitteleValinta(){
-         if (combo.getSelectedItem() == "Puhelinumero") {
-            
 
-            columnNames = new String[]{"ID", "Puhelinumero", "Toimisto ID"};
+    private void kasitteleValinta() {
+        if (combo.getSelectedItem() == "Puhelinnumero") {
+
+            columnNames = new String[]{"ID", "Puhelinnumero", "Toimisto ID"};
             new PuhelinumeroIkkuna("Puhelinnumero", columnNames, 0).setVisible(true);
-            
 
+        } else if (combo.getSelectedItem() == "Toimisto") {
+            columnNames = new String[]{"ID", "Aukioloajat", "Katuosoite", "Postinumero", "Toimipaikka"};
 
-        } else if (combo.getSelectedItem() == "Kuva") {
-            columnNames = new String[]{"№Kuva", "Nimi", "Ohjaja", "Vuosi"};
+            new ToimistoIkkuna("Toimipaikka", columnNames, 1).setVisible(true);
 
-//            new Ikkuna("Elokuva", columnNames, 1).setVisible(true);
+        } else if (combo.getSelectedItem() == "Henkilöstö") {
+            columnNames = new String[]{"ID", "Sukunimi", "Etunimi", "Osasto", "Toimisto ID"};
 
+            new HenkilostoIkkuna("Henkilosto", columnNames, 2).setVisible(true);
+        }else if (combo.getSelectedItem() == "Tehtävä") {
+            columnNames = new String[]{"ID", "Tehtävä"};
 
+            new TehtavaIkkuna("Tehtävä", columnNames, 3).setVisible(true);
+        }else if (combo.getSelectedItem() == "Henkilöstö has tehtävä") {
+            columnNames = new String[]{"Henkilöstö ID", "Tehtävä ID"};
+
+            new HenkilostoHasTehtavaIkkuna("Henkilöstö has tehtävä", columnNames, 4).setVisible(true);
         }
-                   this.dispose();
-    };
+        this.dispose();
+    }
+
+    ;
 
     private void ikkunaasetus(String otsikko) {
         this.add(pohjapaneeli);
@@ -252,13 +260,11 @@ public abstract class Ikkuna extends JFrame {
         }
     }
 
-   
+    public abstract void suoritaLisays();
 
     public abstract void suoritaMuutos();
 
     public abstract void suoritaPoisto();
-
-    public abstract void suoritaLisays();
 
     public abstract void paivitaValintaLista();
 

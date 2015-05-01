@@ -5,19 +5,20 @@
  */
 package kayttoliittymapakkaus;
 
-import datapakkaus.Puhelinnumero;
+import datapakkaus.Tehtava;
 import java.util.Arrays;
-import tietovarastopakkaus.PuhelinnumeroTietovarasto;
+import tietovarastopakkaus.TehtavaTietovarasto;
+
 
 /**
  *
  * @author s1300778
  */
-public final class PuhelinumeroIkkuna extends Ikkuna {
+public final class TehtavaIkkuna extends Ikkuna {
+    
+    private TehtavaTietovarasto rekisteri = new TehtavaTietovarasto();
 
-    private PuhelinnumeroTietovarasto rekisteri = new PuhelinnumeroTietovarasto();
-
-    public PuhelinumeroIkkuna(String otsikko, String[] columnNames, int comboIndex) {
+    public TehtavaIkkuna(String otsikko, String[] columnNames, int comboIndex) {
         super(otsikko, columnNames, comboIndex);
         haeKaikkiTiedot();
     }
@@ -27,11 +28,8 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         values = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(values[0]);
-        int puhelinumero = Integer.parseInt(values[1]);
-        int toimistoID = Integer.parseInt(values[2]);
-        rekisteri.muutaTietoja(new Puhelinnumero(id, puhelinumero, toimistoID));
+        rekisteri.muutaTietoja(new Tehtava(id, values[1]));
         paivitaValintaLista();
-
     }
 
     @Override
@@ -46,9 +44,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         values = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(values[0]);
-            int puhelinumero = Integer.parseInt(values[1]);
-            int toimistoID = Integer.parseInt(values[2]);
-            rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinumero, toimistoID));
+            rekisteri.lisaaTieto(new Tehtava(id, values[1]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -70,8 +66,8 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
 
     @Override
     public void haeKaikkiTiedot() {
-        for (Puhelinnumero puhelinumero : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));
+        for (Tehtava tehtava : rekisteri.haeTiedot()) {
+            malli.addRow(Arrays.asList(tehtava.getId(), tehtava.getTehtava()));
         }
     }
 

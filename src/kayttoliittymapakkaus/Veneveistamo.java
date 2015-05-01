@@ -19,7 +19,7 @@ public class Veneveistamo {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Kotiikkuna("Test").setVisible(true);
+                new Kotiikkuna("Kotiikkuna").setVisible(true);
             }
         });
     }

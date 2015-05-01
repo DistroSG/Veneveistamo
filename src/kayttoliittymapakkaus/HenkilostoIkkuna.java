@@ -5,19 +5,19 @@
  */
 package kayttoliittymapakkaus;
 
-import datapakkaus.Puhelinnumero;
+import datapakkaus.Henkilosto;
 import java.util.Arrays;
-import tietovarastopakkaus.PuhelinnumeroTietovarasto;
+import tietovarastopakkaus.HenkilostoTietovarasto;
 
 /**
  *
  * @author s1300778
  */
-public final class PuhelinumeroIkkuna extends Ikkuna {
+public final class HenkilostoIkkuna extends Ikkuna {
 
-    private PuhelinnumeroTietovarasto rekisteri = new PuhelinnumeroTietovarasto();
+    private HenkilostoTietovarasto rekisteri = new HenkilostoTietovarasto();
 
-    public PuhelinumeroIkkuna(String otsikko, String[] columnNames, int comboIndex) {
+    public HenkilostoIkkuna(String otsikko, String[] columnNames, int comboIndex) {
         super(otsikko, columnNames, comboIndex);
         haeKaikkiTiedot();
     }
@@ -27,11 +27,9 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         values = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(values[0]);
-        int puhelinumero = Integer.parseInt(values[1]);
-        int toimistoID = Integer.parseInt(values[2]);
-        rekisteri.muutaTietoja(new Puhelinnumero(id, puhelinumero, toimistoID));
+        int toimistoID = Integer.parseInt(values[4]);
+        rekisteri.muutaTietoja(new Henkilosto(id, values[1], values[2], values[3], toimistoID));
         paivitaValintaLista();
-
     }
 
     @Override
@@ -46,9 +44,8 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         values = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(values[0]);
-            int puhelinumero = Integer.parseInt(values[1]);
-            int toimistoID = Integer.parseInt(values[2]);
-            rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinumero, toimistoID));
+            int toimistoID = Integer.parseInt(values[4]);
+            rekisteri.lisaaTieto(new Henkilosto(id, values[1], values[2], values[3], toimistoID));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -70,8 +67,8 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
 
     @Override
     public void haeKaikkiTiedot() {
-        for (Puhelinnumero puhelinumero : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));
+        for (Henkilosto henkilo : rekisteri.haeTiedot()) {
+            malli.addRow(Arrays.asList(henkilo.getId(), henkilo.getSukunimi(), henkilo.getEtunimi(), henkilo.getOsasto(), henkilo.getToimistoID()));
         }
     }
 

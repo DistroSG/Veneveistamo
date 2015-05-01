@@ -12,14 +12,14 @@ package datapakkaus;
 public class Toimisto {
 
     private final int id;
-    private final String aukiolajit;
+    private final String aukioloajat;
     private final String katuosoite;
     private final int postinumero;
     private final String toimipaikka;
 
-    public Toimisto(int id, String aukiolajit, String katuosoite, int postinumero, String toimipaikka) {
+    public Toimisto(int id, String aukioloajat, String katuosoite, int postinumero, String toimipaikka) {
         this.id = id;
-        this.aukiolajit = aukiolajit;
+        this.aukioloajat = aukioloajat;
         this.katuosoite = katuosoite;
         this.postinumero = postinumero;
         this.toimipaikka = toimipaikka;
@@ -29,8 +29,8 @@ public class Toimisto {
         return id;
     }
 
-    public String getAukiolajit() {
-        return aukiolajit;
+    public String getAukioloajat() {
+        return aukioloajat;
     }
 
     public String getKatuosoite() {
@@ -47,7 +47,7 @@ public class Toimisto {
 
     @Override
     public String toString() {
-        return "Toimisto{" + "id=" + id + ", aukiolajit=" + aukiolajit + ", katuosoite=" + katuosoite + ", postinumero=" + postinumero + ", toimipaikka=" + toimipaikka + '}';
+        return "Toimisto{" + "id=" + id + ", aukioloajat=" + aukioloajat + ", katuosoite=" + katuosoite + ", postinumero=" + postinumero + ", toimipaikka=" + toimipaikka + '}';
     }
 
 }
