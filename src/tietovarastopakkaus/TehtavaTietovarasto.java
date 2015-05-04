@@ -9,6 +9,7 @@ import datapakkaus.Tehtava;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +62,10 @@ public class TehtavaTietovarasto extends Tietovarasto {
             lisayslause.setInt(1, uusiTehtava.getId());
             lisayslause.setString(2, uusiTehtava.getTehtava());
             lisayslause.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+                if (ex.getErrorCode() == 1062) {
+                   idVirheIlmoitus();
+                }
         } finally {
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);

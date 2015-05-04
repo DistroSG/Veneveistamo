@@ -9,6 +9,7 @@ import datapakkaus.Toimisto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +67,10 @@ public class ToimistoTietovarasto extends Tietovarasto {
             lisayslause.setInt(4, uusiToimisto.getPostinumero());
             lisayslause.setString(5, uusiToimisto.getToimipaikka());
             lisayslause.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+                if (ex.getErrorCode() == 1062) {
+                   idVirheIlmoitus();
+                }
         } finally {
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);

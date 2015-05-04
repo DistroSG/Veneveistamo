@@ -9,8 +9,10 @@ import datapakkaus.Henkilosto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,8 +36,10 @@ public class HenkilostoTietovarasto extends Tietovarasto {
                     henkilot.add(new Henkilosto(tulosjoukko.getInt(1),
                             tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getString(4), tulosjoukko.getInt(5)));
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (SQLException ex) {
+                if (ex.getErrorCode() == 1062) {
+                   idVirheIlmoitus();
+                }
             } finally {
                 YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
                 YhteydenHallinta.suljeLause(hakulause);

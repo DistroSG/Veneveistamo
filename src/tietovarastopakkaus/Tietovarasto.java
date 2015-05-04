@@ -1,7 +1,7 @@
 package tietovarastopakkaus;
 
 import java.util.List;
-
+import javax.swing.JOptionPane;
 
 public abstract class Tietovarasto {
 
@@ -29,7 +29,20 @@ public abstract class Tietovarasto {
     public abstract boolean muutaTietoja(Object object);
 
     public abstract void poistaTieto(int id);
-    
+
+    protected void virhe(String viesti) {
+        JOptionPane.showMessageDialog(null,
+                viesti, "Virhe", JOptionPane.ERROR_MESSAGE);
+    }
+     protected void idVirheIlmoitus() {
+        JOptionPane.showMessageDialog(null,
+                "ID on jo olemassa!", "Virhe", JOptionPane.ERROR_MESSAGE);
+    }
+     protected void hastaulukkoIdVirheIlmoitus() {
+        JOptionPane.showMessageDialog(null,
+                "Yhdistelmä on jo olemassa!", "Virhe", JOptionPane.ERROR_MESSAGE);
+    }
+
 //    //Hakee tiedot Maksu taulusta
 //    public List<Maksu> haeMaksut() {
 //        List<Maksu> maksut = new ArrayList<>();

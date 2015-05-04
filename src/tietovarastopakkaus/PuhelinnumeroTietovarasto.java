@@ -5,12 +5,15 @@
  */
 package tietovarastopakkaus;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import datapakkaus.Puhelinnumero;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,8 +65,11 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
             lisayslause.setInt(2, uusiPuhelinnumero.getPuhelinnumero());
             lisayslause.setInt(3, uusiPuhelinnumero.getToimistoID());
             lisayslause.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 1062) {
+                idVirheIlmoitus();
+            }
         } finally {
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);
@@ -71,7 +77,8 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
     }
 
     @Override
-    public boolean muutaTietoja(Object object) {
+    public boolean muutaTietoja(Object object
+    ) {
         Puhelinnumero uusiPuhelinnumero = (Puhelinnumero) object;
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
@@ -102,7 +109,8 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
     }
 
     @Override
-    public void poistaTieto(int puhelinnumeroID) {
+    public void poistaTieto(int puhelinnumeroID
+    ) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
