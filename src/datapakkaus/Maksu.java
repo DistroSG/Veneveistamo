@@ -14,14 +14,14 @@ import java.util.Objects;
 public class Maksu {
     
     private final int eranumero;
-    private final int tilausID;
+    private final int venetilaus_id;
     private final double hinta;
     private final String maksettupaiva;
     private final String erapaiva;
 
-    public Maksu(int eranumero, int tilausID, double hinta, String maksettupaiva, String erapaiva) {
+    public Maksu(int eranumero, int venetilaus_id, double hinta, String maksettupaiva, String erapaiva) {
         this.eranumero = eranumero;
-        this.tilausID = tilausID;
+        this.venetilaus_id = venetilaus_id;
         this.hinta = hinta;
         this.maksettupaiva = maksettupaiva;
         this.erapaiva = erapaiva;
@@ -31,8 +31,8 @@ public class Maksu {
         return eranumero;
     }
 
-    public int getTilausID() {
-        return tilausID;
+    public int getveneTilaus_id() {
+        return venetilaus_id;
     }
 
     public double getHinta() {
@@ -49,14 +49,14 @@ public class Maksu {
 
     @Override
     public String toString() {
-        return "Maksu{" + "eranumero=" + eranumero + ", tilausID=" + tilausID + ", hinta=" + hinta + ", maksettupaiva=" + maksettupaiva + ", erapaiva=" + erapaiva + '}';
+        return "Maksu{" + "eranumero=" + eranumero + ", tilausID=" + venetilaus_id + ", hinta=" + hinta + ", maksettupaiva=" + maksettupaiva + ", erapaiva=" + erapaiva + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 47 * hash + this.eranumero;
-        hash = 47 * hash + this.tilausID;
+        hash = 47 * hash + this.venetilaus_id;
         hash = 47 * hash + (int) (Double.doubleToLongBits(this.hinta) ^ (Double.doubleToLongBits(this.hinta) >>> 32));
         hash = 47 * hash + Objects.hashCode(this.maksettupaiva);
         hash = 47 * hash + Objects.hashCode(this.erapaiva);
@@ -75,7 +75,7 @@ public class Maksu {
         if (this.eranumero != other.eranumero) {
             return false;
         }
-        if (this.tilausID != other.tilausID) {
+        if (this.venetilaus_id != other.venetilaus_id) {
             return false;
         }
         if (Double.doubleToLongBits(this.hinta) != Double.doubleToLongBits(other.hinta)) {
