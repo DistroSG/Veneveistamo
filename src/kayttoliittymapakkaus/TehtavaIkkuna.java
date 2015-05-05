@@ -16,7 +16,7 @@ import tietovarastopakkaus.TehtavaTietovarasto;
  */
 public final class TehtavaIkkuna extends Ikkuna {
     
-    private TehtavaTietovarasto rekisteri = new TehtavaTietovarasto();
+    private final TehtavaTietovarasto rekisteri = new TehtavaTietovarasto();
 
     public TehtavaIkkuna(String otsikko, String[] columnNames, int comboIndex) {
         super(otsikko, columnNames, comboIndex);
@@ -49,7 +49,7 @@ public final class TehtavaIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("ID:n pitää olla kokonaislukuna");
         }
     }
 

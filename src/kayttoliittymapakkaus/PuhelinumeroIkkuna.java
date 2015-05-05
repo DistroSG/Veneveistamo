@@ -15,7 +15,7 @@ import tietovarastopakkaus.PuhelinnumeroTietovarasto;
  */
 public final class PuhelinumeroIkkuna extends Ikkuna {
 
-    private PuhelinnumeroTietovarasto rekisteri = new PuhelinnumeroTietovarasto();
+    private final PuhelinnumeroTietovarasto rekisteri = new PuhelinnumeroTietovarasto();
 
     public PuhelinumeroIkkuna(String otsikko, String[] columnNames, int comboIndex) {
         super(otsikko, columnNames, comboIndex);
@@ -46,14 +46,14 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         values = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(values[0]);
-            int puhelinumero = Integer.parseInt(values[1]);
+            int puhelinnumero = Integer.parseInt(values[1]);
             int toimistoID = Integer.parseInt(values[2]);
-            rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinumero, toimistoID));
+            rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinnumero, toimistoID));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("ID:n, puhelinnumeron ja toimistoID:n pitää olla kokonaislukuja");
         }
     }
 

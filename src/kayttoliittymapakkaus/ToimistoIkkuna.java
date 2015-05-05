@@ -45,13 +45,13 @@ public final class ToimistoIkkuna extends Ikkuna {
         values = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(values[0]);
-            int puhelinumero = Integer.parseInt(values[3]);
-            rekisteri.lisaaTieto(new Toimisto(id, values[1], values[2], puhelinumero, values[4]));
+            int puhelinnumero = Integer.parseInt(values[3]);
+            rekisteri.lisaaTieto(new Toimisto(id, values[1], values[2], puhelinnumero, values[4]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("ID:n ja ¨puhelinnumeron pitää olla kokonaislukuja");
         }
     }
 

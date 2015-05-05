@@ -50,7 +50,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("ID:n ja toimiston ID:n pitää olla kokonaislukuja");
         }
     }
 

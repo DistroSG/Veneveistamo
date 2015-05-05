@@ -53,7 +53,7 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("HenkilöID:n ja TehtäväID:n pitää olla kokonaislukuja");
         }
     }
 
