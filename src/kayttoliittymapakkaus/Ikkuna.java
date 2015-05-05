@@ -67,7 +67,7 @@ public abstract class Ikkuna extends JFrame {
     private String[] columnNames;
 
     private final JComboBox combo = new JComboBox(new String[]{
-        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali"
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali","Perusvarit"
     });
 
     public Ikkuna(String otsikko) {
@@ -194,6 +194,10 @@ public abstract class Ikkuna extends JFrame {
             columnNames = new String[]{"ID", "Materiaali"};
 
             new MateriaaliIkkuna("Materiaali", columnNames, 6).setVisible(true);
+        } else if (combo.getSelectedItem() == "Perusvarit") {
+            columnNames = new String[]{"ID", "Perusvarit"};
+
+            new PerusvaritIkkuna("Perusvarit", columnNames, 7).setVisible(true);
         
         }
         this.dispose();
