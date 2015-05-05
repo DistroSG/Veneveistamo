@@ -58,7 +58,5 @@ public class Materiaali {
         }
         return true;
     }
-    
-//a
 
 }
