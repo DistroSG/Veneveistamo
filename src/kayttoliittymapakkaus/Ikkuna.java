@@ -190,9 +190,7 @@ public abstract class Ikkuna extends JFrame {
             columnNames = new String[]{"EraNumero", "VeneTilaus ID", "Hinta", "Maksettupaiva", "Eräpäivä"};
             
             new MaksuIkkuna("Maksu", columnNames, 5).setVisible(true);
-<<<<<<< HEAD
-            
-=======
+
         } else if (combo.getSelectedItem() == "Materiaali") {
             columnNames = new String[]{"ID", "Materiaali"};
 
@@ -202,7 +200,7 @@ public abstract class Ikkuna extends JFrame {
 
             new PerusvaritIkkuna("Perusvarit", columnNames, 7).setVisible(true);
         
->>>>>>> origin/master
+
         }
         this.dispose();
     }
