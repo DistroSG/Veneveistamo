@@ -5,7 +5,6 @@
  */
 package tietovarastopakkaus;
 
-import datapakkaus.Henkilosto;
 import datapakkaus.Maksu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,8 +57,8 @@ public void lisaaTieto(Object object) {
         }
         PreparedStatement lisayslause = null;
         try {
-            String lisaaSql = "insert into henkilosto"
-                    + "(id, sukunimi, etunimi, osasto, toimisto_id) values (?,?,?,?,?)";
+            String lisaaSql = "insert into maksu"
+                    + "(eranumero, veneTilaus_id, hinta, maksettupaiva, erapaiva) values (?,?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiMaksu.getEranumero());
@@ -91,11 +90,11 @@ public void lisaaTieto(Object object) {
                     + "where eranumero=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
-            muutoslause.setInt(1, uusiMaksu.getEranumero());
-            muutoslause.setInt(2, uusiMaksu.getveneTilaus_id());
-            muutoslause.setDouble(3, uusiMaksu.getHinta());
-            muutoslause.setString(4, uusiMaksu.getMaksettupaiva());
-            muutoslause.setString(5, uusiMaksu.getErapaiva());
+            muutoslause.setInt(5, uusiMaksu.getEranumero());
+            muutoslause.setInt(1, uusiMaksu.getveneTilaus_id());
+            muutoslause.setDouble(2, uusiMaksu.getHinta());
+            muutoslause.setString(3, uusiMaksu.getMaksettupaiva());
+            muutoslause.setString(4, uusiMaksu.getErapaiva());
             if (muutoslause.executeUpdate() > 0) {
                 return true;
             } else {

@@ -189,8 +189,8 @@ public abstract class Ikkuna extends JFrame {
         } else if (combo.getSelectedItem() == "Maksu"){
             columnNames = new String[]{"EraNumero", "VeneTilaus ID", "Hinta", "Maksettupaiva", "Eräpäivä"};
             
-    /*        new MaksuIkkuna("Maksu", columnNames, 5).setVisible(true);
-            */
+            new MaksuIkkuna("Maksu", columnNames, 5).setVisible(true);
+            
         }
         this.dispose();
     }
