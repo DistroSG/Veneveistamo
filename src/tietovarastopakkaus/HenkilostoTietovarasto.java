@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tietovarastopakkaus;
 
 import datapakkaus.Henkilosto;
@@ -12,18 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
+ * HenkilostoTietovarasto luokka. Jolla avulla saadaan tietokantayhteys ja
+ * tiedot HenkilostoHasTehtava taulukosta.
  *
  * @author s1300778
+ * @version 1.0
  */
 public class HenkilostoTietovarasto extends Tietovarasto {
 
+    /**
+     * Palautta kaikki henkilöiden tiedot.
+     *
+     * @return kaikki henkilöiden tiedot.
+     */
     @Override
     public List<Henkilosto> haeTiedot() {
         List<Henkilosto> henkilot = new ArrayList<>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
@@ -38,7 +40,7 @@ public class HenkilostoTietovarasto extends Tietovarasto {
                 }
             } catch (SQLException ex) {
                 if (ex.getErrorCode() == 1062) {
-                   idVirheIlmoitus();
+                    idVirheIlmoitus();
                 }
             } finally {
                 YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
@@ -49,6 +51,11 @@ public class HenkilostoTietovarasto extends Tietovarasto {
         return henkilot;
     }
 
+    /**
+     * Lisätä uusi henkilö.
+     *
+     * @param object henkilö, joka lisätään.
+     */
     @Override
     public void lisaaTieto(Object object) {
         Henkilosto uusiHenkilo = (Henkilosto) object;
@@ -69,13 +76,18 @@ public class HenkilostoTietovarasto extends Tietovarasto {
             lisayslause.setInt(5, uusiHenkilo.getToimistoID());
             lisayslause.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
 
+    /**
+     * Muuta henkilön tiedot.
+     *
+     * @param object hinkilö, joka muutetaan.
+     * @return palautta true, jos muuttaminen on onnistuttu.
+     */
     @Override
     public boolean muutaTietoja(Object object) {
         Henkilosto uusiHenkilo = (Henkilosto) object;
@@ -96,13 +108,9 @@ public class HenkilostoTietovarasto extends Tietovarasto {
             muutoslause.setString(3, uusiHenkilo.getOsasto());
             muutoslause.setInt(4, uusiHenkilo.getToimistoID());
             muutoslause.setInt(5, uusiHenkilo.getId());
-            if (muutoslause.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return muutoslause.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace();
+
             return false;
         } finally {
             YhteydenHallinta.suljeLause(muutoslause);
@@ -110,6 +118,11 @@ public class HenkilostoTietovarasto extends Tietovarasto {
         }
     }
 
+    /**
+     * Poista henkilö.
+     *
+     * @param henkiloID poistettavan henkilön id. Esim. "1"
+     */
     @Override
     public void poistaTieto(int henkiloID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
@@ -124,7 +137,6 @@ public class HenkilostoTietovarasto extends Tietovarasto {
 
             poistolause.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);

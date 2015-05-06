@@ -22,7 +22,7 @@ public class MaksuTietovarasto extends Tietovarasto {
     @Override
     public List<Maksu> haeTiedot() {
         List<Maksu> maksut = new ArrayList<>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;

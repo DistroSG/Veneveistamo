@@ -16,8 +16,8 @@ public class HenkilostoHasTehtava {
      *
      * Luoda uutta yhdistys henkilostoID:n ja toimistoID:n avulla.
      *
-     * @param henkilostoID henkilön id. Esim. 1
-     * @param tehtavaID tehtävän id. Esim. 1
+     * @param henkilostoID henkilön id. Esim. "1"
+     * @param tehtavaID tehtävän id. Esim. "1"
      */
     public HenkilostoHasTehtava(int henkilostoID, int tehtavaID) {
         this.henkilostoID = henkilostoID;

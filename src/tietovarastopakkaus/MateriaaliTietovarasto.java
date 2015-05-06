@@ -22,7 +22,7 @@ public class MateriaaliTietovarasto extends Tietovarasto {
     @Override
     public List<Materiaali> haeTiedot() {
         List<Materiaali> materiaalit = new ArrayList<>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
@@ -63,9 +63,9 @@ public class MateriaaliTietovarasto extends Tietovarasto {
             lisayslause.setString(2, uusiMateriaali.getMateriaali());
             lisayslause.executeUpdate();
         } catch (SQLException ex) {
-                if (ex.getErrorCode() == 1062) {
-                   idVirheIlmoitus();
-                }
+            if (ex.getErrorCode() == 1062) {
+                idVirheIlmoitus();
+            }
         } finally {
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);

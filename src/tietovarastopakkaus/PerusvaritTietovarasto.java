@@ -13,20 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author s1300778
- */
+
 public class PerusvaritTietovarasto extends Tietovarasto {
 
-    /**
-     *
-     * @return
-     */
+  
     @Override
     public List<Perusvarit> haeTiedot() {
         List<Perusvarit> perusvarit = new ArrayList<>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;

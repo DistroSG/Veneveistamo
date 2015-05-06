@@ -18,12 +18,12 @@ public class Toimisto {
      * Luoda uutta toimistoa id:n, aukioloaikkoin, katuosoiten, postinumeron ja
      * toimipaikkaID:n avulla.
      *
-     * @param id toimiston id. Esim. 1
-     * @param aukioloajat aukioloajat. Esim. arikisin 9-15 lauantaisin ja
-     * sunnuntaisin suljettu
-     * @param katuosoite katuosoite. Esim. Hattulantie 2
-     * @param postinumero postinumero. Esim. 00820
-     * @param toimipaikka toimipaikka. Esim. Helsinki
+     * @param id toimiston id. Esim. "1"
+     * @param aukioloajat aukioloajat. Esim. "arikisin 9-15 lauantaisin ja
+     * sunnuntaisin suljettu"
+     * @param katuosoite katuosoite. Esim. "Hattulantie 2"
+     * @param postinumero postinumero. Esim. "00820"
+     * @param toimipaikka toimipaikka. Esim. "Helsinki"
      */
     public Toimisto(int id, String aukioloajat, String katuosoite, int postinumero, String toimipaikka) {
         this.id = id;

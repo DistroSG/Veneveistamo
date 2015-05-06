@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tietovarastopakkaus;
 
 import datapakkaus.Toimisto;
@@ -14,15 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * ToimistoTietovarasto luokka. Jolla avulla saadaan tietokantayhteys ja tiedot
+ * Toimisto taulukosta.
  *
  * @author s1300778
+ * @version 1.0
  */
 public class ToimistoTietovarasto extends Tietovarasto {
 
+    /**
+     * Palautta kaikki toimistojen tiedot.
+     *
+     * @return kaikki toimistojen tiedot.
+     */
     @Override
     public List<Toimisto> haeTiedot() {
         List<Toimisto> toimistot = new ArrayList<>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
@@ -37,7 +40,6 @@ public class ToimistoTietovarasto extends Tietovarasto {
 
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
                 YhteydenHallinta.suljeLause(hakulause);
@@ -47,6 +49,11 @@ public class ToimistoTietovarasto extends Tietovarasto {
         return toimistot;
     }
 
+    /**
+     * Lisätä uusi toimisto.
+     *
+     * @param object toimisto, joka lisätään.
+     */
     @Override
     public void lisaaTieto(Object object) {
 
@@ -68,15 +75,21 @@ public class ToimistoTietovarasto extends Tietovarasto {
             lisayslause.setString(5, uusiToimisto.getToimipaikka());
             lisayslause.executeUpdate();
         } catch (SQLException ex) {
-                if (ex.getErrorCode() == 1062) {
-                   idVirheIlmoitus();
-                }
+            if (ex.getErrorCode() == 1062) {
+                idVirheIlmoitus();
+            }
         } finally {
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
 
+    /**
+     * Muuta toimiston tiedot.
+     *
+     * @param object toimisto, joka muutetaan.
+     * @return palautta true, jos muuttaminen on onnistuttu.
+     */
     @Override
     public boolean muutaTietoja(Object object) {
         Toimisto uusiToimisto = (Toimisto) object;
@@ -98,13 +111,8 @@ public class ToimistoTietovarasto extends Tietovarasto {
             muutoslause.setString(4, uusiToimisto.getToimipaikka());
             muutoslause.setInt(5, uusiToimisto.getId());
 
-            if (muutoslause.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return muutoslause.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         } finally {
             YhteydenHallinta.suljeLause(muutoslause);
@@ -112,6 +120,11 @@ public class ToimistoTietovarasto extends Tietovarasto {
         }
     }
 
+    /**
+     * Poista henkilö.
+     *
+     * @param toimistoID poistettavan toimiston id. Esim. "1"
+     */
     @Override
     public void poistaTieto(int toimistoID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
@@ -126,7 +139,6 @@ public class ToimistoTietovarasto extends Tietovarasto {
 
             poistolause.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);

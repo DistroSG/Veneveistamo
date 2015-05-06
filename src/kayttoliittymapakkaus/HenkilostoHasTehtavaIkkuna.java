@@ -6,6 +6,7 @@
 package kayttoliittymapakkaus;
 
 import datapakkaus.HenkilostoHasTehtava;
+import datapakkaus.HenkilostoHasTehtavaTupla;
 import java.util.Arrays;
 import tietovarastopakkaus.HenkilostoHasTehtavaTietovarasto;
 
@@ -30,7 +31,7 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
         int vanhaTehtavaID = (int) malli.getValueAt(taulukko.getSelectedRow(), 1);
         int uusiTehtavaID = Integer.parseInt(values[1]);
 
-        rekisteri.muutaTietoja(new HenkilostoHasTehtava(henkilostoID, uusiTehtavaID), new HenkilostoHasTehtava(henkilostoID, vanhaTehtavaID));
+        rekisteri.muutaTietoja(new HenkilostoHasTehtavaTupla(new HenkilostoHasTehtava(henkilostoID, uusiTehtavaID), new HenkilostoHasTehtava(henkilostoID, vanhaTehtavaID)));
         paivitaValintaLista();
     }
 

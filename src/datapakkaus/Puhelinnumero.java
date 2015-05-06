@@ -16,9 +16,9 @@ public class Puhelinnumero {
      *
      * Luoda uutta puhelinnumeroa id:n, puhelinnumerin ja toimistoID:n avulla.
      *
-     * @param id puhelinnumeron id. Esim. 1
-     * @param puhelinnumero puhelinnumero. Eism. 0417268917
-     * @param toimistoID tomiston id. Esim. 1
+     * @param id puhelinnumeron id. Esim. "1"
+     * @param puhelinnumero puhelinnumero. Eism. "0417268917"
+     * @param toimistoID tomiston id. Esim. "1"
      */
     public Puhelinnumero(int id, int puhelinnumero, int toimistoID) {
         this.id = id;

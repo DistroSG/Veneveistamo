@@ -18,11 +18,11 @@ public class Henkilosto {
      * Luoda uutta henkilöä id:n, sukunimen, etunimen, osaston ja toimistoID:n
      * avulla.
      *
-     * @param id henkilön id. Esim. 1
-     * @param sukunimi henkilön sukunimi. Esim. Virtanen
-     * @param etunimi henkilön etunimi. Esim. Pekka
-     * @param osasto henkilön osasto. Esim. Myynti
-     * @param toimistoID henkilön toimistoID. Esim. 1
+     * @param id henkilön id. Esim. "1"
+     * @param sukunimi henkilön sukunimi. Esim. "Virtanen"
+     * @param etunimi henkilön etunimi. Esim. "Pekka"
+     * @param osasto henkilön osasto. Esim. "Myynti"
+     * @param toimistoID henkilön toimistoID. Esim. "1"
      */
     public Henkilosto(int id, String sukunimi, String etunimi, String osasto, int toimistoID) {
         this.id = id;

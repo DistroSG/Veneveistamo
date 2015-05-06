@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tietovarastopakkaus;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import datapakkaus.Puhelinnumero;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,18 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
+ * PuhelinnumeroTietovarasto luokka. Jolla avulla saadaan tietokantayhteys ja
+ * tiedot Puhelinnumero taulukosta.
  *
  * @author s1300778
+ * @version 1.0
  */
 public class PuhelinnumeroTietovarasto extends Tietovarasto {
 
+    /**
+     * Palautta kaikki puhelinnumeroiden tiedot.
+     *
+     * @return kaikki puhelinnumeroiden tiedot.
+     */
     @Override
     public List<Puhelinnumero> haeTiedot() {
         List<Puhelinnumero> puhelinnumerot = new ArrayList<>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
@@ -38,7 +39,6 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
                             tulosjoukko.getInt(2), tulosjoukko.getInt(3)));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
                 YhteydenHallinta.suljeLause(hakulause);
@@ -48,6 +48,11 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
         return puhelinnumerot;
     }
 
+    /**
+     * Lisätä uusi puhelinnumero.
+     *
+     * @param object puhelinnumero, joka lisätään.
+     */
     @Override
     public void lisaaTieto(Object object) {
         Puhelinnumero uusiPuhelinnumero = (Puhelinnumero) object;
@@ -76,6 +81,12 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
         }
     }
 
+    /**
+     * Muuta puhelinnumeron tiedot.
+     *
+     * @param object puhelinnumero, joka muutetaan.
+     * @return palautta true, jos muuttaminen on onnistuttu.
+     */
     @Override
     public boolean muutaTietoja(Object object
     ) {
@@ -94,13 +105,8 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
             muutoslause.setInt(1, uusiPuhelinnumero.getPuhelinnumero());
             muutoslause.setInt(2, uusiPuhelinnumero.getToimistoID());
             muutoslause.setInt(3, uusiPuhelinnumero.getId());
-            if (muutoslause.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return muutoslause.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         } finally {
             YhteydenHallinta.suljeLause(muutoslause);
@@ -108,9 +114,13 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
         }
     }
 
+    /**
+     * Poista puhelinnumero.
+     *
+     * @param puhelinnumeroID poistettavan puhelinnumeron id. Esim. "1"
+     */
     @Override
-    public void poistaTieto(int puhelinnumeroID
-    ) {
+    public void poistaTieto(int puhelinnumeroID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
@@ -123,7 +133,6 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
 
             poistolause.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);
