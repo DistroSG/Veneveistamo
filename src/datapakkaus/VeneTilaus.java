@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  *
- * @author s1300727
+ * @author Axeld
  */
 public class VeneTilaus {
     
