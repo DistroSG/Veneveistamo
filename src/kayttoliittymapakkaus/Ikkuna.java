@@ -67,7 +67,7 @@ public abstract class Ikkuna extends JFrame {
     private String[] columnNames;
 
     private final JComboBox combo = new JComboBox(new String[]{
-        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali","Perusvarit","Asiakas"
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus"
     });
 
     public Ikkuna(String otsikko) {
@@ -186,9 +186,9 @@ public abstract class Ikkuna extends JFrame {
             columnNames = new String[]{"Henkilöstö ID", "Tehtävä ID"};
 
             new HenkilostoHasTehtavaIkkuna("Henkilöstö has tehtävä", columnNames, 4).setVisible(true);
-        } else if (combo.getSelectedItem() == "Maksu"){
+        } else if (combo.getSelectedItem() == "Maksu") {
             columnNames = new String[]{"EraNumero", "VeneTilaus ID", "Hinta", "Maksettupaiva", "Eräpäivä"};
-            
+
             new MaksuIkkuna("Maksu", columnNames, 5).setVisible(true);
 
         } else if (combo.getSelectedItem() == "Materiaali") {
@@ -199,13 +199,15 @@ public abstract class Ikkuna extends JFrame {
             columnNames = new String[]{"ID", "Perusvarit"};
 
             new PerusvaritIkkuna("Perusvarit", columnNames, 7).setVisible(true);
-            
-        } else if (combo.getSelectedItem() == "Asiakas"){
-            columnNames = new String[]{"AsiakasID", "Henkilötunnus", "Salasana", "Sukunimi", "Etunimi", "Sähköposti", "Sukupuoli","Puhelinnumero","Asiakastyyppi"};
+        } else if (combo.getSelectedItem() == "Asiakas") {
+            columnNames = new String[]{"AsiakasID", "Henkilötunnus", "Salasana", "Sukunimi", "Etunimi", "Sähköposti", "Sukupuoli", "Puhelinnumero", "Asiakastyyppi"};
 
-        
-        new AsiakasIkkuna("Asiakas", columnNames, 8).setVisible(true);
-    }
+            new AsiakasIkkuna("Asiakas", columnNames, 8).setVisible(true);
+        } else if (combo.getSelectedItem() == "Vene Tilaus") {
+            columnNames = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID", "Väri", "Edistyminen"};
+
+            new VeneTilausIkkuna("Vene Tilaus", columnNames, 9).setVisible(true);
+        }
         this.dispose();
     }
 
