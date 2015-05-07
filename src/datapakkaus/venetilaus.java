@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author s1300727
  */
-public class venetilaus {
+public class VeneTilaus {
     
     private final int id;
     private final int vene_id;
@@ -21,7 +21,7 @@ public class venetilaus {
     private final String vari;
     private final String edistyminen;
 
-    public venetilaus(int id, int vene_id, int henkilosto_id, double hinta, int kuljetus_id, String vari, String edistyminen) {
+    public VeneTilaus(int id, int vene_id, int henkilosto_id, double hinta, int kuljetus_id, String vari, String edistyminen) {
         this.id = id;
         this.vene_id = vene_id;
         this.henkilosto_id = henkilosto_id;
@@ -30,6 +30,8 @@ public class venetilaus {
         this.vari = vari;
         this.edistyminen = edistyminen;
     }
+
+
 
     public int getId() {
         return id;
@@ -85,7 +87,7 @@ public class venetilaus {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final venetilaus other = (venetilaus) obj;
+        final VeneTilaus other = (VeneTilaus) obj;
         if (this.id != other.id) {
             return false;
         }
