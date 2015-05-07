@@ -76,12 +76,59 @@ public class VeneTilausTietovarasto extends Tietovarasto {
 
     @Override
     public boolean muutaTietoja(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        VeneTilaus uusiVeneTilaus = (VeneTilaus) object;
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return false;
+        }
+        PreparedStatement muutoslause = null;
+        try {
+
+            String muutaSql = "update venetilaus "
+                    + "set vene_id=?,henkilosto_id=?,hinta=?,kuljetus_id=?,vari=?,edistyminen=? "
+                    + "where id=?";
+            muutoslause = yhteys.prepareStatement(muutaSql);
+
+            muutoslause.setInt(7, uusiVeneTilaus.getId());
+            muutoslause.setInt(1, uusiVeneTilaus.getVene_id());
+            muutoslause.setInt(2, uusiVeneTilaus.getHenkilosto_id());
+            muutoslause.setDouble(3, uusiVeneTilaus.getHinta());
+            muutoslause.setInt(4, uusiVeneTilaus.getKuljetus_id());
+            muutoslause.setString(5, uusiVeneTilaus.getVari());
+            muutoslause.setString(6, uusiVeneTilaus.getEdistyminen());
+            if (muutoslause.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            YhteydenHallinta.suljeLause(muutoslause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
     }
 
     @Override
     public void poistaTieto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return;
+        }
+        PreparedStatement poistolause = null;
+        try {
+            String poistoSql = "delete from venetilaus where id=?";
+            poistolause = yhteys.prepareStatement(poistoSql);
+            poistolause.setInt(1, id);
+
+            poistolause.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            YhteydenHallinta.suljeLause(poistolause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
     }
 
 }

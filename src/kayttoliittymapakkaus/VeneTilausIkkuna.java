@@ -42,17 +42,27 @@ public class VeneTilausIkkuna extends Ikkuna {
 
     @Override
     public void suoritaMuutos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        values = syottopaneeli.getArvot();
+
+        int id = Integer.parseInt(values[0]);
+        int vene_id = Integer.parseInt(values[1]);
+        int henkilosto_id = Integer.parseInt(values[2]);
+        double hinta = Integer.parseInt(values[3]);
+        int kuljetus_id = Integer.parseInt(values[4]);
+        rekisteri.muutaTietoja(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, values[5], values[6]));
+        paivitaValintaLista();
     }
 
     @Override
     public void suoritaPoisto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
+        rekisteri.poistaTieto(id);
+        paivitaValintaLista();
     }
 
     @Override
     public void haeKaikkiTiedot() {
-        for(VeneTilaus venetilaus : rekisteri.haeTiedot()){
+        for (VeneTilaus venetilaus : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList(venetilaus.getId(), venetilaus.getVene_id(), venetilaus.getHenkilosto_id(), venetilaus.getHinta(), venetilaus.getKuljetus_id(), venetilaus.getVari(), venetilaus.getEdistyminen()));
         }
     }
