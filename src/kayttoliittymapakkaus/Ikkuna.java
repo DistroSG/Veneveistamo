@@ -246,7 +246,7 @@ public abstract class Ikkuna extends JFrame {
         }
         this.dispose();
     }
-
+//a
     ;
 
     private void ikkunaasetus(String otsikko) {
