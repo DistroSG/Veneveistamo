@@ -46,6 +46,18 @@ public class Taulukkomalli extends AbstractTableModel {
     }
 
     /**
+     * /**
+     * Palauta sarakkeen nimi
+     *
+     * @param col haluttu sarake
+     * @return sarakkeen nimi
+     */
+    @Override
+    public String getColumnName(int col) {
+        return sarakkeenOtsikot[col];
+    }
+
+    /**
      * Palauttaa arvo valitusta solusta objektilla.
      *
      * @param row rivi, jossa on haluttu arvo.
@@ -78,9 +90,9 @@ public class Taulukkomalli extends AbstractTableModel {
     }
 
     /**
-     * Palauta sarakkeen nimet taulukolla
+     * Palauta sarakkeiden nimet taulukona
      *
-     * @return sarakkeen nimet taulukolla
+     * @return sarakkeen nimet taulukona
      */
     public String[] getColumnNames() {
 
