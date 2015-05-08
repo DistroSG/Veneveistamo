@@ -78,7 +78,7 @@ public abstract class Ikkuna extends JFrame {
     private String[] sarakenimet;
 
     private final JComboBox yhdistelmä = new JComboBox(new String[]{
-        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus"
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus"
     });
 
     /**
@@ -230,6 +230,11 @@ public abstract class Ikkuna extends JFrame {
             sarakenimet = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID", "Väri", "Edistyminen"};
 
             new VeneTilausIkkuna("Vene Tilaus", sarakenimet, 9).setVisible(true);
+        }
+        else if (yhdistelmä.getSelectedItem() == "Kuljetus") {
+            sarakenimet = new String[]{"ID", "Vastaanottaja","Vastaanotto"};
+
+            new KuljetusIkkuna("Kuljetus", sarakenimet, 10).setVisible(true);
         }
         this.dispose();
     }
