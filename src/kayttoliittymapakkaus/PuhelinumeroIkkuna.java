@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittymapakkaus;
 
 import datapakkaus.Puhelinnumero;
@@ -10,30 +5,46 @@ import java.util.Arrays;
 import tietovarastopakkaus.PuhelinnumeroTietovarasto;
 
 /**
+ * PuhelinumeroIkkuna luokka. Jolla asennetaan Puhelinumero ikkuna.
  *
  * @author s1300778
+ * @version 1.0
  */
 public final class PuhelinumeroIkkuna extends Ikkuna {
 
     private final PuhelinnumeroTietovarasto rekisteri = new PuhelinnumeroTietovarasto();
 
-    public PuhelinumeroIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    /**
+     * Luoda uusi PuhelinumeroIkkuna ikkuna otsikon, sarakenimien ja
+     * yhdistelmäIndeksen avulla
+     *
+     * @param otsikko ikunan otsikko
+     * @param sarakenimet taulokon sarakenimet
+     * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
+     */
+    public PuhelinumeroIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
+        super(otsikko, sarakenimet, yhdistelmäIndeksi);
         haeKaikkiTiedot();
     }
 
+    /**
+     * Suorita muutos
+     */
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int id = Integer.parseInt(values[0]);
-        int puhelinumero = Integer.parseInt(values[1]);
-        int toimistoID = Integer.parseInt(values[2]);
+        int id = Integer.parseInt(arvot[0]);
+        int puhelinumero = Integer.parseInt(arvot[1]);
+        int toimistoID = Integer.parseInt(arvot[2]);
         rekisteri.muutaTietoja(new Puhelinnumero(id, puhelinumero, toimistoID));
         paivitaValintaLista();
 
     }
 
+    /**
+     * Suorita poisto
+     */
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
@@ -41,13 +52,16 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita lisäys
+     */
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int id = Integer.parseInt(values[0]);
-            int puhelinnumero = Integer.parseInt(values[1]);
-            int toimistoID = Integer.parseInt(values[2]);
+            int id = Integer.parseInt(arvot[0]);
+            int puhelinnumero = Integer.parseInt(arvot[1]);
+            int toimistoID = Integer.parseInt(arvot[2]);
             rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinnumero, toimistoID));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
@@ -57,6 +71,9 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         }
     }
 
+    /**
+     * Hae kaikki tiedot
+     */
     @Override
     public void haeKaikkiTiedot() {
         for (Puhelinnumero puhelinumero : rekisteri.haeTiedot()) {

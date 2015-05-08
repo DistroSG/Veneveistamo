@@ -25,10 +25,10 @@ public class AsiakasIkkuna extends Ikkuna {
 
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int id = Integer.parseInt(values[0]);
-        rekisteri.muutaTietoja(new Asiakas(id, values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]));
+        int id = Integer.parseInt(arvot[0]);
+        rekisteri.muutaTietoja(new Asiakas(id, arvot[1],arvot[2],arvot[3],arvot[4],arvot[5],arvot[6],arvot[7],arvot[8]));
         paivitaValintaLista();
     }
 
@@ -41,10 +41,10 @@ public class AsiakasIkkuna extends Ikkuna {
 
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int id = Integer.parseInt(values[0]);
-            rekisteri.lisaaAsiakas(new Asiakas(id, values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]));
+            int id = Integer.parseInt(arvot[0]);
+            rekisteri.lisaaAsiakas(new Asiakas(id, arvot[1],arvot[2],arvot[3],arvot[4],arvot[5],arvot[6],arvot[7],arvot[8]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 

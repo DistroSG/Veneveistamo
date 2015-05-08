@@ -25,10 +25,10 @@ public final class MateriaaliIkkuna extends Ikkuna {
 
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int id = Integer.parseInt(values[0]);
-        rekisteri.muutaTietoja(new Materiaali(values[1], id));
+        int id = Integer.parseInt(arvot[0]);
+        rekisteri.muutaTietoja(new Materiaali(arvot[1], id));
         paivitaValintaLista();
     }
 
@@ -41,10 +41,10 @@ public final class MateriaaliIkkuna extends Ikkuna {
 
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int id = Integer.parseInt(values[0]);
-            rekisteri.lisaaTieto(new Materiaali(values[1], id));
+            int id = Integer.parseInt(arvot[0]);
+            rekisteri.lisaaTieto(new Materiaali(arvot[1], id));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 

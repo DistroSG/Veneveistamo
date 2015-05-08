@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittymapakkaus;
 
 import datapakkaus.Toimisto;
@@ -10,29 +5,45 @@ import java.util.Arrays;
 import tietovarastopakkaus.ToimistoTietovarasto;
 
 /**
+ * ToimistoIkkuna luokka. Jolla asennetaan Toimisto ikkuna.
  *
  * @author s1300778
+ * @version 1.0
  */
 public final class ToimistoIkkuna extends Ikkuna {
 
-    private ToimistoTietovarasto rekisteri = new ToimistoTietovarasto();
+    private final ToimistoTietovarasto rekisteri = new ToimistoTietovarasto();
 
-    public ToimistoIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    /**
+     * Luoda uusi HenkilostoHasTehtava ikkuna otsikon, sarakenimien ja
+     * yhdistelmäIndeksen avulla
+     *
+     * @param otsikko ikunan otsikko
+     * @param sarakenimet taulokon sarakenimet
+     * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
+     */
+    public ToimistoIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
+        super(otsikko, sarakenimet, yhdistelmäIndeksi);
         haeKaikkiTiedot();
 
     }
 
+    /**
+     * Suorita muutos
+     */
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int id = Integer.parseInt(values[0]);
-        int postinumero = Integer.parseInt(values[3]);
-        rekisteri.muutaTietoja(new Toimisto(id, values[1], values[2], postinumero, values[4]));
+        int id = Integer.parseInt(arvot[0]);
+        int postinumero = Integer.parseInt(arvot[3]);
+        rekisteri.muutaTietoja(new Toimisto(id, arvot[1], arvot[2], postinumero, arvot[4]));
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita poisto
+     */
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
@@ -40,13 +51,16 @@ public final class ToimistoIkkuna extends Ikkuna {
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita lisays
+     */
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int id = Integer.parseInt(values[0]);
-            int puhelinnumero = Integer.parseInt(values[3]);
-            rekisteri.lisaaTieto(new Toimisto(id, values[1], values[2], puhelinnumero, values[4]));
+            int id = Integer.parseInt(arvot[0]);
+            int puhelinnumero = Integer.parseInt(arvot[3]);
+            rekisteri.lisaaTieto(new Toimisto(id, arvot[1], arvot[2], puhelinnumero, arvot[4]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -55,6 +69,9 @@ public final class ToimistoIkkuna extends Ikkuna {
         }
     }
 
+    /**
+     * Hae kaikki tiedot
+     */
     @Override
     public void haeKaikkiTiedot() {
         for (Toimisto toimisto : rekisteri.haeTiedot()) {

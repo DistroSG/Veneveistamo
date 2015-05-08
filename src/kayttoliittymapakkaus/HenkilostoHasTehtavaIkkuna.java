@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittymapakkaus;
 
 import datapakkaus.HenkilostoHasTehtava;
@@ -11,30 +6,47 @@ import java.util.Arrays;
 import tietovarastopakkaus.HenkilostoHasTehtavaTietovarasto;
 
 /**
+ * HenkilostoHasTehtavaIkkuna luokka. Jolla asennetaan HenkilostoHasTehtava
+ * ikkuna.
  *
  * @author s1300778
+ * @version 1.0
  */
 public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
 
     private final HenkilostoHasTehtavaTietovarasto rekisteri = new HenkilostoHasTehtavaTietovarasto();
 
-    public HenkilostoHasTehtavaIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    /**
+     * Luoda uusi HenkilostoHasTehtava ikkuna otsikon, sarakenimien ja
+     * yhdistelmäIndeksen avulla
+     *
+     * @param otsikko ikunan otsikko
+     * @param sarakenimet taulokon sarakenimet
+     * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
+     */
+    public HenkilostoHasTehtavaIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
+        super(otsikko, sarakenimet, yhdistelmäIndeksi);
         haeKaikkiTiedot();
     }
 
+    /**
+     * Suorita muutos
+     */
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
         int henkilostoID = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         int vanhaTehtavaID = (int) malli.getValueAt(taulukko.getSelectedRow(), 1);
-        int uusiTehtavaID = Integer.parseInt(values[1]);
+        int uusiTehtavaID = Integer.parseInt(arvot[1]);
 
         rekisteri.muutaTietoja(new HenkilostoHasTehtavaMuutos(new HenkilostoHasTehtava(henkilostoID, uusiTehtavaID), new HenkilostoHasTehtava(henkilostoID, vanhaTehtavaID)));
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita poisto
+     */
     @Override
     public void suoritaPoisto() {
         int henkilostoID = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
@@ -43,12 +55,15 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita lisäys
+     */
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int henkilostoID = Integer.parseInt(values[0]);
-            int tehtavaID = Integer.parseInt(values[1]);
+            int henkilostoID = Integer.parseInt(arvot[0]);
+            int tehtavaID = Integer.parseInt(arvot[1]);
             rekisteri.lisaaTieto(new HenkilostoHasTehtava(henkilostoID, tehtavaID));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
@@ -58,6 +73,9 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
         }
     }
 
+    /**
+     * Hae kaikki tiedot
+     */
     @Override
     public void haeKaikkiTiedot() {
         for (HenkilostoHasTehtava henkiloHasTehtava : rekisteri.haeTiedot()) {

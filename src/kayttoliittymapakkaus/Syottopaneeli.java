@@ -5,8 +5,10 @@ import javax.swing.*;
 import static javax.swing.GroupLayout.Alignment.*;
 
 /**
+ * Veneveistamo luokka. Jolla suorita ohjelma.
  *
  * @author HELIL
+ * @version 1.0
  */
 public class Syottopaneeli extends JPanel {
 
@@ -15,6 +17,12 @@ public class Syottopaneeli extends JPanel {
 
     private GroupLayout asettelu;
 
+    /**
+     * Luoda syottopaneeli selitteiden otsikkojen avulla
+     *
+     * @param otsikot selitteiden otsikot
+     * @throws IllegalArgumentException
+     */
     public Syottopaneeli(String[] otsikot)
             throws IllegalArgumentException {
 
@@ -31,6 +39,12 @@ public class Syottopaneeli extends JPanel {
         asetteleKomponentit();
     }
 
+    /**
+     * Asetele arvot kenttään
+     *
+     * @param arvot arvot, jotka asenetään
+     * @throws IllegalArgumentException
+     */
     public void setArvot(String[] arvot) throws IllegalArgumentException {
         if (kentat.length != arvot.length) {
             throw new IllegalArgumentException("Arvoja väärä määrä");
@@ -40,6 +54,11 @@ public class Syottopaneeli extends JPanel {
         }
     }
 
+    /**
+     *Palauta arvot String taulukolla
+     * 
+     * @return arvot String taulukolla
+     */
     public String[] getArvot() {
         String[] arvot = new String[kentat.length];
         for (int i = 0; i < kentat.length; i++) {
@@ -48,12 +67,21 @@ public class Syottopaneeli extends JPanel {
         return arvot;
     }
 
+    /**
+     *tyhjenna kaikki kentat
+     */
     public void tyhjennaKentat() {
-        for (int i = 0; i < kentat.length; i++) {
-            kentat[i].setText("");
+        for (JTextField tyhjentäväKentta : kentat) {
+            tyhjentäväKentta.setText("");
         }
     }
 
+    /**
+     * asenna valitu kenta editoitavissa
+     * @param indeksi valitu kenta
+     * @param tila Muokattava(true) tai ei muokattava(false)
+     * @throws IllegalArgumentException
+     */
     public void setEditoitavissa(int indeksi, boolean tila) throws IllegalArgumentException {
         if (indeksi < 0 || indeksi >= kentat.length) {
             throw new IllegalArgumentException("Tiloja väärä määrä");

@@ -24,12 +24,12 @@ public class MaksuIkkuna extends Ikkuna {
 
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int eranumero = Integer.parseInt(values[0]);
-            int veneTilaus_id = Integer.parseInt(values[1]);
-            double hinta = Integer.parseInt(values[2]);
-            rekisteri.lisaaTieto(new Maksu(eranumero, veneTilaus_id, hinta, values[3], values[4]));
+            int eranumero = Integer.parseInt(arvot[0]);
+            int veneTilaus_id = Integer.parseInt(arvot[1]);
+            double hinta = Integer.parseInt(arvot[2]);
+            rekisteri.lisaaTieto(new Maksu(eranumero, veneTilaus_id, hinta, arvot[3], arvot[4]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -40,12 +40,12 @@ public class MaksuIkkuna extends Ikkuna {
 
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int eranumero = Integer.parseInt(values[0]);
-        int veneTilaus_id = Integer.parseInt(values[1]);
-        double hinta = Integer.parseInt(values[2]);
-        rekisteri.muutaTietoja(new Maksu(eranumero, veneTilaus_id, hinta, values[3],values[4]));
+        int eranumero = Integer.parseInt(arvot[0]);
+        int veneTilaus_id = Integer.parseInt(arvot[1]);
+        double hinta = Integer.parseInt(arvot[2]);
+        rekisteri.muutaTietoja(new Maksu(eranumero, veneTilaus_id, hinta, arvot[3],arvot[4]));
         paivitaValintaLista();
 
     }

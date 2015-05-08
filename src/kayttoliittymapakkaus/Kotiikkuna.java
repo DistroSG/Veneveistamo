@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittymapakkaus;
 
 /**
+ * Kotiikkuna luokka. Jolla asennetaan kotiikkuna.
  *
  * @author s1300778
+ * @version 1.0
  */
 public class Kotiikkuna extends Ikkuna {
-
+ /**
+     * Luoda uusi kotiikkuna otsikon avulla
+     *
+     * @param otsikko ikunan otsikko
+     */
     public Kotiikkuna(String otsikko) {
         super(otsikko);
     }

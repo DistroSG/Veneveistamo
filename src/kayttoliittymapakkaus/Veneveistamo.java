@@ -1,20 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittymapakkaus;
 
 import javax.swing.SwingUtilities;
 
 /**
- *
- * ayy lmao wow g
+ * Veneveistamo luokka. Jolla suorita ohjelma.
  *
  * @author s1300778
+ * @version 1.0
  */
 public class Veneveistamo {
 
+    /**
+     *Main metodi, joka suorita ohjelma.
+     * @param args ei käytetään.
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

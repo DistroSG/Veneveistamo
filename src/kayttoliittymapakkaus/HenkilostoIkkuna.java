@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittymapakkaus;
 
 import datapakkaus.Henkilosto;
@@ -10,28 +5,44 @@ import java.util.Arrays;
 import tietovarastopakkaus.HenkilostoTietovarasto;
 
 /**
+ * HenkilostoIkkuna luokka. Jolla asennetaan Henkilosto ikkuna.
  *
  * @author s1300778
+ * @version 1.0
  */
 public final class HenkilostoIkkuna extends Ikkuna {
 
-    private HenkilostoTietovarasto rekisteri = new HenkilostoTietovarasto();
+    private final HenkilostoTietovarasto rekisteri = new HenkilostoTietovarasto();
 
-    public HenkilostoIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    /**
+     * Luoda uusi HenkilostoIkkuna ikkuna otsikon, sarakenimien ja
+     * yhdistelmäIndeksen avulla
+     *
+     * @param otsikko ikunan otsikko
+     * @param sarakenimet taulokon sarakenimet
+     * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
+     */
+    public HenkilostoIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
+        super(otsikko, sarakenimet, yhdistelmäIndeksi);
         haeKaikkiTiedot();
     }
 
+    /**
+     * Suorita muutos
+     */
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int id = Integer.parseInt(values[0]);
-        int toimistoID = Integer.parseInt(values[4]);
-        rekisteri.muutaTietoja(new Henkilosto(id, values[1], values[2], values[3], toimistoID));
+        int id = Integer.parseInt(arvot[0]);
+        int toimistoID = Integer.parseInt(arvot[4]);
+        rekisteri.muutaTietoja(new Henkilosto(id, arvot[1], arvot[2], arvot[3], toimistoID));
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita poisto
+     */
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
@@ -39,13 +50,16 @@ public final class HenkilostoIkkuna extends Ikkuna {
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita lisays
+     */
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int id = Integer.parseInt(values[0]);
-            int toimistoID = Integer.parseInt(values[4]);
-            rekisteri.lisaaTieto(new Henkilosto(id, values[1], values[2], values[3], toimistoID));
+            int id = Integer.parseInt(arvot[0]);
+            int toimistoID = Integer.parseInt(arvot[4]);
+            rekisteri.lisaaTieto(new Henkilosto(id, arvot[1], arvot[2], arvot[3], toimistoID));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -54,6 +68,9 @@ public final class HenkilostoIkkuna extends Ikkuna {
         }
     }
 
+    /**
+     * Hae kaikki tiedot
+     */
     @Override
     public void haeKaikkiTiedot() {
         for (Henkilosto henkilo : rekisteri.haeTiedot()) {

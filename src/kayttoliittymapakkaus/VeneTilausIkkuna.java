@@ -24,14 +24,14 @@ public class VeneTilausIkkuna extends Ikkuna {
 
     @Override
     public void suoritaLisays() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
         try {
-            int id = Integer.parseInt(values[0]);
-            int vene_id = Integer.parseInt(values[1]);
-            int henkilosto_id = Integer.parseInt(values[2]);
-            double hinta = Integer.parseInt(values[3]);
-            int kuljetus_id = Integer.parseInt(values[4]);
-            rekisteri.lisaaTieto(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, values[5], values[6]));
+            int id = Integer.parseInt(arvot[0]);
+            int vene_id = Integer.parseInt(arvot[1]);
+            int henkilosto_id = Integer.parseInt(arvot[2]);
+            double hinta = Integer.parseInt(arvot[3]);
+            int kuljetus_id = Integer.parseInt(arvot[4]);
+            rekisteri.lisaaTieto(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -42,14 +42,14 @@ public class VeneTilausIkkuna extends Ikkuna {
 
     @Override
     public void suoritaMuutos() {
-        values = syottopaneeli.getArvot();
+        arvot = syottopaneeli.getArvot();
 
-        int id = Integer.parseInt(values[0]);
-        int vene_id = Integer.parseInt(values[1]);
-        int henkilosto_id = Integer.parseInt(values[2]);
-        double hinta = Integer.parseInt(values[3]);
-        int kuljetus_id = Integer.parseInt(values[4]);
-        rekisteri.muutaTietoja(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, values[5], values[6]));
+        int id = Integer.parseInt(arvot[0]);
+        int vene_id = Integer.parseInt(arvot[1]);
+        int henkilosto_id = Integer.parseInt(arvot[2]);
+        double hinta = Integer.parseInt(arvot[3]);
+        int kuljetus_id = Integer.parseInt(arvot[4]);
+        rekisteri.muutaTietoja(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6]));
         paivitaValintaLista();
     }
 
