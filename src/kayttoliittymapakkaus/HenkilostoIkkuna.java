@@ -45,7 +45,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
      */
     @Override
     public void suoritaPoisto() {
-        int id = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
+        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
@@ -74,7 +74,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Henkilosto henkilo : rekisteri.haeTiedot()) {
-            taulukkoMalli.addRow(Arrays.asList(henkilo.getId(), henkilo.getSukunimi(), henkilo.getEtunimi(), henkilo.getOsasto(), henkilo.getToimistoID()));
+            malli.addRow(Arrays.asList(henkilo.getId(), henkilo.getSukunimi(), henkilo.getEtunimi(), henkilo.getOsasto(), henkilo.getToimistoID()));
         }
     }
 

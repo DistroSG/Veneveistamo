@@ -42,7 +42,7 @@ public final class TehtavaIkkuna extends Ikkuna {
      */
     @Override
     public void suoritaPoisto() {
-        int id = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
+        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
@@ -68,7 +68,7 @@ public final class TehtavaIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Tehtava tehtava : rekisteri.haeTiedot()) {
-            taulukkoMalli.addRow(Arrays.asList(tehtava.getId(), tehtava.getTehtava()));
+            malli.addRow(Arrays.asList(tehtava.getId(), tehtava.getTehtava()));
         }
     }
 
