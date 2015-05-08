@@ -52,7 +52,7 @@ public class MaksuIkkuna extends Ikkuna {
 
     @Override
     public void suoritaPoisto() {
-        int eranumero = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
+        int eranumero = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(eranumero);
         paivitaValintaLista();
     }
@@ -60,7 +60,7 @@ public class MaksuIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Maksu maksu : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(maksu.getEranumero(), maksu.getveneTilaus_id(), maksu.getHinta(), maksu.getMaksettupaiva(), maksu.getErapaiva()));
+            taulukkoMalli.addRow(Arrays.asList(maksu.getEranumero(), maksu.getveneTilaus_id(), maksu.getHinta(), maksu.getMaksettupaiva(), maksu.getErapaiva()));
         }
     }
 

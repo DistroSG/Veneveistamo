@@ -34,7 +34,7 @@ public final class PerusvaritIkkuna extends Ikkuna {
 
     @Override
     public void suoritaPoisto() {
-        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
+        int id = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
@@ -56,7 +56,7 @@ public final class PerusvaritIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Perusvarit perusvarit : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(perusvarit.getId(), perusvarit.getPerusvarit()));
+            taulukkoMalli.addRow(Arrays.asList(perusvarit.getId(), perusvarit.getPerusvarit()));
         }
     }
 

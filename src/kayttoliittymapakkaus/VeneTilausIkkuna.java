@@ -55,7 +55,7 @@ public class VeneTilausIkkuna extends Ikkuna {
 
     @Override
     public void suoritaPoisto() {
-        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
+        int id = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
@@ -63,7 +63,7 @@ public class VeneTilausIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (VeneTilaus venetilaus : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(venetilaus.getId(), venetilaus.getVene_id(), venetilaus.getHenkilosto_id(), venetilaus.getHinta(), venetilaus.getKuljetus_id(), venetilaus.getVari(), venetilaus.getEdistyminen()));
+            taulukkoMalli.addRow(Arrays.asList(venetilaus.getId(), venetilaus.getVene_id(), venetilaus.getHenkilosto_id(), venetilaus.getHinta(), venetilaus.getKuljetus_id(), venetilaus.getVari(), venetilaus.getEdistyminen()));
         }
     }
 

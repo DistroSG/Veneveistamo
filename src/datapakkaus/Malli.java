@@ -5,8 +5,6 @@
  */
 package datapakkaus;
 
-import java.util.Objects;
-
 /**
  *
  * @author s1300778
@@ -39,36 +37,5 @@ public class Malli {
     public String toString() {
         return "Malli{" + "id=" + id + ", malli=" + malli + ", masto=" + masto + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.malli);
-        hash = 97 * hash + Objects.hashCode(this.masto);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Malli other = (Malli) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.malli, other.malli)) {
-            return false;
-        }
-        if (!Objects.equals(this.masto, other.masto)) {
-            return false;
-        }
-        return true;
-    }
-
 
 }
