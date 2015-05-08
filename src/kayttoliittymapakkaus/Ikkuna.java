@@ -78,13 +78,11 @@ public abstract class Ikkuna extends JFrame {
     private String[] sarakenimet;
 
     private final JComboBox yhdistelmä = new JComboBox(new String[]{
-<<<<<<< HEAD
+
 
         "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Malli"
 
-=======
-        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus","Malli"
->>>>>>> origin/master
+
     });
 
     /**
