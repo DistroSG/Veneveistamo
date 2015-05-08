@@ -64,9 +64,9 @@ public abstract class Ikkuna extends JFrame {
     private JScrollPane vieritettavaRuutu;
 
     /**
-     * Taulukon malli
+     * Taulukon taulukkoMalli
      */
-    protected final Taulukkomalli malli;
+    protected final Taulukkomalli taulukkoMalli;
 
     private final JSplitPane jakaaRuutu = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
             vasenosa, oikeanosa);
@@ -78,7 +78,11 @@ public abstract class Ikkuna extends JFrame {
     private String[] sarakenimet;
 
     private final JComboBox yhdistelmä = new JComboBox(new String[]{
+<<<<<<< HEAD
         "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus"
+=======
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Malli"
+>>>>>>> origin/master
     });
 
     /**
@@ -88,9 +92,9 @@ public abstract class Ikkuna extends JFrame {
      */
     public Ikkuna(String otsikko) {
         sarakenimet = new String[]{};
-        malli = new Taulukkomalli(sarakenimet);
-        arvot = new String[malli.getColumnCount()];
-        syottopaneeli = new Syottopaneeli(malli.getColumnNames());
+        taulukkoMalli = new Taulukkomalli(sarakenimet);
+        arvot = new String[taulukkoMalli.getColumnCount()];
+        syottopaneeli = new Syottopaneeli(taulukkoMalli.getColumnNames());
 
         lisaaNappi.setEnabled(false);
         muutuNappi.setEnabled(false);
@@ -117,9 +121,9 @@ public abstract class Ikkuna extends JFrame {
      */
     public Ikkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
         this.sarakenimet = sarakenimet;
-        malli = new Taulukkomalli(sarakenimet);
-        arvot = new String[malli.getColumnCount()];
-        syottopaneeli = new Syottopaneeli(malli.getColumnNames());
+        taulukkoMalli = new Taulukkomalli(sarakenimet);
+        arvot = new String[taulukkoMalli.getColumnCount()];
+        syottopaneeli = new Syottopaneeli(taulukkoMalli.getColumnNames());
 
         muutuNappi.setEnabled(false);
         poistaNappi.setEnabled(false);
@@ -230,6 +234,10 @@ public abstract class Ikkuna extends JFrame {
             sarakenimet = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID", "Väri", "Edistyminen"};
 
             new VeneTilausIkkuna("Vene Tilaus", sarakenimet, 9).setVisible(true);
+        } else if (yhdistelmä.getSelectedItem() == "Malli") {
+            sarakenimet = new String[]{"ID", "Malli", "Masto"};
+
+            new MalliIkkuna("Malli", sarakenimet, 10).setVisible(true);
         }
         else if (yhdistelmä.getSelectedItem() == "Kuljetus") {
             sarakenimet = new String[]{"ID", "Vastaanottaja","Vastaanotto"};
@@ -259,14 +267,14 @@ public abstract class Ikkuna extends JFrame {
     }
 
     private void taulukonasetus() {
-        taulukko = new JTable(malli);
+        taulukko = new JTable(taulukkoMalli);
         taulukko.setFillsViewportHeight(true);
-        lajittelija = new TableRowSorter<>(malli);
+        lajittelija = new TableRowSorter<>(taulukkoMalli);
         taulukko.setRowSorter(lajittelija);
         taulukko.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         asennaSorting();
         vieritettavaRuutu = new JScrollPane(taulukko);
-        asennaTaulukkoTyylit(malli.getColumnNames());
+        asennaTaulukkoTyylit(taulukkoMalli.getColumnNames());
 
         taulukko.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
@@ -290,7 +298,7 @@ public abstract class Ikkuna extends JFrame {
             poistaNappi.setEnabled(false);
         } else {
 
-            for (int i = 0; i < malli.getColumnCount(); i++) {
+            for (int i = 0; i < taulukkoMalli.getColumnCount(); i++) {
                 try {
                     arvot[i] = taulukko.getValueAt(taulukko.getSelectedRow(), i).toString();
                 } catch (NullPointerException e) {
@@ -329,10 +337,10 @@ public abstract class Ikkuna extends JFrame {
      * päivitä kaikki tiedot ikkunan taulukossa
      */
     public void paivitaValintaLista() {
-        int rowCount = malli.getRowCount();
+        int rowCount = taulukkoMalli.getRowCount();
 
         for (int rowID = rowCount - 1; rowID >= 0; rowID--) {
-            malli.removeRow(rowID);
+            taulukkoMalli.removeRow(rowID);
 
         }
         haeKaikkiTiedot();
