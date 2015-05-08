@@ -1,7 +1,7 @@
 package tietovarastopakkaus;
 
 import datapakkaus.HenkilostoHasTehtava;
-import datapakkaus.HenkilostoHasTehtavaTupla;
+import datapakkaus.HenkilostoHasTehtavaMuutos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,21 +81,22 @@ public class HenkilostoHasTehtavaTietovarasto extends Tietovarasto {
     }
 
     /**
-     * Toimimaton metodi
+     * Muuta yhteys.
      *
-     *  @return ei mitään.
+     * @param object muuttuva yhteys HenkilostoHasTehtavaMuutos objektilla
+     * @return palautta true, jos muuttaminen on onnistuttu.
      */
     @Override
     public boolean muutaTietoja(Object object) {
-        if (object instanceof HenkilostoHasTehtavaTupla) {
-            HenkilostoHasTehtavaTupla apu = (HenkilostoHasTehtavaTupla) object;
+        if (object instanceof HenkilostoHasTehtavaMuutos) {
+            HenkilostoHasTehtavaMuutos apu = (HenkilostoHasTehtavaMuutos) object;
             return muutaTietoja(apu.getUusi(), apu.getVanha());
         }
         return false;
     }
 
     /**
-     * Muuta yhteys.
+     *
      *
      * @param uusiHenkilostoHasTehtava uusi yhetys. Esim "new
      * uusiHenkilostoHasTehtava(1,1)"
@@ -127,17 +128,34 @@ public class HenkilostoHasTehtavaTietovarasto extends Tietovarasto {
     }
 
     /**
-     * Toimimaton metodi.
+     * Poista kaikki merkitty henkilön yhteydet.
      *
-     * @deprecated use {@link #poistaTieto(int, int)} instead.
+     *
+     * @param henkilostoID poistettavien yhteyksien henkilön id
      */
-    @Deprecated
     @Override
-    public void poistaTieto(int id) {
+    public void poistaTieto(int henkilostoID) {
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        if (yhteys == null) {
+            return;
+        }
+        PreparedStatement poistolause = null;
+        try {
+            String poistoSql = "delete from henkilosto_has_tehtava where henkilosto_id=?";
+            poistolause = yhteys.prepareStatement(poistoSql);
+            poistolause.setInt(1, henkilostoID);
+
+            poistolause.executeUpdate();
+        } catch (Exception e) {
+
+        } finally {
+            YhteydenHallinta.suljeLause(poistolause);
+            YhteydenHallinta.suljeYhteys(yhteys);
+        }
     }
 
     /**
-     * Poista yhteys.
+     * Poista konkreettinen yhteys.
      *
      * @param henkilostoID poistettavan yhteyden henkilön id
      * @param tehtavaID poistettavan yhteyden tehtävän id

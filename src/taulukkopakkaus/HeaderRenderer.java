@@ -13,8 +13,10 @@ import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 
 /**
+ * HeaderRenderer luokka. Jolla asennetaan taulukon Header.
  *
  * @author s1300778
+ * @version 1.0
  */
 public class HeaderRenderer extends JLabel implements TableCellRenderer {
 
