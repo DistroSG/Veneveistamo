@@ -36,8 +36,8 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
     public void suoritaMuutos() {
         arvot = syottopaneeli.getArvot();
 
-        int henkilostoID = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
-        int vanhaTehtavaID = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 1);
+        int henkilostoID = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
+        int vanhaTehtavaID = (int) malli.getValueAt(taulukko.getSelectedRow(), 1);
         int uusiTehtavaID = Integer.parseInt(arvot[1]);
 
         rekisteri.muutaTietoja(new HenkilostoHasTehtavaMuutos(new HenkilostoHasTehtava(henkilostoID, uusiTehtavaID), new HenkilostoHasTehtava(henkilostoID, vanhaTehtavaID)));
@@ -49,8 +49,8 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
      */
     @Override
     public void suoritaPoisto() {
-        int henkilostoID = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
-        int tehtavaID = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 1);
+        int henkilostoID = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
+        int tehtavaID = (int) malli.getValueAt(taulukko.getSelectedRow(), 1);
         rekisteri.poistaTieto(henkilostoID, tehtavaID);
         paivitaValintaLista();
     }
@@ -79,7 +79,7 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (HenkilostoHasTehtava henkiloHasTehtava : rekisteri.haeTiedot()) {
-            taulukkoMalli.addRow(Arrays.asList(henkiloHasTehtava.getHenkilostoID(), henkiloHasTehtava.getTehtavaID()));
+            malli.addRow(Arrays.asList(henkiloHasTehtava.getHenkilostoID(), henkiloHasTehtava.getTehtavaID()));
         }
     }
 

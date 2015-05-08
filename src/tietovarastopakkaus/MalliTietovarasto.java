@@ -83,12 +83,12 @@ public class MalliTietovarasto extends Tietovarasto {
         PreparedStatement muutoslause = null;
         try {
             String muutaSql = "update malli "
-                    + " set malli=?, masto=? where id=?";
+                    + " set malli=? where id=? where masto=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
-            muutoslause.setInt(3, uusiMalli.getId());
-            muutoslause.setString(1, uusiMalli.getMalli());
-            muutoslause.setInt(2, uusiMalli.getMasto());
+            muutoslause.setInt(1, uusiMalli.getId());
+            muutoslause.setString(2, uusiMalli.getMalli());
+            muutoslause.setInt(3, uusiMalli.getMasto());
             if (muutoslause.executeUpdate() > 0) {
                 return true;
             } else {
@@ -111,7 +111,7 @@ public class MalliTietovarasto extends Tietovarasto {
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from malli where id=?";
+            String poistoSql = "delete from malli where id=?, masto=?";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, MalliID);
 

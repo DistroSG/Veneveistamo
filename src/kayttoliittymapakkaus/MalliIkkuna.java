@@ -28,14 +28,14 @@ public final class MalliIkkuna extends Ikkuna {
 
         int id = Integer.parseInt(arvot[0]);
         int masto = Integer.parseInt(arvot[2]);
-        rekisteri.muutaTietoja(new Malli(id, arvot[1], masto));
+        rekisteri.muutaTietoja(new Malli(id, arvot[3], masto));
         paivitaValintaLista();
 
     }
 
     @Override
     public void suoritaPoisto() {
-        int id = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
+        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
@@ -45,8 +45,8 @@ public final class MalliIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int masto = Integer.parseInt(arvot[2]);
-            rekisteri.lisaaTieto(new Malli(id, arvot[1], masto));
+            int masto = Integer.parseInt(arvot[1]);
+            rekisteri.lisaaTieto(new Malli(id, arvot[3], masto));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -57,8 +57,8 @@ public final class MalliIkkuna extends Ikkuna {
 
     @Override
     public void haeKaikkiTiedot() {
-        for (Malli malli : rekisteri.haeTiedot()) {
-            taulukkoMalli.addRow(Arrays.asList(malli.getId(), malli.getMalli(), malli.getMasto()));
+        for (Malli malli1 : rekisteri.haeTiedot()) {
+            malli.addRow(Arrays.asList(malli1.getId(), malli1.getMalli(), malli1.getMasto()));
         }
     }
 

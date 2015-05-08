@@ -47,7 +47,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
      */
     @Override
     public void suoritaPoisto() {
-        int id = (int) taulukkoMalli.getValueAt(taulukko.getSelectedRow(), 0);
+        int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
@@ -77,7 +77,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Puhelinnumero puhelinumero : rekisteri.haeTiedot()) {
-            taulukkoMalli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));
+            malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));
         }
     }
 
