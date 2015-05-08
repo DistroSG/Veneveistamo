@@ -80,7 +80,7 @@ public abstract class Ikkuna extends JFrame {
     private final JComboBox yhdistelmä = new JComboBox(new String[]{
 
 
-        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Malli"
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus","Kuljetus", "Malli"
 
 
     });

@@ -28,7 +28,7 @@ public final class MalliIkkuna extends Ikkuna {
 
         int id = Integer.parseInt(arvot[0]);
         int masto = Integer.parseInt(arvot[2]);
-        rekisteri.muutaTietoja(new Malli(id, arvot[3], masto));
+        rekisteri.muutaTietoja(new Malli(id, arvot[1], masto));
         paivitaValintaLista();
 
     }
@@ -45,8 +45,8 @@ public final class MalliIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int masto = Integer.parseInt(arvot[1]);
-            rekisteri.lisaaTieto(new Malli(id, arvot[3], masto));
+            int masto = Integer.parseInt(arvot[2]);
+            rekisteri.lisaaTieto(new Malli(id, arvot[1], masto));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
