@@ -80,7 +80,7 @@ public abstract class Ikkuna extends JFrame {
     private final JComboBox yhdistelmä = new JComboBox(new String[]{
 
 
-        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus","Kuljetus", "Malli"
+        "Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus","Kuljetus", "Malli","Osoite","Arvostelu"
 
 
     });
@@ -242,11 +242,20 @@ public abstract class Ikkuna extends JFrame {
             sarakenimet = new String[]{"ID", "Vastaanottaja","Vastaanotto"};
 
             new KuljetusIkkuna("Kuljetus", sarakenimet, 10).setVisible(true);
+            
+        }else if (yhdistelmä.getSelectedItem() == "Osoite") {
+            sarakenimet = new String[]{"ID", "Katuosoite","Postinumero","Toimipaikka","Yrityksennimi","VenetilausID"};
+            
+            new OsoiteIkkuna("Osoite", sarakenimet, 12).setVisible(true);
+        }else if (yhdistelmä.getSelectedItem() == "Arvostelu") {
+            sarakenimet = new String[]{"ID", "AsiakasID","Arvostelu","Pikkuarvostelu"};
+            
+            new ArvosteluIkkuna("Arvostelu", sarakenimet, 13).setVisible(true);
         }
         this.dispose();
     }
 //a
-    ;
+    
 
     private void ikkunaasetus(String otsikko) {
         this.add(pohjapaneeli);
