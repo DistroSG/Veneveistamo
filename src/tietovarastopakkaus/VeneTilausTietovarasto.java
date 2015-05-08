@@ -55,7 +55,7 @@ public class VeneTilausTietovarasto extends Tietovarasto {
         PreparedStatement lisayslause = null;
         try {
             String lisaaSql = "insert into venetilaus"
-                    + "(id, vene_id, henkilosto_id, hinta, kultejus_id, vari, edistyminen) values (?,?,?,?,?,?,?)";
+                    + "(id, vene_id, henkilosto_id, hinta, kuljetus_id, vari, edistyminen) values (?,?,?,?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiVeneTilaus.getId());
