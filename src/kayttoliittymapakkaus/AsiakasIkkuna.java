@@ -14,12 +14,12 @@ import tietovarastopakkaus.AsiakasTietovarasto;
  *
  * @author s1300778
  */
-public class AsiakasIkkuna extends Ikkuna {
+public final class AsiakasIkkuna extends Ikkuna {
 
-    private AsiakasTietovarasto rekisteri = new AsiakasTietovarasto();
+    private final AsiakasTietovarasto rekisteri = new AsiakasTietovarasto();
 
-    public AsiakasIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public AsiakasIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

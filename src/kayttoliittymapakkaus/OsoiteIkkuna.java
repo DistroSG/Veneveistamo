@@ -13,12 +13,12 @@ import tietovarastopakkaus.OsoiteTietovarasto;
  *
  * @author s1300778
  */
-public class OsoiteIkkuna extends Ikkuna {
+public final class OsoiteIkkuna extends Ikkuna {
 
-    private OsoiteTietovarasto rekisteri = new OsoiteTietovarasto();
+    private final OsoiteTietovarasto rekisteri = new OsoiteTietovarasto();
 
-    public OsoiteIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public OsoiteIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

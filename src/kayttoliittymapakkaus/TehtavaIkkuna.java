@@ -18,14 +18,14 @@ public final class TehtavaIkkuna extends Ikkuna {
      * Luoda uusi TehtavaIkkuna ikkuna otsikon, sarakenimien ja
      * yhdistelmäIndeksen avulla
      *
-     * @param otsikko ikunan otsikko
+     * @param ikkunanNimi ikunan otsikko
      * @param sarakenimet taulokon sarakenimet
-     * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
      */
-    public TehtavaIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
-        super(otsikko, sarakenimet, yhdistelmäIndeksi);
+    public TehtavaIkkuna(String ikkunanNimi, String[] sarakenimet) {
+        super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
     }
+
     /**
      * Suorita muutos
      */
@@ -37,6 +37,7 @@ public final class TehtavaIkkuna extends Ikkuna {
         rekisteri.muutaTietoja(new Tehtava(id, arvot[1]));
         paivitaValintaLista();
     }
+
     /**
      * Suorita poisto
      */
@@ -46,6 +47,7 @@ public final class TehtavaIkkuna extends Ikkuna {
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
+
     /**
      * Suorita lisays
      */
@@ -62,6 +64,7 @@ public final class TehtavaIkkuna extends Ikkuna {
             virhe("ID:n pitää olla kokonaislukuna");
         }
     }
+
     /**
      * Hae kaikki tiedot
      */

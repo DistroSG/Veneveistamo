@@ -13,13 +13,13 @@ import tietovarastopakkaus.KuljetusTietovarasto;
  *
  * @author s1300727
  */
-public class KuljetusIkkuna extends Ikkuna{
+public final class KuljetusIkkuna extends Ikkuna{
     
-        private KuljetusTietovarasto rekisteri = new KuljetusTietovarasto();
+        private final KuljetusTietovarasto rekisteri = new KuljetusTietovarasto();
 
 
-    public KuljetusIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
-        super(otsikko, sarakenimet, yhdistelmäIndeksi);
+    public KuljetusIkkuna(String ikkunanNimi, String[] sarakenimet) {
+        super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
     }
 

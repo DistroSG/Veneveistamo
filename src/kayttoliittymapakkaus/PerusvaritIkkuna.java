@@ -16,10 +16,10 @@ import tietovarastopakkaus.PerusvaritTietovarasto;
  */
 public final class PerusvaritIkkuna extends Ikkuna {
     
-    private PerusvaritTietovarasto rekisteri = new PerusvaritTietovarasto();
+    private final PerusvaritTietovarasto rekisteri = new PerusvaritTietovarasto();
 
-    public PerusvaritIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public PerusvaritIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

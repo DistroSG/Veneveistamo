@@ -17,8 +17,8 @@ public final class MalliIkkuna extends Ikkuna {
 
     private final MalliTietovarasto rekisteri = new MalliTietovarasto();
 
-    public MalliIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public MalliIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

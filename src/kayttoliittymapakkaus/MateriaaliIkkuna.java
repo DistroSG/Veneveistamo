@@ -16,10 +16,10 @@ import tietovarastopakkaus.MateriaaliTietovarasto;
  */
 public final class MateriaaliIkkuna extends Ikkuna {
     
-    private MateriaaliTietovarasto rekisteri = new MateriaaliTietovarasto();
+    private final MateriaaliTietovarasto rekisteri = new MateriaaliTietovarasto();
 
-    public MateriaaliIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public MateriaaliIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

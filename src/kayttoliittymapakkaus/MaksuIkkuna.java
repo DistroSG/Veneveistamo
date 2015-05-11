@@ -13,12 +13,12 @@ import tietovarastopakkaus.MaksuTietovarasto;
  *
  * @author s1300727
  */
-public class MaksuIkkuna extends Ikkuna {
+public final class MaksuIkkuna extends Ikkuna {
 
-    private MaksuTietovarasto rekisteri = new MaksuTietovarasto();
+    private final MaksuTietovarasto rekisteri = new MaksuTietovarasto();
 
-    public MaksuIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public MaksuIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

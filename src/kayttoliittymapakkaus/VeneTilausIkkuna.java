@@ -13,12 +13,12 @@ import tietovarastopakkaus.VeneTilausTietovarasto;
  *
  * @author Axel
  */
-public class VeneTilausIkkuna extends Ikkuna {
+public final class VeneTilausIkkuna extends Ikkuna {
 
-    private VeneTilausTietovarasto rekisteri = new VeneTilausTietovarasto();
+    private final VeneTilausTietovarasto rekisteri = new VeneTilausTietovarasto();
 
-    public VeneTilausIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public VeneTilausIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
 

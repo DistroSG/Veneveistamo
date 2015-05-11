@@ -13,12 +13,12 @@ import tietovarastopakkaus.ArvosteluTietovarasto;
  *
  * @author s1300778
  */
-public class ArvosteluIkkuna extends Ikkuna {
+public final class ArvosteluIkkuna extends Ikkuna {
 
-    private ArvosteluTietovarasto rekisteri = new ArvosteluTietovarasto();
+    private final ArvosteluTietovarasto rekisteri = new ArvosteluTietovarasto();
 
-    public ArvosteluIkkuna(String otsikko, String[] columnNames, int comboIndex) {
-        super(otsikko, columnNames, comboIndex);
+    public ArvosteluIkkuna(String ikkunanNimi, String[] columnNames) {
+        super(ikkunanNimi, columnNames);
         haeKaikkiTiedot();
     }
   

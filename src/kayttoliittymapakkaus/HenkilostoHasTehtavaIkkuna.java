@@ -20,12 +20,11 @@ public final class HenkilostoHasTehtavaIkkuna extends Ikkuna {
      * Luoda uusi HenkilostoHasTehtava ikkuna otsikon, sarakenimien ja
      * yhdistelmäIndeksen avulla
      *
-     * @param otsikko ikunan otsikko
+     * @param ikkunanNimi ikunan nimi
      * @param sarakenimet taulokon sarakenimet
-     * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
      */
-    public HenkilostoHasTehtavaIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
-        super(otsikko, sarakenimet, yhdistelmäIndeksi);
+    public HenkilostoHasTehtavaIkkuna(String ikkunanNimi, String[] sarakenimet) {
+        super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
     }
 
