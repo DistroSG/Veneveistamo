@@ -77,7 +77,7 @@ public abstract class Ikkuna extends JFrame {
      */
     protected String[] arvot;
     private String[] sarakenimet;
-    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu"};
+    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu","Ilmoitus"};
     private final SortedComboBoxModel<String> comboboxModel = new SortedComboBoxModel<>(comboboxItems);
     private final JComboBox<String> yhdistelmä = new JComboBox<>(comboboxModel);
 
@@ -246,6 +246,10 @@ public abstract class Ikkuna extends JFrame {
             sarakenimet = new String[]{"ID", "AsiakasID", "Arvostelu", "Pikkuarvostelu"};
 
             new ArvosteluIkkuna("Arvostelu", sarakenimet).setVisible(true);
+        }else if (yhdistelmä.getSelectedItem() == "Ilmoitus") {
+            sarakenimet = new String[]{"ID", "Ilmoitus", "Hinta", "VeneTilaus ID"};
+
+            new IlmoitusIkkuna("Ilmoitus", sarakenimet).setVisible(true);
         }
         this.dispose();
     }
