@@ -199,7 +199,7 @@ public abstract class Ikkuna extends JFrame {
         } else if (yhdistelmä.getSelectedItem() == "Henkilöstö") {
             sarakenimet = new String[]{"ID", "Sukunimi", "Etunimi", "Osasto", "Toimisto ID"};
 
-            new HenkilostoIkkuna("Henkilosto", sarakenimet).setVisible(true);
+            new HenkilostoIkkuna("Henkilöstö", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Tehtävä") {
             sarakenimet = new String[]{"ID", "Tehtävä"};
 
