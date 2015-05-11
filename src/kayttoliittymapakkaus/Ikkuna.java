@@ -271,6 +271,7 @@ public abstract class Ikkuna extends JFrame {
     private void taulukonasetus() {
         taulukko = new JTable(malli);
         taulukko.setFillsViewportHeight(true);
+        taulukko.getTableHeader().setReorderingAllowed(false);
         lajittelija = new TableRowSorter<>(malli);
         taulukko.setRowSorter(lajittelija);
         taulukko.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
