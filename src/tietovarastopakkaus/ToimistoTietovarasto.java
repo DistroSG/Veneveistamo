@@ -36,7 +36,7 @@ public class ToimistoTietovarasto extends Tietovarasto {
 
                 while (tulosjoukko.next()) {
                     toimistot.add(new Toimisto(tulosjoukko.getInt(1),
-                            tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getInt(4), tulosjoukko.getString(5)));
+                            tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getString(4), tulosjoukko.getString(5)));
 
                 }
             } catch (Exception e) {
@@ -71,7 +71,7 @@ public class ToimistoTietovarasto extends Tietovarasto {
             lisayslause.setInt(1, uusiToimisto.getId());
             lisayslause.setString(2, uusiToimisto.getAukioloajat());
             lisayslause.setString(3, uusiToimisto.getKatuosoite());
-            lisayslause.setInt(4, uusiToimisto.getPostinumero());
+            lisayslause.setString(4, uusiToimisto.getPostinumero());
             lisayslause.setString(5, uusiToimisto.getToimipaikka());
             lisayslause.executeUpdate();
         } catch (SQLException ex) {
@@ -107,7 +107,7 @@ public class ToimistoTietovarasto extends Tietovarasto {
 
             muutoslause.setString(1, uusiToimisto.getAukioloajat());
             muutoslause.setString(2, uusiToimisto.getKatuosoite());
-            muutoslause.setInt(3, uusiToimisto.getPostinumero());
+            muutoslause.setString(3, uusiToimisto.getPostinumero());
             muutoslause.setString(4, uusiToimisto.getToimipaikka());
             muutoslause.setInt(5, uusiToimisto.getId());
 

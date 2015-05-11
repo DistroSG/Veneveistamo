@@ -36,8 +36,7 @@ public final class ToimistoIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(arvot[0]);
-        int postinumero = Integer.parseInt(arvot[3]);
-        rekisteri.muutaTietoja(new Toimisto(id, arvot[1], arvot[2], postinumero, arvot[4]));
+        rekisteri.muutaTietoja(new Toimisto(id, arvot[1], arvot[2], arvot[3], arvot[4]));
         paivitaValintaLista();
     }
 
@@ -59,8 +58,7 @@ public final class ToimistoIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int puhelinnumero = Integer.parseInt(arvot[3]);
-            rekisteri.lisaaTieto(new Toimisto(id, arvot[1], arvot[2], puhelinnumero, arvot[4]));
+            rekisteri.lisaaTieto(new Toimisto(id, arvot[1], arvot[2], arvot[3], arvot[4]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 

@@ -11,7 +11,7 @@ public class Toimisto {
     private final int id;
     private final String aukioloajat;
     private final String katuosoite;
-    private final int postinumero;
+    private final String postinumero;
     private final String toimipaikka;
 
     /**
@@ -25,7 +25,7 @@ public class Toimisto {
      * @param postinumero postinumero. Esim. "00820"
      * @param toimipaikka toimipaikka. Esim. "Helsinki"
      */
-    public Toimisto(int id, String aukioloajat, String katuosoite, int postinumero, String toimipaikka) {
+    public Toimisto(int id, String aukioloajat, String katuosoite, String postinumero, String toimipaikka) {
         this.id = id;
         this.aukioloajat = aukioloajat;
         this.katuosoite = katuosoite;
@@ -65,7 +65,7 @@ public class Toimisto {
      *
      * @return postinumero
      */
-    public int getPostinumero() {
+    public String getPostinumero() {
         return postinumero;
     }
 
