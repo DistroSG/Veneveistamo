@@ -24,6 +24,16 @@ public class Taulukkomalli extends AbstractTableModel {
         this.sarakkeenOtsikot = sarakkeenOtsikot;
 
     }
+  /**
+     * Palauttaa sarakkeen luokka.
+     *
+     * @param c sarakkeen indeksi.
+     * @return  sarakkeen luokka.
+     */
+    @Override
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
 
     /**
      * Palauttaa sarakkeen lukumäärä.
