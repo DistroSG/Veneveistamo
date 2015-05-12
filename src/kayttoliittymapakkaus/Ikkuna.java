@@ -464,7 +464,11 @@ public abstract class Ikkuna extends JFrame {
                     taulukko.clearSelection();
                 } else {
                     try {
-                        lajittelija.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        if (hakuKentta.getText().matches("\\d")) {
+                            lajittelija.setRowFilter(RowFilter.regexFilter("^" + text));
+                        } else {
+                            lajittelija.setRowFilter(RowFilter.regexFilter(text));
+                        }
 
                     } catch (PatternSyntaxException pse) {
                         JOptionPane.showMessageDialog(null, "Bad regex pattern", "Bad regex pattern", JOptionPane.ERROR_MESSAGE);
