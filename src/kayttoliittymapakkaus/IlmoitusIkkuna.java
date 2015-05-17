@@ -36,7 +36,7 @@ public class IlmoitusIkkuna extends Ikkuna{
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ID, hinnan ja VeneTilausID pitää olla kokonaislukuja!");
+            virhe("ID/veneTilasus ID:n täytyy olla kokonaislukuja!");
         }
     }
 

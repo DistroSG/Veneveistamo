@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package datapakkaus;
 
 import java.util.Objects;
@@ -10,9 +5,10 @@ import java.util.Objects;
 /**
  *
  * @author Axeld
+ * @author Axel
  */
 public class VeneTilaus {
-    
+
     private final int id;
     private final int vene_id;
     private final int henkilosto_id;
@@ -30,8 +26,6 @@ public class VeneTilaus {
         this.vari = vari;
         this.edistyminen = edistyminen;
     }
-
-
 
     public int getId() {
         return id;
@@ -111,6 +105,5 @@ public class VeneTilaus {
         }
         return true;
     }
-    
-    
+
 }
