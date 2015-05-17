@@ -24,10 +24,11 @@ public final class AsiakasHasVeneTilausIkkuna extends Ikkuna {
      * @param sarakenimet taulokon sarakenimet
      * @param yhdistelmäIndeksi ikkunan numero yhdistelmässä
      */
-    public AsiakasHasVeneTilausIkkuna(String otsikko, String[] sarakenimet, int yhdistelmäIndeksi) {
-        super(otsikko, sarakenimet, yhdistelmäIndeksi);
+    public AsiakasHasVeneTilausIkkuna(String ikkunanNimi, String[] sarakenimet) {
+        super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
     }
+
 
     /**
      * Suorita muutos
