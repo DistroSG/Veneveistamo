@@ -18,67 +18,65 @@ public class Ilmoitus {
     private final double hinta;
     private final int venetilaus_id;
 
+    /**
+     * Luo uuden tiedon ID, ilmoitus, hinta ja venetilausID:eelle
+     * 
+     * @param id Ilmoituksen id. Esim "1"
+     * @param ilmoitus Ilmoitus. Esim "Vene on valmiina noudettavaksi."
+     * @param hinta Hinta. Esim "10"
+     * @param venetilaus_id VeneTilaus_id joka on linkitetty venetilaus tauluun foreingkeyllä Esim "1"
+     */
+    
     public Ilmoitus(int id, String ilmoitus, double hinta, int venetilaus_id) {
         this.id = id;
         this.ilmoitus = ilmoitus;
         this.hinta = hinta;
         this.venetilaus_id = venetilaus_id;
     }
-
+/**
+ * Palauttaa ID arvon
+ * 
+ * @return id
+ */
     public int getId() {
         return id;
     }
-
+/**
+ * Palauttaa Ilmmoutus tiedon
+ * 
+ * @return ilmoitus
+ */
+    
     public String getIlmoitus() {
         return ilmoitus;
     }
-
+/**
+ * Palauttaa Hinta tiedon
+ * 
+ * @return hinta
+ */
     public double getHinta() {
         return hinta;
     }
-
+/**
+ * Palauttaa veneTilaus_ID:n
+ * 
+ * @return venetilaus_id 
+ */
     public int getVenetilaus_id() {
         return venetilaus_id;
     }
-
+/**
+ * Palauttaa Ilmoituksen kaikki tiedot stringissä.
+ * 
+ * @return  Kaikki tidot
+ */
     @Override
     public String toString() {
         return "Ilmoitus{" + "id=" + id + ", ilmoitus=" + ilmoitus + ", hinta=" + hinta + ", venetilaus_id=" + venetilaus_id + '}';
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.ilmoitus);
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.hinta) ^ (Double.doubleToLongBits(this.hinta) >>> 32));
-        hash = 53 * hash + this.venetilaus_id;
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ilmoitus other = (Ilmoitus) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.ilmoitus, other.ilmoitus)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.hinta) != Double.doubleToLongBits(other.hinta)) {
-            return false;
-        }
-        if (this.venetilaus_id != other.venetilaus_id) {
-            return false;
-        }
-        return true;
-    }
     
     
 }
