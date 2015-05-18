@@ -9,7 +9,10 @@ import java.util.List;
 
 public class OsoiteTietovarasto extends Tietovarasto {
 
-
+/**
+ * haeTiedot Hakee kaikki tiedot osoite taulusta.
+ * @return kaikki osoitteen tiedot.
+ */
     @Override
     public List<Osoite> haeTiedot() {
         List<Osoite> asiakkaat = new ArrayList<Osoite>();
@@ -43,7 +46,10 @@ public class OsoiteTietovarasto extends Tietovarasto {
         }
         return asiakkaat;
     }
-
+/**
+ * lisaaTieto lisää tietoa osoite kantaan.
+ * @param object, lisättävät osoitetiedot
+ */
     @Override
     public void lisaaTieto(Object object) {
         Osoite uusiosoite = (Osoite) object;
@@ -74,7 +80,11 @@ public class OsoiteTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * muutaTietoja muuttaa osoite kannan tietoja
+ * @param object
+ * @return palautta true, jos muuttaminen on onnistuttu.
+ */
     @Override
     public boolean muutaTietoja(Object object) {
         Osoite osoite = (Osoite) object;
@@ -106,7 +116,10 @@ public class OsoiteTietovarasto extends Tietovarasto {
         }
         return false;
     }
-
+/**
+ * poistaOsoite poistaa osoite kannasta.
+ * @param id osoitteen id joka poistetaan.
+ */
     public boolean poistaOsoite(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {

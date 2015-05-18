@@ -25,7 +25,10 @@ public class ArvosteluTietovarasto {
         this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
                 "bb372d8eaf1594", "c887b8c8");
     }
-
+/**
+ * haeKaikkiArvostelut Hakee kaikki tiedot arvostelu taulusta.
+ * @return kaikki arvostelujen tiedot.
+ */
     public List<Arvostelu> haeKaikkArvostelut() {
         List<Arvostelu> arvostelut = new ArrayList<Arvostelu>();
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
@@ -57,7 +60,10 @@ public class ArvosteluTietovarasto {
         return arvostelut;
     }
 
-
+/**
+ * lisaaArvostelu lisää arvostelun arvostelu kantaan.
+ * @param uusiarvostelu, lisättävä arvostelu
+ */
     public void lisaaArvostelu(Arvostelu uusiarvostelu) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
@@ -84,7 +90,10 @@ public class ArvosteluTietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * poistaArvostelu poistaa arvostelun kannasta.
+ * @param id arvostelun id joka poistetaan.
+ */
     public boolean poistaArvostelu(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
@@ -109,7 +118,11 @@ public class ArvosteluTietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * muutaTietoja muuttaa arvostelu tietoja
+ * @param object
+ * @return palautta true, jos muuttaminen on onnistuttu.
+ */
         public boolean muutaTietoja(Object object) {
         Arvostelu arvostelu = (Arvostelu) object;
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

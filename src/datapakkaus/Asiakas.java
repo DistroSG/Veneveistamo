@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package datapakkaus;
 
 import java.util.Objects;
@@ -12,6 +7,7 @@ import java.util.Objects;
  * @author s1300776
  */
 public class Asiakas {
+
     private final int id;
     private final String henkilotunnus;
     private final String salasana;
@@ -22,7 +18,21 @@ public class Asiakas {
     private final String puhelinnumero;
     private final String asiakastyyppi;
 
-        public Asiakas(int id, String henkilotunnus, String salasana, String sukunimi, String etunimi, String sahkoposti, String sukupuoli, String puhelinnumero, String asiakastyyppi) {
+    /**
+     * Luodaan uutta asiakasta, id:n, henkilotunnuksen, salasanan, sukunimen,
+     * etunimen, sahkopostin, sukupuolen,puhelinnumeron ja asiakastyypin avulla.
+     *
+     * @param id arvostelu id. Esim. "1"
+     * @param henkilotunnus henkilotunnuksen ID. Esim. "890232-123E"
+     * @param salasana asiakkaan salasana. Esim. "WowSuchDog123"
+     * @param sukunimi asiakkaan sukunimi Esim. "Salainen"
+     * @param etunimi asiakkaan etunimi. Esim. "Saku"
+     * @param sahkoposti asiakkaan sahkoposti. Esim. "asd.dsa@jotain.com"
+     * @param sukupuoli asiakkaan sukupuoli. HUOM. käy vain "M/N"
+     * @param puhelinnumero asiakkaan puhelinnumero. Esim. "983249823"
+     * @param asiakastyyppi asiakkastyyppi. Esim. "Yksityishenkilö/Organisaatio"
+     */
+    public Asiakas(int id, String henkilotunnus, String salasana, String sukunimi, String etunimi, String sahkoposti, String sukupuoli, String puhelinnumero, String asiakastyyppi) {
         this.id = id;
         this.henkilotunnus = henkilotunnus;
         this.salasana = salasana;
@@ -37,105 +47,97 @@ public class Asiakas {
     public Asiakas(int id, String henkilotunnus, String value, String salasana, String value0, String sukunimi, String value1, String etunimi, String value2, String sahkoposti, String value3, String sukupuoli, String value4, String asiakastyyppi, String value5) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-        
-    
+
+    /**
+     * Palauttaa henkilön ID.
+     *
+     * @return ID
+     */
+
     public int getId() {
         return id;
     }
 
+    /**
+     * Palauttaa henkilötunnuksen.
+     *
+     * @return henkilotunnus
+     */
     public String getHenkilotunnus() {
         return henkilotunnus;
     }
 
+    /**
+     * Palauttaa salasanan.
+     *
+     * @return salasana
+     */
     public String getSalasana() {
         return salasana;
     }
 
+    /**
+     * Palauttaa sukunimen.
+     *
+     * @return sukunimi
+     */
     public String getSukunimi() {
         return sukunimi;
     }
 
+    /**
+     * Palauttaa etunimen.
+     *
+     * @return etunimi
+     */
     public String getEtunimi() {
         return etunimi;
     }
 
+    /**
+     * Palauttaa sahköpostin.
+     *
+     * @return sahkoposti
+     */
     public String getSahkoposti() {
         return sahkoposti;
     }
 
+    /**
+     * Palauttaa sukupuolen.
+     *
+     * @return sukupuoli
+     */
     public String getSukupuoli() {
         return sukupuoli;
     }
 
+    /**
+     * Palauttaa puhelinnumeron.
+     *
+     * @return puhelinnumero
+     */
     public String getPuhelinnumero() {
         return puhelinnumero;
     }
 
+    /**
+     * Palauttaa asiakastyypin.
+     *
+     * @return asiakastyyppi
+     */
     public String getAsiakastyyppi() {
         return asiakastyyppi;
     }
-    
-    
-    
+
+    /**
+     * Palauttaa asiakkaan kaikki tiedot.
+     *
+     * @return kaikki tiedot
+     */
     @Override
     public String toString() {
         return "asiakas{" + "id=" + id + ", henkilotunnus=" + henkilotunnus + ", salasana=" + salasana + ", sukunimi=" + sukunimi + ", etunimi=" + etunimi + ", sahkoposti=" + sahkoposti + ", sukupuoli=" + sukupuoli + ", puhelinnumero=" + puhelinnumero + ", asiakastyyppi=" + asiakastyyppi + '}';
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.henkilotunnus);
-        hash = 97 * hash + Objects.hashCode(this.salasana);
-        hash = 97 * hash + Objects.hashCode(this.sukunimi);
-        hash = 97 * hash + Objects.hashCode(this.etunimi);
-        hash = 97 * hash + Objects.hashCode(this.sahkoposti);
-        hash = 97 * hash + Objects.hashCode(this.sukupuoli);
-        hash = 97 * hash + Objects.hashCode(this.puhelinnumero);
-        hash = 97 * hash + Objects.hashCode(this.asiakastyyppi);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Asiakas other = (Asiakas) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.henkilotunnus, other.henkilotunnus)) {
-            return false;
-        }
-        if (!Objects.equals(this.salasana, other.salasana)) {
-            return false;
-        }
-        if (!Objects.equals(this.sukunimi, other.sukunimi)) {
-            return false;
-        }
-        if (!Objects.equals(this.etunimi, other.etunimi)) {
-            return false;
-        }
-        if (!Objects.equals(this.sahkoposti, other.sahkoposti)) {
-            return false;
-        }
-        if (!Objects.equals(this.sukupuoli, other.sukupuoli)) {
-            return false;
-        }
-        if (!Objects.equals(this.puhelinnumero, other.puhelinnumero)) {
-            return false;
-        }
-        if (!Objects.equals(this.asiakastyyppi, other.asiakastyyppi)) {
-            return false;
-        }
-        return true;
-    }
-
-
-    
 }

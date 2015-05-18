@@ -53,6 +53,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
             virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
         }
     }
+
 @Override
     public void haeKaikkiTiedot() {
         for (Arvostelu arvostelu : rekisteri.haeKaikkArvostelut()) {

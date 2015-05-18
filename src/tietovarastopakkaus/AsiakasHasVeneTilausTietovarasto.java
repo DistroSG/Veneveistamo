@@ -13,9 +13,9 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
 
 
     /**
-     * Palautta kaikki HenkilostoHasTehtava yhteydet.
+     * Palautta kaikki AsiakasHasVeneTilaus yhteydet.
      *
-     * @return kaikki HenkilostoHasTehtava yhteydet.
+     * @return kaikki AsiakasHasVeneTilaus yhteydet.
      */
     @Override
     public List<AsiakasHasVeneTilaus> haeTiedot() {
@@ -44,7 +44,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
     }
 
     /**
-     * Lisätä uusi yhteys.
+     * Lisätään uusi yhteys.
      *
      * @param object objekti, joka lisätään.
      */
@@ -77,7 +77,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
     /**
      * Muuta yhteys.
      *
-     * @param object muuttuva yhteys HenkilostoHasTehtavaMuutos objektilla
+     * @param object muuttuva yhteys AsiakasHasVeneTilausMuutos objektilla
      * @return palautta true, jos muuttaminen on onnistuttu.
      */
     @Override
@@ -92,10 +92,10 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
     /**
      *
      *
-     * @param uusiHenkilostoHasTehtava uusi yhetys. Esim "new
-     * uusiHenkilostoHasTehtava(1,1)"
-     * @param vanhaHenkilostoHasTehtava vanha yhetys. Esim. "new
-     * uusiHenkilostoHasTehtava(1,2)"
+     * @param uusiAsiakasHasVeneTilaus uusi yhetys. Esim "new
+     * uusiAsiakasHasVeneTilaus(1,1)"
+     * @param vanhaAsiakasHasVeneTilaus vanha yhetys. Esim. "new
+     * vanhaAsiakasHasVeneTilaus(1,2)"
      * @return palautta true, jos muuttaminen on onnistuttu.
      */
     private boolean muutaTietoja(AsiakasHasVeneTilaus uusiAsiakasHasVeneTilaus, AsiakasHasVeneTilaus vanhaAsiakasHasVeneTilaus) {
@@ -122,10 +122,10 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
     }
 
     /**
-     * Poista kaikki merkitty henkilön yhteydet.
+     * Poista kaikki merkityt asiakkaan yhteydet.
      *
      *
-     * @param asiakasID poistettavien yhteyksien henkilön id
+     * @param asiakasID poistettavien yhteyksien veneTilausID
      */
     @Override
     public void poistaTieto(int asiakasID) {
@@ -151,8 +151,8 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
     /**
      * Poista konkreettinen yhteys.
      *
-     * @param henkilostoID poistettavan yhteyden henkilön id
-     * @param tehtavaID poistettavan yhteyden tehtävän id
+     * @param asiakasID poistettavan yhteyden asiakas id
+     * @param venetilausID poistettavan yhteyden venetilaus id
      */
     public void poistaTieto(int venetilausID, int asiakasID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
