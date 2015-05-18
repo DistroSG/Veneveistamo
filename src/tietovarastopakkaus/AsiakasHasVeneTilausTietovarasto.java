@@ -25,7 +25,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT henkilosto_id, tehtava_id FROM asiakas_has_venetilaus;";
+                String hakuSql = "SELECT asiakas_id, veneTilaus_id FROM asiakas_has_venetilaus;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
@@ -58,7 +58,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         PreparedStatement lisayslause = null;
         try {
             String lisaaSql = "insert into asiakas_has_venetilaus "
-                    + "(asiakas_id, venetilaus_id) values (?,?)";
+                    + "(asiakas_id, veneTilaus_id) values (?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiAsiakasHasVeneTilaus.getAsiakasID());
@@ -82,7 +82,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
      */
     @Override
     public boolean muutaTietoja(Object object) {
-        if (object instanceof AsiakasHasVeneTilaus) {
+        if (object instanceof AsiakasHasVeneTilausMuutos) {
             AsiakasHasVeneTilausMuutos apu = (AsiakasHasVeneTilausMuutos) object;
             return muutaTietoja(apu.getUusi(), apu.getVanha());
         }
@@ -106,7 +106,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         PreparedStatement muutoslause = null;
         try {
             String muutaSql = "update asiakas_has_venetilaus "
-                    + " set venetilaus_id=? where asiakas_id=? and venetilaus_id=?";
+                    + " set veneTilaus_id=? where asiakas_id=? and veneTilaus_id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
             muutoslause.setInt(1, uusiAsiakasHasVeneTilaus.getVeneTilausID());
@@ -135,7 +135,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from asiakas_has_venetilaus where venetilaus_id=?";
+            String poistoSql = "delete from asiakas_has_venetilaus where veneTilaus_id=?";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, asiakasID);
 
@@ -161,7 +161,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from asiakas_has_venetilaus where asiakas_id=? AND venetilaus_id=?  ";
+            String poistoSql = "delete from asiakas_has_venetilaus where asiakas_id=? AND veneTilaus_id=?  ";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, venetilausID);
             poistolause.setInt(2, asiakasID);
