@@ -14,11 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author s1300727
+ *MaksuTietovarasto  luokka jonka avulla muodostetaan yhteys oikeean tauluun tietokannassa.
+ * 
+ * @author s1300727'
+ * @version 1.0
  */
 public class MaksuTietovarasto extends Tietovarasto {
-
+/**
+ * Hakee kaikki tiedot Maksu taulusta.
+ * 
+ * @return Maksu tiedot.
+ */
+    
     @Override
     public List<Maksu> haeTiedot() {
         List<Maksu> maksut = new ArrayList<>();
@@ -47,6 +54,11 @@ public class MaksuTietovarasto extends Tietovarasto {
     }
 
 
+    /**
+     * Lisää tiedon Maksu tauluun.
+     * 
+     * @param object Maksu
+     */
 
     @Override
 public void lisaaTieto(Object object) {
@@ -75,6 +87,12 @@ public void lisaaTieto(Object object) {
         }
     }
 
+/**
+ * Muuttaa tietoa/tietoja Maksu taulussa.
+ *  
+ * @param object Maksu
+ * @return palauttaa true jos muutos on onnistunut.
+ */
     @Override
         public boolean muutaTietoja(Object object) {
         Maksu uusiMaksu = (Maksu) object;
@@ -107,7 +125,11 @@ public void lisaaTieto(Object object) {
             YhteydenHallinta.suljeLause(muutoslause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }    }
-
+/**
+ * Poistaa Maksu tiedon kannasta.
+ * @param eranumero määrittää poistettavan tiedon.
+ */
+        
     @Override
     public void poistaTieto(int eranumero) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

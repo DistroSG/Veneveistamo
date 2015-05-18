@@ -13,11 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *VeneTilaustietovarasto luokka jonka avulla muodostetaan yhteys oikeen tauluun kannassa.
+ * 
  * @author Axel
+ * @version 1.0
  */
 public class VeneTilausTietovarasto extends Tietovarasto {
-
+/**
+ * Hakee kaikki tiedot VeneTilaus taulusta.
+ * 
+ * @return Venetilaus tiedot.
+ */
     @Override
     public List<VeneTilaus> haeTiedot() {
         List<VeneTilaus> venetilaus = new ArrayList<>();
@@ -44,7 +50,11 @@ public class VeneTilausTietovarasto extends Tietovarasto {
         }
         return venetilaus;
     }
-
+/**
+ * Lisätään uusi VeneTilaus tieto tietokantaan.
+ * 
+ * @param object VeneTilaus 
+ */
     @Override
     public void lisaaTieto(Object object) {
         VeneTilaus uusiVeneTilaus = (VeneTilaus) object;
@@ -73,7 +83,12 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * Muutetaan tietoa VeneTilaus tietokannassa.
+ * 
+ * @param object VeneTilaus
+ * @return palauttaa true, jos muuttaminen on onnistunut.
+ */
     @Override
     public boolean muutaTietoja(Object object) {
         VeneTilaus uusiVeneTilaus = (VeneTilaus) object;
@@ -109,7 +124,11 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * Poistaa tiedon VeneTilaus taulusta.
+ * 
+ * @param id poistetaan tieto ID:en perusteella.
+ */
     @Override
     public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
