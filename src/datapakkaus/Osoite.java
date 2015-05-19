@@ -36,6 +36,10 @@ public class Osoite {
         return toimipaikka;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getYrityksennimi() {
         return yrityksennimi;
     }

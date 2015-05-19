@@ -63,8 +63,8 @@ public class VeneHasPerusvaritTietovarasto extends Tietovarasto {
         }
         PreparedStatement lisayslause = null;
         try {
-            String lisaaSql = "insert into vene_has_materiaali "
-                    + "(vene_id, materiaali_id) values (?,?)";
+            String lisaaSql = "insert into vene_has_perusvarit"
+                   + "(vene_id, perusvarit_id) values (?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiVeneHasPerusvarit.getVeneID());
