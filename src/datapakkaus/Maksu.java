@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  *
  * @author s1300727
- * heeii
+ * @version 1.0
  */
 public class Maksu {
     
@@ -20,6 +20,15 @@ public class Maksu {
     private final String maksettupaiva;
     private final String erapaiva;
 
+    /**
+     * Luo uuden tiedon eranumero, venetilaus_id,hinta, maksettupaiva ja erapaiva Maksu tauluun.
+     * 
+     * @param eranumero Maksun eränumero esim. 1
+     * @param venetilaus_id venetilauksen id esim. 1
+     * @param hinta Maksun hinta esim. 10.
+     * @param maksettupaiva Maksun maksettupaiva esim. 02-03-2015
+     * @param erapaiva maksun eräpäivä esim. 05-05-2015
+     */
     public Maksu(int eranumero, int venetilaus_id, double hinta, String maksettupaiva, String erapaiva) {
         this.eranumero = eranumero;
         this.venetilaus_id = venetilaus_id;
@@ -27,69 +36,60 @@ public class Maksu {
         this.maksettupaiva = maksettupaiva;
         this.erapaiva = erapaiva;
     }
+    /**
+     * Palauttaa eranumero arvon.
+     * 
+     * @return eranumero
+     */
     
     public int getEranumero() {
         return eranumero;
     }
+    /**
+     * palauttaa venetilaus id
+     * 
+     * @return venetilaus_id
+     */
 
     public int getveneTilaus_id() {
         return venetilaus_id;
     }
-
+/**
+ * palauttaa hinta arvon
+ * 
+ * @return hinta 
+ */
+    
     public double getHinta() {
         return hinta;
     }
-
+/**
+ * palauttaa maksettupaiva arvon
+ * 
+ * @return maksettupaiva 
+ */
+    
     public String getMaksettupaiva() {
         return maksettupaiva;
     }
-
+/**
+ * palauttaa erapaiva arvon
+ * 
+ * @return erapaiva
+ */
     public String getErapaiva() {
         return erapaiva;
     }
-
+/**
+ * Palauttaa kaikki Maksun tiedot stringissä.
+ * @return 
+ */
     @Override
     public String toString() {
         return "Maksu{" + "eranumero=" + eranumero + ", tilausID=" + venetilaus_id + ", hinta=" + hinta + ", maksettupaiva=" + maksettupaiva + ", erapaiva=" + erapaiva + '}';
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + this.eranumero;
-        hash = 47 * hash + this.venetilaus_id;
-        hash = 47 * hash + (int) (Double.doubleToLongBits(this.hinta) ^ (Double.doubleToLongBits(this.hinta) >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.maksettupaiva);
-        hash = 47 * hash + Objects.hashCode(this.erapaiva);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Maksu other = (Maksu) obj;
-        if (this.eranumero != other.eranumero) {
-            return false;
-        }
-        if (this.venetilaus_id != other.venetilaus_id) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.hinta) != Double.doubleToLongBits(other.hinta)) {
-            return false;
-        }
-        if (!Objects.equals(this.maksettupaiva, other.maksettupaiva)) {
-            return false;
-        }
-        if (!Objects.equals(this.erapaiva, other.erapaiva)) {
-            return false;
-        }
-        return true;
-    }
     
     
 }

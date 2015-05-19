@@ -13,11 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * IlmoitusTietovarasto luokka jonka avulla muodostetaan yhteys oikeean tauluun tietokannassa.
  *
  * @author s1300727
+ * @version 1.0
  */
 public class IlmoitusTietovarasto extends Tietovarasto{
-
+/**
+ * Hakee kaikki tiedot Ilmoitus taulusta.
+ * 
+ * @return Ilmoitus tiedot 
+ */
     @Override
     public List<Ilmoitus> haeTiedot() {
                 List<Ilmoitus> ilmoitukset = new ArrayList<>();
@@ -44,7 +50,11 @@ public class IlmoitusTietovarasto extends Tietovarasto{
         }
         return ilmoitukset;
     }
-
+/**
+ * Lisätään uusi Ilmoitus tieto tietokantaan.
+ * 
+ * @param object ilmoitus
+ */
     @Override
     public void lisaaTieto(Object object) {
          Ilmoitus uusiIlmoitus = (Ilmoitus) object;
@@ -70,6 +80,12 @@ public class IlmoitusTietovarasto extends Tietovarasto{
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
+    /**
+     * Muuttaa Ilmoitus tietoja tietokannassa
+     * 
+     * @param object ilmoitus
+     * @return palauttaa true, jos muuttaminen on onnistunut.
+     */
 
     @Override
     public boolean muutaTietoja(Object object) {
@@ -103,7 +119,11 @@ public class IlmoitusTietovarasto extends Tietovarasto{
             YhteydenHallinta.suljeYhteys(yhteys);
         } 
     }
-
+/**
+ * Poistaa ilmoituksen tietokannasta ID:en perusteella.
+ * 
+ * @param id poistetaan tieto ID:en perusteella. 
+ */
     @Override
     public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

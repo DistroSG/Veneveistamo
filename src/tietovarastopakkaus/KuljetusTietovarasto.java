@@ -14,11 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * KuljetusTietovarasto luokka jonka avulla muodostetaan yhteys oikeean tauluun.
  *
  * @author s1300727
+ * @version 1.0
  */
 public class KuljetusTietovarasto extends Tietovarasto{
-
+/**
+ * Hakee kaikki tiedot Kuljetus taulusta.
+ * 
+ * @return Kuljetus tiedot
+ */
     @Override
     public List<Kuljetus> haeTiedot() {
         List<Kuljetus> kuljetukset = new ArrayList<>();
@@ -44,7 +50,11 @@ public class KuljetusTietovarasto extends Tietovarasto{
             }
         }
         return kuljetukset;    }
-
+/**
+ * Lisää tietoa kuljetus tauluun.
+ * 
+ * @param object Kuljetus
+ */
     @Override
     public void lisaaTieto(Object object) {
         Kuljetus uusiKuljetus = (Kuljetus) object;
@@ -69,7 +79,13 @@ public class KuljetusTietovarasto extends Tietovarasto{
             YhteydenHallinta.suljeLause(lisayslause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }    }
-
+/**
+ * Muutetaan tietoa Kuljetus taulussa.
+ * 
+ * @param object
+ * @return palauttaa true jos muutos on onnistunut. 
+ */
+    
     @Override
     public boolean muutaTietoja(Object object) {
               Kuljetus uusiKuljetus = (Kuljetus) object;
@@ -103,6 +119,11 @@ public class KuljetusTietovarasto extends Tietovarasto{
         }
     }
 
+    /**
+     * Poistaa tiedon Kuljetus taulusta
+     * @param id poistaa tiedon ID:en perusteella
+     */
+    
     @Override
     public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
