@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * VeneTietovarasto luokka. Jonka avulla saadaan tietokantayhteys ja
- * tiedot VeneHasPerusvarit ja VeneHasMateriaalit taulukoista.
+ * VeneTietovarasto luokka. Jonka avulla saadaan tietokantayhteys ja tiedot
+ * VeneHasPerusvarit ja VeneHasMateriaalit taulukoista.
  *
- * @author s1300778
+ * @author s1300723
  * @version 1.0
  */
 public class VeneTietovarasto extends Tietovarasto {
@@ -37,7 +37,9 @@ public class VeneTietovarasto extends Tietovarasto {
                 while (tulosjoukko.next()) {
                     veneet.add(new Vene(tulosjoukko.getInt(1),
                             tulosjoukko.getInt(2), tulosjoukko.getInt(3), tulosjoukko.getInt(4), tulosjoukko.getInt(5)));
+
                 }
+
             } catch (SQLException ex) {
                 if (ex.getErrorCode() == 1062) {
                     idVirheIlmoitus();

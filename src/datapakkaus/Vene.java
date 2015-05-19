@@ -48,44 +48,4 @@ public class Vene {
     public String toString() {
         return "Vene{" + "id=" + id + ", malli=" + malli + ", takuu=" + takuu + ", hinta=" + hinta + ", alv=" + alv + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + this.id;
-        hash = 31 * hash + this.malli;
-        hash = 31 * hash + this.takuu;
-        hash = 31 * hash + this.hinta;
-        hash = 31 * hash + this.alv;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Vene other = (Vene) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.malli != other.malli) {
-            return false;
-        }
-        if (this.takuu != other.takuu) {
-            return false;
-        }
-        if (this.hinta != other.hinta) {
-            return false;
-        }
-        if (this.alv != other.alv) {
-            return false;
-        }
-        return true;
-    }
-    
-
 }

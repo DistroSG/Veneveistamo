@@ -6,7 +6,6 @@
 package tietovarastopakkaus;
 
 import datapakkaus.Kuljetus;
-import datapakkaus.Maksu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

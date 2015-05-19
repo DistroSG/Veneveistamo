@@ -5,9 +5,9 @@ import java.util.Arrays;
 import tietovarastopakkaus.VeneTietovarasto;
 
 /**
- * HenkilostoIkkuna luokka. Jolla asennetaan Henkilosto ikkuna.
+ * VeneIkkuna luokka. Jolla asennetaan Vene ikkuna.
  *
- * @author s1300778
+ * @author s1300723
  * @version 1.0
  */
 public final class VeneIkkuna extends Ikkuna {
@@ -15,7 +15,7 @@ public final class VeneIkkuna extends Ikkuna {
     private final VeneTietovarasto rekisteri = new VeneTietovarasto();
 
     /**
-     * Luoda uusi HenkilostoIkkuna ikkuna otsikon, sarakenimien ja
+     * Luoda uusi VeneIkkuna ikkuna otsikon, sarakenimien ja
      * yhdistelmäIndeksen avulla
      *
      * @param ikkunanNimi ikunan otsikko
@@ -34,11 +34,11 @@ public final class VeneIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(arvot[0]);
-        int malli = Integer.parseInt(arvot[1]);
+        int malli2 = Integer.parseInt(arvot[1]);
         int takuu = Integer.parseInt(arvot[2]);
-        int hinta = Integer.parseInt(arvot[5]);
+        int hinta = Integer.parseInt(arvot[3]);
         int alv = Integer.parseInt(arvot[4]);
-        rekisteri.muutaTietoja(new Vene(id, malli, takuu, hinta, alv));
+        rekisteri.muutaTietoja(new Vene(id, malli2, takuu, hinta, alv));
         paivitaValintaLista();
     }
 
@@ -62,7 +62,7 @@ public final class VeneIkkuna extends Ikkuna {
             int id = Integer.parseInt(arvot[0]);
             int malli = Integer.parseInt(arvot[1]);
             int takuu = Integer.parseInt(arvot[2]);
-            int hinta = Integer.parseInt(arvot[5]);
+            int hinta = Integer.parseInt(arvot[3]);
             int alv = Integer.parseInt(arvot[4]);
             rekisteri.lisaaTieto(new Vene(id, malli, takuu, hinta, alv));
             syottopaneeli.tyhjennaKentat();
