@@ -226,7 +226,7 @@ public abstract class Ikkuna extends JFrame {
 
             new AsiakasIkkuna("Asiakas", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Vene Tilaus") {
-            sarakenimet = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID", "Väri", "Edistyminen"};
+            sarakenimet = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID","Vastaanottaja", "Väri", "Edistyminen"};
 
             new VeneTilausIkkuna("Vene Tilaus", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Malli") {

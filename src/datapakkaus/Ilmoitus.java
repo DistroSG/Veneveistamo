@@ -10,6 +10,7 @@ import java.util.Objects;
 /**
  *
  * @author s1300727
+ * @version 1.0
  */
 public class Ilmoitus {
     
@@ -42,7 +43,7 @@ public class Ilmoitus {
         return id;
     }
 /**
- * Palauttaa Ilmmoutus tiedon
+ * Palauttaa Ilmmoitus tiedon
  * 
  * @return ilmoitus
  */
@@ -69,7 +70,7 @@ public class Ilmoitus {
 /**
  * Palauttaa Ilmoituksen kaikki tiedot stringissä.
  * 
- * @return  Kaikki tidot
+ * @return  Kaikki tiedot
  */
     @Override
     public String toString() {

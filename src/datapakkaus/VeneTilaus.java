@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Axeld
+ * 
  * @author Axel
  */
 public class VeneTilaus {
@@ -14,6 +14,7 @@ public class VeneTilaus {
     private final int henkilosto_id;
     private final double hinta;
     private final int kuljetus_id;
+    private final String vastaanottaja;
     private final String vari;
     private final String edistyminen;
 
@@ -24,15 +25,17 @@ public class VeneTilaus {
      * @param henkilosto_id henkilöstön id esim. 1
      * @param hinta hinta esim. 10
      * @param kuljetus_id kuljetus id esim. 1
+     * @param vastaanottaja vastaanottaja haetaan toisesta taulusta esim. Pekko Tominpoika.
      * @param vari väri esim. punainen
      * @param edistyminen edistyminen esim. Vasta aloitettu.
      */
-    public VeneTilaus(int id, int vene_id, int henkilosto_id, double hinta, int kuljetus_id, String vari, String edistyminen) {
+    public VeneTilaus(int id, int vene_id, int henkilosto_id, double hinta, int kuljetus_id,String vastaanottaja, String vari, String edistyminen) {
         this.id = id;
         this.vene_id = vene_id;
         this.henkilosto_id = henkilosto_id;
         this.hinta = hinta;
         this.kuljetus_id = kuljetus_id;
+        this.vastaanottaja = vastaanottaja;
         this.vari = vari;
         this.edistyminen = edistyminen;
     }
@@ -75,6 +78,14 @@ public class VeneTilaus {
  */
     public int getKuljetus_id() {
         return kuljetus_id;
+    }
+    /**
+     * Palauttaa vastaanottaja tiedon.
+     * 
+     * @return vastaanottaja
+     */
+    public String getVastaanottaja(){
+        return vastaanottaja;
     }
 /**
  * Palauttaa vari tiedon

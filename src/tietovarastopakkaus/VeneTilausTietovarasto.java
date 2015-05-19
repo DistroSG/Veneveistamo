@@ -32,13 +32,13 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT id, vene_id, henkilosto_id, hinta, kuljetus_id, vari, edistyminen FROM venetilaus;";
+                String hakuSql = "SELECT venetilaus.id, vene_id, henkilosto_id, hinta, kuljetus_id,kuljetus.vastaanottaja , vari, edistyminen FROM venetilaus INNER JOIN kuljetus ON venetilaus.kuljetus_id=kuljetus.id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
                 while (tulosjoukko.next()) {
                     venetilaus.add(new VeneTilaus(tulosjoukko.getInt(1),
-                            tulosjoukko.getInt(2), tulosjoukko.getInt(3), tulosjoukko.getDouble(4), tulosjoukko.getInt(5), tulosjoukko.getString(6), tulosjoukko.getString(7)));
+                            tulosjoukko.getInt(2), tulosjoukko.getInt(3), tulosjoukko.getDouble(4), tulosjoukko.getInt(5), tulosjoukko.getString(6), tulosjoukko.getString(7), tulosjoukko.getString(8)));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
