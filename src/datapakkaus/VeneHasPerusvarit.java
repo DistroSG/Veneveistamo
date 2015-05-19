@@ -6,8 +6,11 @@
 package datapakkaus;
 
 /**
- *
+ * Luodaan uutta vene has perusvarit vene id:n ja perusvarit id:n avulla.
+ * @param veneID
+ * @param perusvaritID 
  * @author s1300723
+ * @version 1.0
  */
 public class VeneHasPerusvarit {
     private final int veneID;
@@ -17,45 +20,32 @@ public class VeneHasPerusvarit {
         this.veneID = veneID;
         this.perusvaritID = perusvaritID;
     }
+    /**
+     * Palauttaa veneen ID:n.
+     *
+     * @return vene id
+     */
 
     public int getVeneID() {
         return veneID;
     }
+    /**
+     * Palauttaa perusvarin ID:n.
+     *
+     * @return perusvarit id
+     */
 
     public int getPerusvaritID() {
         return perusvaritID;
     }
+     /**
+     * Palauttaa vene has perusvarit kaikki tiedot.
+     *
+     * @return kaikki tiedot
+     */
 
     @Override
     public String toString() {
         return "VeneHasPerusvarit{" + "veneID=" + veneID + ", perusvaritID=" + perusvaritID + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.veneID;
-        hash = 97 * hash + this.perusvaritID;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final VeneHasPerusvarit other = (VeneHasPerusvarit) obj;
-        if (this.veneID != other.veneID) {
-            return false;
-        }
-        if (this.perusvaritID != other.perusvaritID) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 }

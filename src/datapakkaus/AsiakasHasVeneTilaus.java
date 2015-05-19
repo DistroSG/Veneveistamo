@@ -24,10 +24,10 @@ public class AsiakasHasVeneTilaus {
     public int getAsiakasID() {
         return asiakasID;
     }
-   /**
-     * Palauttaa venetilaus id:n.
+/**
+     * Palauttaa asiakkaan ID:n.
      *
-     * @return venetilaus id
+     * @return asiakas id
      */
     public int getVeneTilausID() {
         return veneTilausID;

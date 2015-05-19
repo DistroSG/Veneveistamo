@@ -6,8 +6,11 @@
 package datapakkaus;
 
 /**
- *
+ * Luodaan uutta vene has materiaalit vene id:n ja materiaalit id:n avulla.
+ * @param veneID
+ * @param materiaaliID 
  * @author s1300723
+ * @version 1.0
  */
 public class VeneHasMateriaali {
     private final int veneID;
@@ -17,44 +20,29 @@ public class VeneHasMateriaali {
         this.veneID = veneID;
         this.materiaaliID = materiaaliID;
     }
-
+    /**
+     * Palauttaa veneen ID:n.
+     *
+     * @return vene id
+     */
     public int getVeneID() {
         return veneID;
     }
-
+    /**
+     * Palauttaa materiaalin ID:n.
+     *
+     * @return materiaalit id
+     */
     public int getMateriaaliID() {
         return materiaaliID;
     }
-
+     /**
+     * Palauttaa vene has materiaalit kaikki tiedot.
+     *
+     * @return kaikki tiedot
+     */
     @Override
     public String toString() {
         return "VeneHasMateriaali{" + "veneID=" + veneID + ", materiaaliID=" + materiaaliID + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.veneID;
-        hash = 47 * hash + this.materiaaliID;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final VeneHasMateriaali other = (VeneHasMateriaali) obj;
-        if (this.veneID != other.veneID) {
-            return false;
-        }
-        if (this.materiaaliID != other.materiaaliID) {
-            return false;
-        }
-        return true;
-    }
-    
 }

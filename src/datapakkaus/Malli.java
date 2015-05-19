@@ -8,8 +8,10 @@ package datapakkaus;
 import java.util.Objects;
 
 /**
- *
- * @author s1300778
+ * Malli luokka. Jolla pidetään tietoja malleista.
+ * 
+ * @author s1300723
+ * version 1.0
  */
 public class Malli {
 
