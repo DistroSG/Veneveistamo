@@ -30,13 +30,14 @@ public class VeneTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT id, malli, takuu, hinta, alv FROM vene;";
+                String hakuSql = "SELECT vene.id, malliID, malli.malli, takuuID, hinta, alv FROM vene INNER JOIN malli ON vene.malliID=malli.id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
+                
 
                 while (tulosjoukko.next()) {
                     veneet.add(new Vene(tulosjoukko.getInt(1),
-                            tulosjoukko.getInt(2), tulosjoukko.getInt(3), tulosjoukko.getInt(4), tulosjoukko.getInt(5)));
+                            tulosjoukko.getInt(2), tulosjoukko.getString(3),tulosjoukko.getInt(4), tulosjoukko.getInt(5), tulosjoukko.getInt(6)));
 
                 }
 
@@ -68,12 +69,12 @@ public class VeneTietovarasto extends Tietovarasto {
         PreparedStatement lisayslause = null;
         try {
             String lisaaSql = "insert into vene"
-                    + "(id, malli, takuu, hinta, alv) values (?,?,?,?,?)";
+                    + "(id, malliID, takuuID, hinta, alv) values (?,?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiVene.getId());
-            lisayslause.setInt(2, uusiVene.getMalli());
-            lisayslause.setInt(3, uusiVene.getTakuu());
+            lisayslause.setInt(2, uusiVene.getMalliID());
+            lisayslause.setInt(3, uusiVene.getTakuuID());
             lisayslause.setInt(4, uusiVene.getHinta());
             lisayslause.setInt(5, uusiVene.getAlv());
             lisayslause.executeUpdate();
@@ -101,12 +102,12 @@ public class VeneTietovarasto extends Tietovarasto {
         try {
 
             String muutaSql = "update vene "
-                    + "set malli=?,takuu=?,hinta=?,alv=? "
+                    + "set malliID=?,takuuID=?,hinta=?,alv=? "
                     + "where id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
-            muutoslause.setInt(1, uusiVene.getMalli());
-            muutoslause.setInt(2, uusiVene.getTakuu());
+            muutoslause.setInt(1, uusiVene.getMalliID());
+            muutoslause.setInt(2, uusiVene.getTakuuID());
             muutoslause.setInt(3, uusiVene.getHinta());
             muutoslause.setInt(4, uusiVene.getAlv());
             muutoslause.setInt(5, uusiVene.getId());

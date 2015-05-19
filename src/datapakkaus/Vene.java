@@ -11,15 +11,17 @@ package datapakkaus;
  */
 public class Vene {
     private final int id;
-    private final int malli;
-    private final int takuu;
+    private final int malliID;
+    private final String malli;
+    private final int takuuID;
     private final int hinta;
     private final int alv;
 
-    public Vene(int id, int malli, int takuu, int hinta, int alv) {
+    public Vene(int id, int malliID, String malli, int takuuID, int hinta, int alv) {
         this.id = id;
+        this.malliID = malliID;
         this.malli = malli;
-        this.takuu = takuu;
+        this.takuuID = takuuID;
         this.hinta = hinta;
         this.alv = alv;
     }
@@ -28,12 +30,16 @@ public class Vene {
         return id;
     }
 
-    public int getMalli() {
+    public int getMalliID() {
+        return malliID;
+    }
+    
+    public String getMalli() {
         return malli;
     }
 
-    public int getTakuu() {
-        return takuu;
+    public int getTakuuID() {
+        return takuuID;
     }
 
     public int getHinta() {
@@ -46,6 +52,6 @@ public class Vene {
 
     @Override
     public String toString() {
-        return "Vene{" + "id=" + id + ", malli=" + malli + ", takuu=" + takuu + ", hinta=" + hinta + ", alv=" + alv + '}';
+        return "Vene{" + "id=" + id + ", malliID=" + malliID + ", takuuID=" + takuuID + ", hinta=" + hinta + ", alv=" + alv + '}';
     }
 }

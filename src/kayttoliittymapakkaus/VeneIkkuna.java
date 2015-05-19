@@ -24,6 +24,7 @@ public final class VeneIkkuna extends Ikkuna {
     public VeneIkkuna(String ikkunanNimi, String[] sarakenimet) {
         super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
+        syottopaneeli.setEditoitavissa(2, false);
     }
 
     /**
@@ -34,11 +35,11 @@ public final class VeneIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(arvot[0]);
-        int malli2 = Integer.parseInt(arvot[1]);
-        int takuu = Integer.parseInt(arvot[2]);
-        int hinta = Integer.parseInt(arvot[3]);
-        int alv = Integer.parseInt(arvot[4]);
-        rekisteri.muutaTietoja(new Vene(id, malli2, takuu, hinta, alv));
+        int malliID = Integer.parseInt(arvot[1]);
+        int takuuID = Integer.parseInt(arvot[3]);
+        int hinta = Integer.parseInt(arvot[4]);
+        int alv = Integer.parseInt(arvot[5]);
+        rekisteri.muutaTietoja(new Vene(id, malliID, arvot[2], takuuID, hinta, alv));
         paivitaValintaLista();
     }
 
@@ -60,11 +61,11 @@ public final class VeneIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int malli = Integer.parseInt(arvot[1]);
-            int takuu = Integer.parseInt(arvot[2]);
-            int hinta = Integer.parseInt(arvot[3]);
-            int alv = Integer.parseInt(arvot[4]);
-            rekisteri.lisaaTieto(new Vene(id, malli, takuu, hinta, alv));
+            int malliID = Integer.parseInt(arvot[1]);
+            int takuuID = Integer.parseInt(arvot[3]);
+            int hinta = Integer.parseInt(arvot[4]);
+            int alv = Integer.parseInt(arvot[5]);
+            rekisteri.lisaaTieto(new Vene(id, malliID, arvot[2], takuuID, hinta, alv));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -79,7 +80,7 @@ public final class VeneIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Vene vene : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(vene.getId(), vene.getMalli(), vene.getTakuu(), vene.getHinta(), vene.getAlv()));
+            malli.addRow(Arrays.asList(vene.getId(), vene.getMalliID(),vene.getMalli(), vene.getTakuuID(), vene.getHinta(), vene.getAlv()));
         }
     }
 

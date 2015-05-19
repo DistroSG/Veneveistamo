@@ -265,7 +265,7 @@ public abstract class Ikkuna extends JFrame {
 
             new VeneHasPerusvaritIkkuna("Vene Has Perusvarit", sarakenimet).setVisible(true);
         }else if (yhdistelmä.getSelectedItem() == "Vene") {
-            sarakenimet = new String[]{"VeneID", "Malli", "Takuu","Hinta","Alv"};
+            sarakenimet = new String[]{"Vene ID", "Malli ID", "Malli", "Takuu ID","Hinta","Alv"};
 
             new VeneIkkuna("Vene", sarakenimet).setVisible(true);
         }

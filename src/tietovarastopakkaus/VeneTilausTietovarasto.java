@@ -32,7 +32,8 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT venetilaus.id, vene_id, henkilosto_id, hinta, kuljetus_id,kuljetus.vastaanottaja , vari, edistyminen FROM venetilaus INNER JOIN kuljetus ON venetilaus.kuljetus_id=kuljetus.id;";
+                String hakuSql = "SELECT venetilaus.id, vene_id, henkilosto_id, hinta, kuljetus_id,kuljetus.vastaanottaja , "
+                        + "vari, edistyminen FROM venetilaus INNER JOIN kuljetus ON venetilaus.kuljetus_id=kuljetus.id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
