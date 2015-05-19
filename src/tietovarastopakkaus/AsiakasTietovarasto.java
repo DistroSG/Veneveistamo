@@ -26,7 +26,10 @@ public class AsiakasTietovarasto extends Tietovarasto {
         this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
                 "bb372d8eaf1594", "c887b8c8");
     }
-
+/**
+ * haeAsiakas Hakee kaikki tiedot asiakas taulusta.
+ * @return kaikki asiakas tiedot.
+ */
     public List<Asiakas> haeAsiakas() {
         List<Asiakas> asiakkaat = new ArrayList<Asiakas>();
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
@@ -63,7 +66,10 @@ public class AsiakasTietovarasto extends Tietovarasto {
         return asiakkaat;
     }
 
-
+/**
+ * lisaaAsiakas lisää asiakkaan asiakas kantaan.
+ * @param uusiasiakas, lisättävät osoitetiedot.
+ */
     public void lisaaAsiakas(Asiakas uusiasiakas) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
@@ -95,7 +101,10 @@ public class AsiakasTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * poistaAsiakas poistaa asiakkaan kannasta.
+ * @param id osoitteen id joka poistetaan.
+ */
     public void poistaAsiakas(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
@@ -115,7 +124,11 @@ public class AsiakasTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+/**
+ * muutaTietoja muuttaa asiakas tietoja.
+ * @param object
+ * @return palautta true, jos muuttaminen on onnistuttu.
+ */
     @Override
         public boolean muutaTietoja(Object object) {
         Asiakas Asiakas = (Asiakas) object;

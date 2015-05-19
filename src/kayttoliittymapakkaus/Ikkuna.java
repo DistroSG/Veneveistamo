@@ -243,7 +243,7 @@ public abstract class Ikkuna extends JFrame {
 
             new OsoiteIkkuna("Osoite", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Arvostelu") {
-            sarakenimet = new String[]{"ID", "AsiakasID", "Arvostelu", "Pikkuarvostelu"};
+            sarakenimet = new String[]{"Etunimi","Sukunimi","ID", "AsiakasID", "Arvostelu", "Pikkuarvostelu"};
 
             new ArvosteluIkkuna("Arvostelu", sarakenimet).setVisible(true);
         }else if (yhdistelmä.getSelectedItem() == "Ilmoitus") {

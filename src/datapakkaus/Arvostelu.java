@@ -9,70 +9,89 @@ public class Arvostelu {
     private final int asiakasid;
     private final String arvostelu;
     private final String pikkuarvostelu;
+    private final String etunimi;
+    private final String sukunimi;
 
-    public Arvostelu(int id, int asiakasid, String arvostelu, String pikkuarvostelu) {
+
+        /**
+     * Luodaan uutta arvostelua, id:n, asiakasid:n, arvostelun, pikkuarvostelun, etunimen ja sukunimen 
+     * avulla.
+     *
+     * @param id arvostelu id. Esim. "1"
+     * @param asiakasid asiakkaan ID. Esim. "1"
+     * @param arvostelu asiakkaan arvostelu. Esim. "Arvostelu teksti"
+     * @param pikkuarvostelu asiakkaan pieniarvostelu. Esim. "Pieniarvostelu 5/5"
+     * @param etunimi asiakkaan etunimi. Esim. "Pekka"
+     * @param sukunimi asiakkaan sukunimi. Esim. "Salainen"
+     */
+    public Arvostelu(int id, int asiakasid, String arvostelu, String pikkuarvostelu, String etunimi, String sukunimi) {
         this.id = id;
         this.asiakasid = asiakasid;
         this.arvostelu = arvostelu;
         this.pikkuarvostelu = pikkuarvostelu;
+        this.etunimi = etunimi;
+        this.sukunimi = sukunimi;
     }
 
+    
+    
+    /**
+     * Palauttaa arvostelun kaikki tiedot.
+     *
+     * @return kaikki tiedot
+     */
     @Override
     public String toString() {
-        return "Arvostelu{" + "id=" + id + ", asiakasid=" + asiakasid + ", arvostelu=" + arvostelu + ", pikkuarvostelu=" + pikkuarvostelu + '}';
+        return "Arvostelu{" + "id=" + id + ", asiakasid=" + asiakasid + ", arvostelu=" + arvostelu + ", pikkuarvostelu=" + pikkuarvostelu + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi + '}';
     }
-    
 
+    /**
+     * Palauttaa henkilön ID.
+     *
+     * @return ID
+     */
     public int getId() {
         return id;
     }
-
+  /**
+     * Palauttaa asiakas ID.
+     *
+     * @return asiakas ID
+     */
     public int getAsiakasid() {
         return asiakasid;
     }
-
+  /**
+     * Palauttaa arvostelun.
+     *
+     * @return arvostelu
+     */
     public String getArvostelu() {
         return arvostelu;
     }
-
+  /**
+     * Palauttaa pikkuarvostelun.
+     *
+     * @return pikkuarvostelu
+     */
     public String getPikkuarvostelu() {
         return pikkuarvostelu;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + this.asiakasid;
-        hash = 89 * hash + Objects.hashCode(this.arvostelu);
-        hash = 89 * hash + Objects.hashCode(this.pikkuarvostelu);
-        return hash;
+      /**
+     * Palauttaa etunimen.
+     *
+     * @return etunimi
+     */
+    public String getEtunimi() {
+        return etunimi;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Arvostelu other = (Arvostelu) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.asiakasid != other.asiakasid) {
-            return false;
-        }
-        if (!Objects.equals(this.arvostelu, other.arvostelu)) {
-            return false;
-        }
-        if (!Objects.equals(this.pikkuarvostelu, other.pikkuarvostelu)) {
-            return false;
-        }
-        return true;
+          /**
+     * Palauttaa sukunimen.
+     *
+     * @return sukunimi
+     */
+       public String getSukunimi() {
+        return sukunimi;
     }
-    
-    
     
 }

@@ -28,7 +28,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
 
         int id = Integer.parseInt(arvot[0]);
         int asiakasID = Integer.parseInt(arvot[1]);
-        rekisteri.muutaTietoja(new Arvostelu(id,asiakasID, arvot[2], arvot[3]));
+        rekisteri.muutaTietoja(new Arvostelu( id, asiakasID, arvot[2], arvot[3], arvot[4], arvot[5]));
         paivitaValintaLista();
     }
 
@@ -45,7 +45,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
         try {
             int id = Integer.parseInt(arvot[0]);
             int asiakasID = Integer.parseInt(arvot[1]);
-            rekisteri.lisaaArvostelu(new Arvostelu(id,asiakasID, arvot[2], arvot[3]));
+            rekisteri.lisaaArvostelu(new Arvostelu(id,asiakasID, arvot[2], arvot[3], arvot[4], arvot[5]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -53,10 +53,11 @@ public final class ArvosteluIkkuna extends Ikkuna {
             virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
         }
     }
+
 @Override
     public void haeKaikkiTiedot() {
         for (Arvostelu arvostelu : rekisteri.haeKaikkArvostelut()) {
-            malli.addRow(Arrays.asList(arvostelu.getId(), arvostelu.getAsiakasid(), arvostelu.getArvostelu(), arvostelu.getPikkuarvostelu()));
+            malli.addRow(Arrays.asList(arvostelu.getEtunimi(), arvostelu.getSukunimi(), arvostelu.getId(), arvostelu.getAsiakasid(), arvostelu.getArvostelu(), arvostelu.getPikkuarvostelu()));
         }
     }
 

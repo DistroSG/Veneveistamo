@@ -1,9 +1,9 @@
-
 package datapakkaus;
 
 import java.util.Objects;
 
 public class Osoite {
+
     private final int id;
     private final String katuosoite;
     private final String postinumero;
@@ -11,6 +11,17 @@ public class Osoite {
     private final String yrityksennimi;
     private final int venetilausid;
 
+    /**
+     * Luodaan uutta osoitetta, id:n, katuosoitteen, postinumeron, toimipaikan,
+     * yrityksennimen ja venetilausid:n avulla.
+     *
+     * @param id osoite id. Esim. "1"
+     * @param katuosoite katuosoite. Esim. "Hattulantie 2"
+     * @param postinumero postinumero. Esim. "00400"
+     * @param toimipaikka toimipaikka. Esim. "Helsinki"
+     * @param yrityksennimi yrityksennimi. Esim. ""
+     * @param venetilausid venetilausid. Esim. "1"
+     */
     public Osoite(int id, String katuosoite, String postinumero, String toimipaikka, String yrityksennimi, int venetilausid) {
         this.id = id;
         this.katuosoite = katuosoite;
@@ -19,83 +30,70 @@ public class Osoite {
         this.yrityksennimi = yrityksennimi;
         this.venetilausid = venetilausid;
     }
-
+   /**
+     * Palauttaa osoitteen ID.
+     *
+     * @return ID
+     */
     public int getId() {
         return id;
     }
-
+   /**
+     * Palauttaa katuosoitteen.
+     *
+     * @return katuosoite
+     */
     public String getKatuosoite() {
         return katuosoite;
     }
-
+   /**
+     * Palauttaa postinumeron.
+     *
+     * @return postinumero
+     */
     public String getPostinumero() {
         return postinumero;
     }
-
+   /**
+     * Palauttaa toimipaikan.
+     *
+     * @return toimipaikka
+     */
     public String getToimipaikka() {
         return toimipaikka;
     }
+<<<<<<< HEAD
 
     /**
      *
      * @return
+=======
+   /**
+     * Palauttaa yrityksennimen.
+     *
+     * @return yrityksennimi
+>>>>>>> origin/master
      */
     public String getYrityksennimi() {
         return yrityksennimi;
     }
-
+   /**
+     * Palauttaa venetilaus ID:n.
+     *
+     * @return venetilausid
+     */
     public int getVenetilausid() {
         return venetilausid;
     }
-
+    /**
+     * Palauttaa osoitteen kaikki tiedot.
+     *
+     * @return kaikki tiedot
+     */
     @Override
     public String toString() {
         return "Osoite{" + "id=" + id + ", katuosoite=" + katuosoite + ", postinumero=" + postinumero + ", toimipaikka=" + toimipaikka + ", yrityksennimi=" + yrityksennimi + ", venetilausid=" + venetilausid + '}';
     }
-    
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + Objects.hashCode(this.katuosoite);
-        hash = 23 * hash + Objects.hashCode(this.postinumero);
-        hash = 23 * hash + Objects.hashCode(this.toimipaikka);
-        hash = 23 * hash + Objects.hashCode(this.yrityksennimi);
-        hash = 23 * hash + this.venetilausid;
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Osoite other = (Osoite) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.katuosoite, other.katuosoite)) {
-            return false;
-        }
-        if (!Objects.equals(this.postinumero, other.postinumero)) {
-            return false;
-        }
-        if (!Objects.equals(this.toimipaikka, other.toimipaikka)) {
-            return false;
-        }
-        if (!Objects.equals(this.yrityksennimi, other.yrityksennimi)) {
-            return false;
-        }
-        if (this.venetilausid != other.venetilausid) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
 }
