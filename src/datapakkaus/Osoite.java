@@ -1,7 +1,5 @@
 package datapakkaus;
 
-import java.util.Objects;
-
 public class Osoite {
 
     private final int id;
@@ -62,17 +60,10 @@ public class Osoite {
     public String getToimipaikka() {
         return toimipaikka;
     }
-<<<<<<< HEAD
-
-    /**
-     *
-     * @return
-=======
    /**
      * Palauttaa yrityksennimen.
      *
      * @return yrityksennimi
->>>>>>> origin/master
      */
     public String getYrityksennimi() {
         return yrityksennimi;
