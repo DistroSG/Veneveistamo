@@ -9,21 +9,28 @@ public class Arvostelu {
     private final int asiakasid;
     private final String arvostelu;
     private final String pikkuarvostelu;
+    private final String etunimi;
+    private final String sukunimi;
+
 
         /**
-     * Luodaan uutta arvostelua, id:n, asiakasid:n, arvostelun ja pikkuarvostelun 
+     * Luodaan uutta arvostelua, id:n, asiakasid:n, arvostelun, pikkuarvostelun, etunimen ja sukunimen 
      * avulla.
      *
      * @param id arvostelu id. Esim. "1"
      * @param asiakasid asiakkaan ID. Esim. "1"
      * @param arvostelu asiakkaan arvostelu. Esim. "Arvostelu teksti"
      * @param pikkuarvostelu asiakkaan pieniarvostelu. Esim. "Pieniarvostelu 5/5"
+     * @param etunimi asiakkaan etunimi. Esim. "Pekka"
+     * @param sukunimi asiakkaan sukunimi. Esim. "Salainen"
      */
-    public Arvostelu(int id, int asiakasid, String arvostelu, String pikkuarvostelu) {
+    public Arvostelu(int id, int asiakasid, String arvostelu, String pikkuarvostelu, String etunimi, String sukunimi) {
         this.id = id;
         this.asiakasid = asiakasid;
         this.arvostelu = arvostelu;
         this.pikkuarvostelu = pikkuarvostelu;
+        this.etunimi = etunimi;
+        this.sukunimi = sukunimi;
     }
 
     
@@ -35,10 +42,10 @@ public class Arvostelu {
      */
     @Override
     public String toString() {
-        return "Arvostelu{" + "id=" + id + ", asiakasid=" + asiakasid + ", arvostelu=" + arvostelu + ", pikkuarvostelu=" + pikkuarvostelu + '}';
+        return "Arvostelu{" + "id=" + id + ", asiakasid=" + asiakasid + ", arvostelu=" + arvostelu + ", pikkuarvostelu=" + pikkuarvostelu + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi + '}';
     }
-    
-  /**
+
+    /**
      * Palauttaa henkilön ID.
      *
      * @return ID
@@ -49,7 +56,7 @@ public class Arvostelu {
   /**
      * Palauttaa asiakas ID.
      *
-     * @return ID
+     * @return asiakas ID
      */
     public int getAsiakasid() {
         return asiakasid;
@@ -57,7 +64,7 @@ public class Arvostelu {
   /**
      * Palauttaa arvostelun.
      *
-     * @return ID
+     * @return arvostelu
      */
     public String getArvostelu() {
         return arvostelu;
@@ -65,12 +72,26 @@ public class Arvostelu {
   /**
      * Palauttaa pikkuarvostelun.
      *
-     * @return ID
+     * @return pikkuarvostelu
      */
     public String getPikkuarvostelu() {
         return pikkuarvostelu;
     }
-
-   
+      /**
+     * Palauttaa etunimen.
+     *
+     * @return etunimi
+     */
+    public String getEtunimi() {
+        return etunimi;
+    }
+          /**
+     * Palauttaa sukunimen.
+     *
+     * @return sukunimi
+     */
+       public String getSukunimi() {
+        return sukunimi;
+    }
     
 }

@@ -37,7 +37,7 @@ public class ArvosteluTietovarasto {
             ResultSet tulosjoukko = null;
             try {
 
-                String hakuSql = "select id,asiakas_id,arvostelu,pikkuarvostelu from arvostelu";
+                String hakuSql = "select arvostelu.id,asiakas_id,arvostelu,pikkuarvostelu,etunimi,sukunimi from arvostelu inner join asiakas ON arvostelu.asiakas_id=asiakas.id";
 
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
@@ -46,7 +46,9 @@ public class ArvosteluTietovarasto {
                     arvostelut.add(new Arvostelu(tulosjoukko.getInt(1),
                             tulosjoukko.getInt(2),
                             tulosjoukko.getString(3),
-                            tulosjoukko.getString(4)));
+                            tulosjoukko.getString(4),
+                            tulosjoukko.getString(5),
+                            tulosjoukko.getString(6)));
                 }
 
             } catch (Exception e) {
