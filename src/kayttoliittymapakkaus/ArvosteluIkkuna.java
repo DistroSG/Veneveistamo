@@ -19,6 +19,8 @@ public final class ArvosteluIkkuna extends Ikkuna {
 
     public ArvosteluIkkuna(String ikkunanNimi, String[] columnNames) {
         super(ikkunanNimi, columnNames);
+         syottopaneeli.setEditoitavissa(4, false);
+         syottopaneeli.setEditoitavissa(5, false);
         haeKaikkiTiedot();
     }
   
@@ -57,7 +59,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
 @Override
     public void haeKaikkiTiedot() {
         for (Arvostelu arvostelu : rekisteri.haeKaikkArvostelut()) {
-            malli.addRow(Arrays.asList(arvostelu.getEtunimi(), arvostelu.getSukunimi(), arvostelu.getId(), arvostelu.getAsiakasid(), arvostelu.getArvostelu(), arvostelu.getPikkuarvostelu()));
+            malli.addRow(Arrays.asList( arvostelu.getId(), arvostelu.getAsiakasid(), arvostelu.getArvostelu(), arvostelu.getPikkuarvostelu(),arvostelu.getEtunimi(), arvostelu.getSukunimi()));
         }
     }
 
