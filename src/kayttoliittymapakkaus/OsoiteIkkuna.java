@@ -11,7 +11,7 @@ import tietovarastopakkaus.OsoiteTietovarasto;
 
 /**
  *
- * @author s1300778
+ * @author s1300776
  */
 public final class OsoiteIkkuna extends Ikkuna {
 

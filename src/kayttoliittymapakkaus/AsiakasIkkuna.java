@@ -12,7 +12,7 @@ import tietovarastopakkaus.AsiakasTietovarasto;
 
 /**
  *
- * @author s1300778
+ * @author s1300776
  */
 public final class AsiakasIkkuna extends Ikkuna {
 

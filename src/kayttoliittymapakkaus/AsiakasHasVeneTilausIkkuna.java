@@ -9,7 +9,7 @@ import tietovarastopakkaus.AsiakasHasVeneTilausTietovarasto;
  * HenkilostoHasTehtavaIkkuna luokka. Jolla asennetaan HenkilostoHasTehtava
  * ikkuna.
  *
- * @author s1300778
+ * @author s1300776
  * @version 1.0
  */
 public final class AsiakasHasVeneTilausIkkuna extends Ikkuna {
