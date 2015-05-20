@@ -50,7 +50,7 @@ public final class OsoiteIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("Numeroiden pitää olla kokonaislukuja");
         }
     }
 

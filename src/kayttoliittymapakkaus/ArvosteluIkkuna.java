@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kayttoliittymapakkaus;
 
 import datapakkaus.Arvostelu;
@@ -11,7 +7,7 @@ import tietovarastopakkaus.ArvosteluTietovarasto;
 
 /**
  *
- * @author s1300778
+ * @author s1300776
  */
 public final class ArvosteluIkkuna extends Ikkuna {
 
@@ -52,7 +48,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("Numeroiden pitää olla kokonaislukuja");
         }
     }
 

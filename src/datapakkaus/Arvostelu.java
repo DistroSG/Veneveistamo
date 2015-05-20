@@ -1,9 +1,6 @@
 
 package datapakkaus;
 
-import java.util.Objects;
-
-
 public class Arvostelu {
     private final int id;
     private final int asiakasid;

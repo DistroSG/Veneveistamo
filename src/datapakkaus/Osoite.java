@@ -10,7 +10,7 @@ public class Osoite {
     private final int venetilausid;
 
     /**
-     * Luodaan uutta osoitetta, id:n, katuosoitteen, postinumeron, toimipaikan,
+     * Luodaan uutta osoitetta  id:n, katuosoitteen, postinumeron, toimipaikan,
      * yrityksennimen ja venetilausid:n avulla.
      *
      * @param id osoite id. Esim. "1"

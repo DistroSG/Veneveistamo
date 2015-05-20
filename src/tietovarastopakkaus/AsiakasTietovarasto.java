@@ -67,8 +67,8 @@ public class AsiakasTietovarasto extends Tietovarasto {
     }
 
 /**
- * lisaaAsiakas lisää asiakkaan asiakas kantaan.
- * @param uusiasiakas, lisättävät osoitetiedot.
+ * lisaaAsiakas lisää asiakkaan kantaan.
+ * @param uusiasiakas, lisättävät asiakas.
  */
     public void lisaaAsiakas(Asiakas uusiasiakas) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
@@ -103,7 +103,7 @@ public class AsiakasTietovarasto extends Tietovarasto {
     }
 /**
  * poistaAsiakas poistaa asiakkaan kannasta.
- * @param id osoitteen id joka poistetaan.
+ * @param id asiakkaan id joka poistetaan.
  */
     public void poistaAsiakas(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

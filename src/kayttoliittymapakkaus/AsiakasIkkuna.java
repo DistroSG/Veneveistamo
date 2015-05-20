@@ -49,7 +49,7 @@ public final class AsiakasIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("Numeroiden pitää olla kokonaislukuja");
         }
     }
 
