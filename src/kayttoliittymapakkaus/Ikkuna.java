@@ -512,10 +512,10 @@ public abstract class Ikkuna extends JFrame {
     }
 
     private void asennaTaulukkoTyylit(String[] sarakeNimet) {
-        taulukko.setShowVerticalLines(false);
         for (int i = 0; i < sarakeNimet.length; i++) {
             TableColumn column = taulukko.getColumnModel().getColumn(i);
             column.setHeaderRenderer(new HeaderRenderer());
+
         }
 
         vieritettavaRuutu.setBorder(BorderFactory.createEmptyBorder());

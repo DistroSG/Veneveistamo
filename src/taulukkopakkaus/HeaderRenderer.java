@@ -30,6 +30,8 @@ public class HeaderRenderer extends JLabel implements TableCellRenderer {
         setText(value.toString());
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.gray));
+        setBackground(Color.LIGHT_GRAY);
+        setOpaque(true);
         if (this instanceof JLabel) {
             JLabel label = (JLabel) this;
             label.setIcon(getSortIcon(table, col));
