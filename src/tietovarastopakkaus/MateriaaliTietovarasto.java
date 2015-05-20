@@ -14,11 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * MateriaaliTietovarasto luokka. Jonka avulla saadaan tietokantayhteys ja tiedot
+ * VeneHasMateriaali taulukkoon.
  *
- * @author s1300778
+ * @author s1300723
+ * @version 1.0
  */
 public class MateriaaliTietovarasto extends Tietovarasto {
 
+      /**
+     * Palautta kaikki materiaalien tiedot.
+     *
+     * @return kaikki materiaalien tiedot.
+     */
     @Override
     public List<Materiaali> haeTiedot() {
         List<Materiaali> materiaalit = new ArrayList<>();
@@ -45,7 +53,11 @@ public class MateriaaliTietovarasto extends Tietovarasto {
         }
         return materiaalit;
     }
-
+    /**
+     * Lisätä uusi materiaali.
+     *
+     * @param object materiaali, joka lisätään.
+     */
     @Override
     public void lisaaTieto(Object object) {
         Materiaali uusiMateriaali = (Materiaali) object;
@@ -71,7 +83,12 @@ public class MateriaaliTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+    /**
+     * Muuta materiaalien tiedot.
+     *
+     * @param object materiaali, joka muutetaan.
+     * @return palauttaa true, jos muuttaminen on onnistunut.
+     */
     @Override
     public boolean muutaTietoja(Object object) {
         Materiaali uusiMateriaali = (Materiaali) object;
@@ -100,7 +117,11 @@ public class MateriaaliTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+    /**
+     * Poista materiaali.
+     *
+     * @param MateriaaliID poistettavan materiaalin id. Esim. "1"
+     */
     @Override
     public void poistaTieto(int MateriaaliID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

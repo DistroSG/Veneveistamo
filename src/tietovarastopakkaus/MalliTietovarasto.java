@@ -14,11 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * MalliTietovarasto luokka. Jonka avulla saadaan tietokantayhteys ja tiedot
+ * Vene taulukkoon.
  *
- * @author s1300778
+ * @author s1300723
+ * @version 1.0
  */
 public class MalliTietovarasto extends Tietovarasto {
 
+      /**
+     * Palautta kaikki mallien tiedot.
+     *
+     * @return kaikki mallien tiedot.
+     */
     @Override
     public List<Malli> haeTiedot() {
         List<Malli> mallit = new ArrayList<>();
@@ -45,7 +53,11 @@ public class MalliTietovarasto extends Tietovarasto {
         }
         return mallit;
     }
-
+    /**
+     * Lisätä uusi malli.
+     *
+     * @param object malli, joka lisätään.
+     */
     @Override
     public void lisaaTieto(Object object) {
         Malli uusiMalli = (Malli) object;
@@ -72,7 +84,12 @@ public class MalliTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+    /**
+     * Muuta mallien tiedot.
+     *
+     * @param object malli, joka muutetaan.
+     * @return palauttaa true, jos muuttaminen on onnistunut.
+     */
     @Override
     public boolean muutaTietoja(Object object) {
         Malli uusiMalli = (Malli) object;
@@ -102,7 +119,11 @@ public class MalliTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+    /**
+     * Poista malli.
+     *
+     * @param MalliID poistettavan mallin id. Esim. "1"
+     */
     @Override
     public void poistaTieto(int MalliID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

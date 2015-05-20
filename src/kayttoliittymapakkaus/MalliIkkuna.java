@@ -8,20 +8,30 @@ package kayttoliittymapakkaus;
 import datapakkaus.Malli;
 import java.util.Arrays;
 import tietovarastopakkaus.MalliTietovarasto;
-
 /**
+ * MalliIkkuna luokka. Jolla asennetaan Malli
+ * ikkuna.
  *
- * @author s1300778
+ * @author s1300723
+ * @version 1.0
  */
 public final class MalliIkkuna extends Ikkuna {
 
     private final MalliTietovarasto rekisteri = new MalliTietovarasto();
-
-    public MalliIkkuna(String ikkunanNimi, String[] columnNames) {
-        super(ikkunanNimi, columnNames);
+    /**
+     * Luoda uusi Malli ikkuna otsikon, sarakenimien ja
+     * yhdistelmäIndeksen avulla
+     *
+     * @param ikkunanNimi ikunan nimi
+     * @param sarakenimet taulokon sarakenimet
+     */
+    public MalliIkkuna(String ikkunanNimi, String[] sarakenimet) {
+        super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
     }
-
+    /**
+     * Suorita muutos
+     */
     @Override
     public void suoritaMuutos() {
         arvot = syottopaneeli.getArvot();
@@ -33,13 +43,18 @@ public final class MalliIkkuna extends Ikkuna {
 
     }
 
+    /**
+     * Suorita poisto
+     */
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
-
+    /**
+     * Suorita lisäys
+     */
     @Override
     public void suoritaLisays() {
         arvot = syottopaneeli.getArvot();
@@ -55,6 +70,9 @@ public final class MalliIkkuna extends Ikkuna {
         }
     }
 
+    /**
+     * Hae kaikki tiedot
+     */
     @Override
     public void haeKaikkiTiedot() {
         for (Malli malli1 : rekisteri.haeTiedot()) {

@@ -5,58 +5,49 @@
  */
 package datapakkaus;
 
-import java.util.Objects;
-
 /**
- *
+ * Materiaali luokka. Jolla pidetään tietoja materiaaleista.
+ * 
  * @author s1300723
+ * version 1.0
  */
 public class Materiaali {
     private final String materiaali;
     private final int id;
-
+    /**
+     * Luoda uutta mallin id:n, sukunimen, etunimen, osaston ja toimistoID:n
+     * avulla.
+     *
+     * @param id Mallin id. Esim. "1"
+     * @param materiaali Mallin malli. Esim. "Puuvene"
+     */
     public Materiaali(String materiaali, int id) {
         this.materiaali = materiaali;
         this.id = id;
     }
-
+    /**
+     * Palauttaa Materiaalin.
+     *
+     * @return Materiaali
+     */
     public String getMateriaali() {
         return materiaali;
     }
-
+    /**
+     * Palauttaa Materiaalin ID.
+     *
+     * @return ID
+     */
     public int getId() {
         return id;
     }
-
+    /**
+     * Palauttaa materiaalin kaikki tiedot.
+     *
+     * @return kaikki tiedot
+     */
     @Override
     public String toString() {
         return "Materiaali{" + "materiaali=" + materiaali + ", id=" + id + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.materiaali);
-        hash = 97 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Materiaali other = (Materiaali) obj;
-        if (!Objects.equals(this.materiaali, other.materiaali)) {
-            return false;
-        }
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
 }

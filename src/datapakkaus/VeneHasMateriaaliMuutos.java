@@ -1,7 +1,7 @@
 package datapakkaus;
 
 /**
- * VeneHasMateriaaliMuutos luokka. Jolla pidetään uusi ja vanha henkilön
+ * VeneHasMateriaaliMuutos luokka. Jolla pidetään uusi ja vanha veneen
  * tehtävät muutoksen varten.
  *
  * @author s1300723
@@ -13,7 +13,7 @@ public class VeneHasMateriaaliMuutos {
     private final VeneHasMateriaali uusi;
 
     /**
-     * Luoda luokka, jossa on uusi ja vanha henkilön tehtävät kahden
+     * Luoda luokka, jossa on uusi ja vanha veneen tehtävät kahden
      * VeneHasMateriaali luokan avulla.
      *
      * @param uusi luokka, jossa on uudet tiedot.
