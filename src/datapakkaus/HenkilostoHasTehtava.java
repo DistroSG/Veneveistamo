@@ -10,18 +10,24 @@ package datapakkaus;
 public class HenkilostoHasTehtava {
 
     private final int henkilostoID;
+    private final String henkilonNimi;
     private final int tehtavaID;
+    private final String tehtava;
 
     /**
      *
      * Luoda uutta yhdistys henkilostoID:n ja toimistoID:n avulla.
      *
      * @param henkilostoID henkilön id. Esim. "1"
+     * @param henkilonNimi henkilön nimi Esim. "Virtanen Pekka"
      * @param tehtavaID tehtävän id. Esim. "1"
+     * @param Tehtava tehtävä. Esim "Pääinsinööri"
      */
-    public HenkilostoHasTehtava(int henkilostoID, int tehtavaID) {
+    public HenkilostoHasTehtava(int henkilostoID, String henkilonNimi, int tehtavaID, String Tehtava) {
         this.henkilostoID = henkilostoID;
+        this.henkilonNimi = henkilonNimi;
         this.tehtavaID = tehtavaID;
+        this.tehtava = Tehtava;
     }
 
     /**
@@ -43,13 +49,31 @@ public class HenkilostoHasTehtava {
     }
 
     /**
+     * Palauttaa Henkilön nimi.
+     *
+     * @return henkilonNimi
+     */
+    public String getHenkilonNimi() {
+        return henkilonNimi;
+    }
+
+    /**
+     * Palauttaa tehtävä.
+     *
+     * @return Tehtava
+     */
+    public String getTehtava() {
+        return tehtava;
+    }
+
+    /**
      * Palauttaa henkilostoHasTehtava kaikki tiedot.
      *
      * @return kaikki tiedot
      */
     @Override
     public String toString() {
-        return "HenkilostoHasTehtava{" + "henkilostoID=" + henkilostoID + ", tehtavaID=" + tehtavaID + '}';
+        return "HenkilostoHasTehtava{" + "henkilostoID=" + henkilostoID + ", henkilonNimi=" + henkilonNimi + ", tehtavaID=" + tehtavaID + ", tehtava=" + tehtava + '}';
     }
 
 }

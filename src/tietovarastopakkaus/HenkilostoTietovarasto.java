@@ -30,13 +30,14 @@ public class HenkilostoTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT id, sukunimi, etunimi, osasto, toimisto_id FROM henkilosto;";
+                String hakuSql = "SELECT henkilosto.id, henkilosto.sukunimi, henkilosto.etunimi, henkilosto.osasto, henkilosto.toimisto_id, toimisto.katuosoite FROM veneveistamo.henkilosto"
+                        + " JOIN veneveistamo.toimisto ON toimisto.id = henkilosto.toimisto_id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
                 while (tulosjoukko.next()) {
                     henkilot.add(new Henkilosto(tulosjoukko.getInt(1),
-                            tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getString(4), tulosjoukko.getInt(5)));
+                            tulosjoukko.getString(2), tulosjoukko.getString(3), tulosjoukko.getString(4), tulosjoukko.getInt(5), tulosjoukko.getString(6)));
                 }
             } catch (SQLException ex) {
                 if (ex.getErrorCode() == 1062) {

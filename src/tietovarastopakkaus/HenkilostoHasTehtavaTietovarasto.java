@@ -31,13 +31,16 @@ public class HenkilostoHasTehtavaTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT henkilosto_id, tehtava_id FROM henkilosto_has_tehtava;";
+                String hakuSql = "SELECT henkilosto_has_tehtava.henkilosto_id,  CONCAT(henkilosto.sukunimi, \" \" , henkilosto.etunimi) AS Nimi , henkilosto_has_tehtava.tehtava_id, tehtava.tehtava FROM veneveistamo.henkilosto_has_tehtava\n"
+                        + "Join veneveistamo.henkilosto on henkilosto.id = henkilosto_has_tehtava.henkilosto_id\n"
+                        + "Join veneveistamo.tehtava on tehtava.id = henkilosto_has_tehtava.tehtava_id "
+                        + "ORDER BY henkilosto_has_tehtava.henkilosto_id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
                 while (tulosjoukko.next()) {
-                    haeHenkilostoHasTehtava.add(new HenkilostoHasTehtava(tulosjoukko.getInt(1),
-                            tulosjoukko.getInt(2)));
+                    haeHenkilostoHasTehtava.add(new HenkilostoHasTehtava(tulosjoukko.getInt(1), tulosjoukko.getString(2),
+                            tulosjoukko.getInt(3), tulosjoukko.getString(4)));
                 }
             } catch (Exception e) {
             } finally {

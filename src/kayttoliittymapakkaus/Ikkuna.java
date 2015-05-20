@@ -77,7 +77,7 @@ public abstract class Ikkuna extends JFrame {
      */
     protected String[] arvot;
     private String[] sarakenimet;
-    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu","Ilmoitus", "Vene Has Materiaali", "Vene Has Perusvarit","Vene", "Asiakas Has VeneTilaus"};
+    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu", "Ilmoitus", "Vene Has Materiaali", "Vene Has Perusvarit", "Vene", "Asiakas Has VeneTilaus"};
     private final SortedComboBoxModel<String> comboboxModel = new SortedComboBoxModel<>(comboboxItems);
     private final JComboBox<String> yhdistelmä = new JComboBox<>(comboboxModel);
 
@@ -188,7 +188,7 @@ public abstract class Ikkuna extends JFrame {
     private void kasitteleValinta() {
         if (yhdistelmä.getSelectedItem() == "Puhelinnumero") {
 
-            sarakenimet = new String[]{"ID", "Puhelinnumero", "Toimisto ID"};
+            sarakenimet = new String[]{"ID", "Puhelinnumero", "Toimisto ID", "Toimiston katuosoite"};
             new PuhelinumeroIkkuna("Puhelinnumero", sarakenimet).setVisible(true);
 
         } else if (yhdistelmä.getSelectedItem() == "Toimisto") {
@@ -197,7 +197,7 @@ public abstract class Ikkuna extends JFrame {
             new ToimistoIkkuna("Toimisto", sarakenimet).setVisible(true);
 
         } else if (yhdistelmä.getSelectedItem() == "Henkilöstö") {
-            sarakenimet = new String[]{"ID", "Sukunimi", "Etunimi", "Osasto", "Toimisto ID"};
+            sarakenimet = new String[]{"ID", "Sukunimi", "Etunimi", "Osasto", "Toimisto ID", "Toimiston katuosoite"};
 
             new HenkilostoIkkuna("Henkilöstö", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Tehtävä") {
@@ -205,7 +205,7 @@ public abstract class Ikkuna extends JFrame {
 
             new TehtavaIkkuna("Tehtävä", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Henkilöstö has tehtävä") {
-            sarakenimet = new String[]{"Henkilöstö ID", "Tehtävä ID"};
+            sarakenimet = new String[]{"Henkilöstö ID", "Henkilön nimi", "Tehtävä ID", "Tehtävä"};
 
             new HenkilostoHasTehtavaIkkuna("Henkilöstö has tehtävä", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Maksu") {
@@ -226,7 +226,7 @@ public abstract class Ikkuna extends JFrame {
 
             new AsiakasIkkuna("Asiakas", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Vene Tilaus") {
-            sarakenimet = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID","Vastaanottaja", "Väri", "Edistyminen"};
+            sarakenimet = new String[]{"ID", "Vene ID", "Henkilöstö ID", "Hinta", "Kuljetus ID", "Vastaanottaja", "Väri", "Edistyminen"};
 
             new VeneTilausIkkuna("Vene Tilaus", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Malli") {
@@ -243,29 +243,29 @@ public abstract class Ikkuna extends JFrame {
 
             new OsoiteIkkuna("Osoite", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Arvostelu") {
-            sarakenimet = new String[]{"ID", "AsiakasID", "Arvostelu", "Pikkuarvostelu","Etunimi","Sukunimi"};
+            sarakenimet = new String[]{"ID", "AsiakasID", "Arvostelu", "Pikkuarvostelu", "Etunimi", "Sukunimi"};
 
             new ArvosteluIkkuna("Arvostelu", sarakenimet).setVisible(true);
-        }else if (yhdistelmä.getSelectedItem() == "Ilmoitus") {
+        } else if (yhdistelmä.getSelectedItem() == "Ilmoitus") {
             sarakenimet = new String[]{"ID", "Ilmoitus", "Hinta", "VeneTilaus ID"};
 
             new IlmoitusIkkuna("Ilmoitus", sarakenimet).setVisible(true);
-        }else if (yhdistelmä.getSelectedItem() == "Vene Has Materiaali") {
+        } else if (yhdistelmä.getSelectedItem() == "Vene Has Materiaali") {
             sarakenimet = new String[]{"VeneID", "MateriaaliID"};
 
             new VeneHasMateriaaliIkkuna("Vene Has Materiaali", sarakenimet).setVisible(true);
 
-        }else if (yhdistelmä.getSelectedItem() == "Asiakas Has VeneTilaus") {
+        } else if (yhdistelmä.getSelectedItem() == "Asiakas Has VeneTilaus") {
             sarakenimet = new String[]{"AsiakasID", "VeneTilausID"};
 
             new AsiakasHasVeneTilausIkkuna("Asiakas Has VeneTilaus", sarakenimet).setVisible(true);
 
-        }else if (yhdistelmä.getSelectedItem() == "Vene Has Perusvarit") {
+        } else if (yhdistelmä.getSelectedItem() == "Vene Has Perusvarit") {
             sarakenimet = new String[]{"VeneID", "PerusvaritID"};
 
             new VeneHasPerusvaritIkkuna("Vene Has Perusvarit", sarakenimet).setVisible(true);
-        }else if (yhdistelmä.getSelectedItem() == "Vene") {
-            sarakenimet = new String[]{"Vene ID", "Malli ID", "Malli", "Takuu ID","Hinta","Alv"};
+        } else if (yhdistelmä.getSelectedItem() == "Vene") {
+            sarakenimet = new String[]{"Vene ID", "Malli ID", "Malli", "Takuu ID", "Hinta", "Alv"};
 
             new VeneIkkuna("Vene", sarakenimet).setVisible(true);
         }

@@ -23,6 +23,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
      */
     public HenkilostoIkkuna(String ikkunanNimi, String[] sarakenimet) {
         super(ikkunanNimi, sarakenimet);
+        syottopaneeli.setEditoitavissa(5, false);
         haeKaikkiTiedot();
     }
 
@@ -35,7 +36,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
 
         int id = Integer.parseInt(arvot[0]);
         int toimistoID = Integer.parseInt(arvot[4]);
-        rekisteri.muutaTietoja(new Henkilosto(id, arvot[1], arvot[2], arvot[3], toimistoID));
+        rekisteri.muutaTietoja(new Henkilosto(id, arvot[1], arvot[2], arvot[3], toimistoID, arvot[5]));
         paivitaValintaLista();
     }
 
@@ -58,7 +59,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
         try {
             int id = Integer.parseInt(arvot[0]);
             int toimistoID = Integer.parseInt(arvot[4]);
-            rekisteri.lisaaTieto(new Henkilosto(id, arvot[1], arvot[2], arvot[3], toimistoID));
+            rekisteri.lisaaTieto(new Henkilosto(id, arvot[1], arvot[2], arvot[3], toimistoID, arvot[5]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -73,7 +74,7 @@ public final class HenkilostoIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Henkilosto henkilo : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(henkilo.getId(), henkilo.getSukunimi(), henkilo.getEtunimi(), henkilo.getOsasto(), henkilo.getToimistoID()));
+            malli.addRow(Arrays.asList(henkilo.getId(), henkilo.getSukunimi(), henkilo.getEtunimi(), henkilo.getOsasto(), henkilo.getToimistoID(), henkilo.getToimistoKatuosoite()));
         }
     }
 

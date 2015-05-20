@@ -23,6 +23,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
           */
     public PuhelinumeroIkkuna(String ikkunanNimi, String[] sarakenimet) {
         super(ikkunanNimi, sarakenimet);
+        syottopaneeli.setEditoitavissa(3, false);
         haeKaikkiTiedot();
     }
 
@@ -36,7 +37,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
         int id = Integer.parseInt(arvot[0]);
         int puhelinumero = Integer.parseInt(arvot[1]);
         int toimistoID = Integer.parseInt(arvot[2]);
-        rekisteri.muutaTietoja(new Puhelinnumero(id, puhelinumero, toimistoID));
+        rekisteri.muutaTietoja(new Puhelinnumero(id, puhelinumero, toimistoID, arvot[3]));
         paivitaValintaLista();
 
     }
@@ -61,7 +62,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
             int id = Integer.parseInt(arvot[0]);
             int puhelinnumero = Integer.parseInt(arvot[1]);
             int toimistoID = Integer.parseInt(arvot[2]);
-            rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinnumero, toimistoID));
+            rekisteri.lisaaTieto(new Puhelinnumero(id, puhelinnumero, toimistoID, arvot[3]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -76,7 +77,7 @@ public final class PuhelinumeroIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Puhelinnumero puhelinumero : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID()));
+            malli.addRow(Arrays.asList(puhelinumero.getId(), puhelinumero.getPuhelinnumero(), puhelinumero.getToimistoID(), puhelinumero.getToimistoKatuosoite()));
         }
     }
 

@@ -92,7 +92,7 @@ public abstract class Tietovarasto {
      *
      * @param viesti virhen teksti.
      */
-    protected void virhe(String viesti) {
+    protected static void virhe(String viesti) {
         JOptionPane.showMessageDialog(null,
                 viesti, "Virhe", JOptionPane.ERROR_MESSAGE);
     }
@@ -100,7 +100,7 @@ public abstract class Tietovarasto {
     /**
      * Virhe joka ilmoitta, että "ID on jo olemassa!"
      */
-    protected void idVirheIlmoitus() {
+    protected static void idVirheIlmoitus() {
         JOptionPane.showMessageDialog(null,
                 "ID on jo olemassa!", "Virhe", JOptionPane.ERROR_MESSAGE);
     }
