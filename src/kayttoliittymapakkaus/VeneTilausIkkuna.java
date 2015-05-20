@@ -30,7 +30,7 @@ public final class VeneTilausIkkuna extends Ikkuna {
             int id = Integer.parseInt(arvot[0]);
             int vene_id = Integer.parseInt(arvot[1]);
             int henkilosto_id = Integer.parseInt(arvot[2]);
-            double hinta = Double.parseDouble(arvot[3]);
+            double hinta = Integer.parseInt(arvot[3]);
             int kuljetus_id = Integer.parseInt(arvot[4]);
             rekisteri.lisaaTieto(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6], arvot[7]));
             syottopaneeli.tyhjennaKentat();
@@ -48,7 +48,7 @@ public final class VeneTilausIkkuna extends Ikkuna {
         int id = Integer.parseInt(arvot[0]);
         int vene_id = Integer.parseInt(arvot[1]);
         int henkilosto_id = Integer.parseInt(arvot[2]);
-        double hinta = Double.parseDouble(arvot[3]);
+        double hinta = Integer.parseInt(arvot[3]);
         int kuljetus_id = Integer.parseInt(arvot[4]);
         rekisteri.muutaTietoja(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6], arvot[7]));
         paivitaValintaLista();

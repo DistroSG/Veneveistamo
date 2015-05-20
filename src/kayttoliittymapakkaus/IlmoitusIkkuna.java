@@ -28,7 +28,7 @@ public class IlmoitusIkkuna extends Ikkuna{
                 arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            double hinta = Double.parseDouble(arvot[2]);
+            double hinta = Integer.parseInt(arvot[2]);
             int veneTilaus_id = Integer.parseInt(arvot[3]);
             
             rekisteri.lisaaTieto(new Ilmoitus(id, arvot[1], hinta, veneTilaus_id));
@@ -46,7 +46,7 @@ public class IlmoitusIkkuna extends Ikkuna{
 
             int id = Integer.parseInt(arvot[0]);
             int veneTilaus_id = Integer.parseInt(arvot[3]);
-            double hinta = Double.parseDouble(arvot[2]);
+            double hinta = Integer.parseInt(arvot[2]);
             rekisteri.lisaaTieto(new Ilmoitus(id, arvot[1], hinta, veneTilaus_id));
         paivitaValintaLista();
     }
