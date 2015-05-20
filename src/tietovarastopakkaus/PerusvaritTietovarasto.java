@@ -13,10 +13,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * PerusvaritTietovarasto luokka. Jonka avulla saadaan tietokantayhteys ja tiedot
+ * VeneHasPerusvarit taulukkoon.
+ *
+ * @author s1300723
+ * @version 1.0
+ */
 public class PerusvaritTietovarasto extends Tietovarasto {
 
-  
+      /**
+     * Palautta kaikki perusvarien tiedot.
+     *
+     * @return kaikki perusvarien tiedot.
+     */
     @Override
     public List<Perusvarit> haeTiedot() {
         List<Perusvarit> perusvarit = new ArrayList<>();
@@ -43,7 +53,11 @@ public class PerusvaritTietovarasto extends Tietovarasto {
         }
         return perusvarit;
     }
-
+    /**
+     * Lisätä uusi perusvari.
+     *
+     * @param object perusvari, joka lisätään.
+     */
     @Override
     public void lisaaTieto(Object object) {
         Perusvarit uusiPerusvari = (Perusvarit) object;
@@ -69,7 +83,12 @@ public class PerusvaritTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+    /**
+     * Muuta perusvarin tiedot.
+     *
+     * @param object perusvari, joka muutetaan.
+     * @return palauttaa true, jos muuttaminen on onnistunut.
+     */
     @Override
     public boolean muutaTietoja(Object object) {
         Perusvarit uusiPerusvari = (Perusvarit) object;
@@ -98,7 +117,11 @@ public class PerusvaritTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-
+    /**
+     * Poista perusvari.
+     *
+     * @param PerusvariID poistettavan perusvarin id. Esim. "1"
+     */
     @Override
     public void poistaTieto(int PerusvariID) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);

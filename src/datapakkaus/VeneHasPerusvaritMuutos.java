@@ -1,7 +1,7 @@
 package datapakkaus;
 
 /**
- * VeneHasPerusvaritMuutos luokka. Jolla pidetään uusi ja vanha henkilön
+ * VeneHasPerusvaritMuutos luokka. Jolla pidetään uusi ja vanha veneen
  * tehtävät muutoksen varten.
  *
  * @author s1300723
@@ -13,7 +13,7 @@ public class VeneHasPerusvaritMuutos {
     private final VeneHasPerusvarit uusi;
 
     /**
-     * Luoda luokka, jossa on uusi ja vanha henkilön tehtävät kahden
+     * Luoda luokka, jossa on uusi ja vanha veneen tehtävät kahden
      * VeneHasPerusvarit luokan avulla.
      *
      * @param uusi luokka, jossa on uudet tiedot.

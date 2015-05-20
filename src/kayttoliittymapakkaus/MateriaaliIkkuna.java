@@ -8,21 +8,30 @@ package kayttoliittymapakkaus;
 import datapakkaus.Materiaali;
 import java.util.Arrays;
 import tietovarastopakkaus.MateriaaliTietovarasto;
-
-
 /**
+ * MateriaaliIkkuna luokka. Jolla asennetaan Materiaali
+ * ikkuna.
  *
- * @author s1300778
+ * @author s1300723
+ * @version 1.0
  */
 public final class MateriaaliIkkuna extends Ikkuna {
     
     private final MateriaaliTietovarasto rekisteri = new MateriaaliTietovarasto();
-
-    public MateriaaliIkkuna(String ikkunanNimi, String[] columnNames) {
-        super(ikkunanNimi, columnNames);
+    /**
+     * Luoda uusi Materiaali ikkuna otsikon, sarakenimien ja
+     * yhdistelmäIndeksen avulla
+     *
+     * @param ikkunanNimi ikunan nimi
+     * @param sarakenimet taulokon sarakenimet
+     */
+    public MateriaaliIkkuna(String ikkunanNimi, String[] sarakenimet) {
+        super(ikkunanNimi, sarakenimet);
         haeKaikkiTiedot();
     }
-
+    /**
+     * Suorita muutos
+     */
     @Override
     public void suoritaMuutos() {
         arvot = syottopaneeli.getArvot();
@@ -32,13 +41,18 @@ public final class MateriaaliIkkuna extends Ikkuna {
         paivitaValintaLista();
     }
 
+    /**
+     * Suorita poisto
+     */
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
         rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
-
+    /**
+     * Suorita lisäys
+     */
     @Override
     public void suoritaLisays() {
         arvot = syottopaneeli.getArvot();
@@ -49,10 +63,13 @@ public final class MateriaaliIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("ElokuvaNro:n ja vuoden pitää olla kokonaislukuja");
+            virhe("ID:n pitää olla kokonaisluku");
         }
     }
 
+    /**
+     * Hae kaikki tiedot
+     */
     @Override
     public void haeKaikkiTiedot() {
         for (Materiaali materiaali : rekisteri.haeTiedot()) {
