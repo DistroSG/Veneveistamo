@@ -19,6 +19,7 @@ public final class VeneTilausIkkuna extends Ikkuna {
 
     public VeneTilausIkkuna(String ikkunanNimi, String[] columnNames) {
         super(ikkunanNimi, columnNames);
+        syottopaneeli.setEditoitavissa(5, false);
         haeKaikkiTiedot();
     }
 
@@ -31,7 +32,7 @@ public final class VeneTilausIkkuna extends Ikkuna {
             int henkilosto_id = Integer.parseInt(arvot[2]);
             double hinta = Integer.parseInt(arvot[3]);
             int kuljetus_id = Integer.parseInt(arvot[4]);
-            rekisteri.lisaaTieto(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6],arvot[7]));
+            rekisteri.lisaaTieto(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6], arvot[7]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -49,7 +50,7 @@ public final class VeneTilausIkkuna extends Ikkuna {
         int henkilosto_id = Integer.parseInt(arvot[2]);
         double hinta = Integer.parseInt(arvot[3]);
         int kuljetus_id = Integer.parseInt(arvot[4]);
-        rekisteri.muutaTietoja(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6],arvot[7]));
+        rekisteri.muutaTietoja(new VeneTilaus(id, vene_id, henkilosto_id, hinta, kuljetus_id, arvot[5], arvot[6], arvot[7]));
         paivitaValintaLista();
     }
 
@@ -63,7 +64,7 @@ public final class VeneTilausIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (VeneTilaus venetilaus : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(venetilaus.getId(), venetilaus.getVene_id(), venetilaus.getHenkilosto_id(), venetilaus.getHinta(), venetilaus.getKuljetus_id(),venetilaus.getVastaanottaja(), venetilaus.getVari(), venetilaus.getEdistyminen()));
+            malli.addRow(Arrays.asList(venetilaus.getId(), venetilaus.getVene_id(), venetilaus.getHenkilosto_id(), venetilaus.getHinta(), venetilaus.getKuljetus_id(), venetilaus.getVastaanottaja(), venetilaus.getVari(), venetilaus.getEdistyminen()));
         }
     }
 
