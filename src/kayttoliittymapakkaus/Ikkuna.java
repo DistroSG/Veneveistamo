@@ -262,6 +262,10 @@ public abstract class Ikkuna extends JFrame {
 
         } else if (yhdistelmä.getSelectedItem() == "Vene Has Perusvarit") {
             sarakenimet = new String[]{"VeneID", "PerusvaritID"};
+            
+            new VarusteetIkkuna("Varusteet", sarakenimet).setVisible(true);
+        } else if (yhdistelmä.getSelectedItem() == "Varusteet") {
+            sarakenimet = new String[]{"ID", "Kuvaus", "Kuva", "Takuu ID", "Hinta", "Alv"};
 
             new VeneHasPerusvaritIkkuna("Vene Has Perusvarit", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Vene") {
@@ -269,6 +273,7 @@ public abstract class Ikkuna extends JFrame {
 
             new VeneIkkuna("Vene", sarakenimet).setVisible(true);
         }
+        
         this.dispose();
     }
 //a
