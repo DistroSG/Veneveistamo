@@ -47,7 +47,7 @@ public class IlmoitusIkkuna extends Ikkuna{
             int id = Integer.parseInt(arvot[0]);
             int veneTilaus_id = Integer.parseInt(arvot[3]);
             double hinta = Double.parseDouble(arvot[2]);
-            rekisteri.lisaaTieto(new Ilmoitus(id, arvot[1], hinta, veneTilaus_id));
+            rekisteri.muutaTietoja(new Ilmoitus(id, arvot[1], hinta, veneTilaus_id));
         paivitaValintaLista();
     }
 

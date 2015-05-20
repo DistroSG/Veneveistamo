@@ -98,7 +98,7 @@ public class IlmoitusTietovarasto extends Tietovarasto{
         try {
 
             String muutaSql = "update ilmotus "
-                    + "set ilmotus=?,hinta=?,veneTilaus_id=?"
+                    + "set ilmotus=?,hinta=?,veneTilaus_id=? "
                     + "where id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
