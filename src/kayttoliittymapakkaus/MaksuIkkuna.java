@@ -34,7 +34,7 @@ public final class MaksuIkkuna extends Ikkuna {
             paivitaValintaLista();
 
         } catch (NumberFormatException e) {
-            virhe("Eränumeron, VeneTilausID ja hinnan pitää olla kokonaislukuja!");
+            virhe("Eränumeron, VeneTilausID ja hinnan pitää olla kokonaislukuja! HUOM! päivät syötetään YYYY-MM-DD muodossa");
         }
     }
 
@@ -44,7 +44,7 @@ public final class MaksuIkkuna extends Ikkuna {
 
         int eranumero = Integer.parseInt(arvot[0]);
         int veneTilaus_id = Integer.parseInt(arvot[1]);
-        double hinta = Integer.parseInt(arvot[2]);
+        double hinta = Double.parseDouble(arvot[2]);
         rekisteri.muutaTietoja(new Maksu(eranumero, veneTilaus_id, hinta, arvot[3],arvot[4]));
         paivitaValintaLista();
 
