@@ -1,7 +1,7 @@
 package datapakkaus;
 
 /**
- * VeneHasMateriaaliMuutos luokka. Jolla pidetään uusi ja vanha veneen
+ * VeneHasMateriaaliMuutos on luokka, jossa pidetään uusi ja vanha veneen
  * tehtävät muutoksen varten.
  *
  * @author s1300723

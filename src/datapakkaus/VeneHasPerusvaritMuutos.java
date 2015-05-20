@@ -1,7 +1,7 @@
 package datapakkaus;
 
 /**
- * VeneHasPerusvaritMuutos luokka. Jolla pidetään uusi ja vanha veneen
+ * VeneHasPerusvaritMuutos on luokka, jossa pidetään uusi ja vanha veneen
  * tehtävät muutoksen varten.
  *
  * @author s1300723
