@@ -6,7 +6,7 @@ import tietovarastopakkaus.VarusteetTietovarasto;
 
 //@author s1300748
 
-public class VarusteetIkkuna extends Ikkuna {
+public final class VarusteetIkkuna extends Ikkuna {
         private final VarusteetTietovarasto rekisteri = new VarusteetTietovarasto();
 
  
@@ -15,9 +15,9 @@ public class VarusteetIkkuna extends Ikkuna {
         haeKaikkiTiedot();
     }
 
-    public void haeVarusteet() {
-        for (Varusteet varusteet : rekisteri.haeVarusteet()) {
-            malli.addRow(Arrays.asList(varusteet.getId(), varusteet.getKuvaus(), varusteet.getKuva(), varusteet.getTakuu_id(), varusteet.getHinta(), varusteet.getAlv()));
+    public void haeTiedot() {
+        for (Varusteet varusteet : rekisteri.haeTiedot()) {
+            malli.addRow(Arrays.asList(varusteet.getId(), varusteet.getVarusteet(), varusteet.getKuvaus(), varusteet.getKuva(), varusteet.getTakuu_id(), varusteet.getHinta(), varusteet.getAlv()));
         }
     }
 
@@ -26,9 +26,9 @@ public class VarusteetIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(arvot[0]);
-        int takuu_id = Integer.parseInt(arvot[3]);
-        double hinta = Double.parseDouble(arvot[4]);
-        double alv = Double.parseDouble(arvot[5]);
+        int takuu_id = Integer.parseInt(arvot[4]);
+        double hinta = Double.parseDouble(arvot[5]);
+        double alv = Double.parseDouble(arvot[6]);
         rekisteri.muutaTietoja(new Varusteet(id, arvot[1], arvot[2], arvot[3], takuu_id, hinta, alv));
         paivitaValintaLista();
     }
@@ -38,9 +38,9 @@ public class VarusteetIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int takuu_id = Integer.parseInt(arvot[3]);
-            double hinta = Integer.parseInt(arvot[4]);
-            double alv = Integer.parseInt(arvot[5]);
+            int takuu_id = Integer.parseInt(arvot[4]);
+            double hinta = Double.parseDouble(arvot[5]);
+            double alv = Double.parseDouble(arvot[6]);
             rekisteri.lisaaTieto(new Varusteet(id, arvot[1], arvot[2], arvot[3], takuu_id, hinta, alv));
             
             syottopaneeli.tyhjennaKentat();
@@ -60,7 +60,10 @@ public class VarusteetIkkuna extends Ikkuna {
 
     @Override
     public void haeKaikkiTiedot() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Varusteet varusteet : rekisteri.haeTiedot()) {
+	            malli.addRow(Arrays.asList(varusteet.getId(), varusteet.getVarusteet(), 
+                             varusteet.getKuvaus(), varusteet.getKuva(), varusteet.getHinta(), varusteet.getAlv()));
+	        }
     }
 
 }

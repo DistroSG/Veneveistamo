@@ -28,7 +28,7 @@ public class VarusteetTietovarasto extends Tietovarasto {
                 "bb372d8eaf1594", "c887b8c8");
     }
 
-    public List<Varusteet> haeVarusteet() {
+    public List<Varusteet> haeTiedot() {
         List<Varusteet> Varusteet = new ArrayList<Varusteet>();
         Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
@@ -63,16 +63,17 @@ public class VarusteetTietovarasto extends Tietovarasto {
         PreparedStatement lisayslause = null;
         try {
             String lisaaSql = "insert into Varusteet "
-                    + "(Id,Kuvaus,Kuva,Takuu_id,Hinta,Alv) "
-                    + "values (?,?,?,?,?,?)";
+                    + "(Id,Varusteet,Kuvaus,Kuva,Takuu_id,Hinta,Alv) "
+                    + "values (?,?,?,?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiVarusteet.getId());
-            lisayslause.setString(2, uusiVarusteet.getKuvaus());
-            lisayslause.setString(3, uusiVarusteet.getKuva());
-            lisayslause.setInt(4, uusiVarusteet.getTakuu_id());
-            lisayslause.setDouble(5, uusiVarusteet.getHinta());
-            lisayslause.setDouble(6, uusiVarusteet.getAlv());
+            lisayslause.setString(2, uusiVarusteet.getVarusteet());
+            lisayslause.setString(3, uusiVarusteet.getKuvaus());
+            lisayslause.setString(4, uusiVarusteet.getKuva());
+            lisayslause.setInt(5, uusiVarusteet.getTakuu_id());
+            lisayslause.setDouble(6, uusiVarusteet.getHinta());
+            lisayslause.setDouble(7, uusiVarusteet.getAlv());
             lisayslause.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,16 +91,17 @@ public class VarusteetTietovarasto extends Tietovarasto {
         PreparedStatement muuttamislause = null;
         try {
             String muutaSql = "update Varusteet "
-                    + " set Kuvaus=?,Kuva=?,Takuu_id=?,Hinta=?,Alv=? "
+                    + " set Varusteet=?,Kuvaus=?,Kuva=?,Takuu_id=?,Hinta=?,Alv=? "
                     + "where Id=?";
             muuttamislause = yhteys.prepareStatement(muutaSql);
 
-            muuttamislause.setInt(6, uusiVarusteet.getId());
-            muuttamislause.setString(1, uusiVarusteet.getKuvaus());
-            muuttamislause.setString(2, uusiVarusteet.getKuva());
-            muuttamislause.setInt(3, uusiVarusteet.getTakuu_id());
-            muuttamislause.setDouble(4, uusiVarusteet.getHinta());
-            muuttamislause.setDouble(5, uusiVarusteet.getAlv());
+            muuttamislause.setInt(7, uusiVarusteet.getId());
+            muuttamislause.setString(1, uusiVarusteet.getVarusteet());
+            muuttamislause.setString(2, uusiVarusteet.getKuvaus());
+            muuttamislause.setString(3, uusiVarusteet.getKuva());
+            muuttamislause.setInt(4, uusiVarusteet.getTakuu_id());
+            muuttamislause.setDouble(5, uusiVarusteet.getHinta());
+            muuttamislause.setDouble(6, uusiVarusteet.getAlv());
             if(muuttamislause.executeUpdate()>0) {
                 return true;
             }
@@ -132,12 +134,6 @@ public class VarusteetTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }
-    }
-    
-
-    @Override
-    public List<?> haeTiedot() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
