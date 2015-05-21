@@ -77,7 +77,7 @@ public abstract class Ikkuna extends JFrame {
      */
     protected String[] arvot;
     private String[] sarakenimet;
-    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu", "Ilmoitus", "Vene Has Materiaali", "Vene Has Perusvarit", "Vene", "Asiakas Has VeneTilaus"};
+    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu", "Ilmoitus", "Vene Has Materiaali", "Vene Has Perusvarit", "Vene", "Varusteet", "Asiakas Has VeneTilaus"};
     private final SortedComboBoxModel<String> comboboxModel = new SortedComboBoxModel<>(comboboxItems);
     private final JComboBox<String> yhdistelmä = new JComboBox<>(comboboxModel);
 
@@ -262,13 +262,18 @@ public abstract class Ikkuna extends JFrame {
 
         } else if (yhdistelmä.getSelectedItem() == "Vene Has Perusvarit") {
             sarakenimet = new String[]{"VeneID", "PerusvaritID"};
+            
+             new VeneHasPerusvaritIkkuna("Vene Has Perusvarit", sarakenimet).setVisible(true);
+        } else if (yhdistelmä.getSelectedItem() == "Varusteet") {
+            sarakenimet = new String[]{"ID", "Kuvaus", "Kuva", "Takuu ID", "Hinta", "Alv"};
 
-            new VeneHasPerusvaritIkkuna("Vene Has Perusvarit", sarakenimet).setVisible(true);
+           new VarusteetIkkuna("Varusteet", sarakenimet).setVisible(true);
         } else if (yhdistelmä.getSelectedItem() == "Vene") {
             sarakenimet = new String[]{"Vene ID", "Malli ID", "Malli", "Takuu ID", "Hinta", "Alv"};
 
             new VeneIkkuna("Vene", sarakenimet).setVisible(true);
         }
+        
         this.dispose();
     }
 //a
