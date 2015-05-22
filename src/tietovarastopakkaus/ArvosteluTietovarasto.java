@@ -29,7 +29,7 @@ public class ArvosteluTietovarasto {
  * haeKaikkiArvostelut Hakee kaikki tiedot arvostelu taulusta.
  * @return kaikki arvostelujen tiedot.
  */
-    public List<Arvostelu> haeKaikkArvostelut() {
+    public List<Arvostelu> haeTiedot() {
         List<Arvostelu> arvostelut = new ArrayList<Arvostelu>();
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
@@ -66,7 +66,7 @@ public class ArvosteluTietovarasto {
  * lisaaArvostelu lisää arvostelun arvostelu kantaan.
  * @param uusiarvostelu, lisättävä arvostelu
  */
-    public void lisaaArvostelu(Arvostelu uusiarvostelu) {
+    public void lisaaTieto(Arvostelu uusiarvostelu) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
@@ -96,7 +96,7 @@ public class ArvosteluTietovarasto {
  * poistaArvostelu poistaa arvostelun kannasta.
  * @param id arvostelun id joka poistetaan.
  */
-    public boolean poistaArvostelu(int id) {
+    public boolean poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return false;

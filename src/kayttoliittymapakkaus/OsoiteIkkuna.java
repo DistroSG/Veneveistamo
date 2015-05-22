@@ -35,7 +35,7 @@ public final class OsoiteIkkuna extends Ikkuna {
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
-        rekisteri.poistaOsoite(id);
+        rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
 

@@ -30,7 +30,8 @@ public class AsiakasTietovarasto extends Tietovarasto {
  * haeAsiakas Hakee kaikki tiedot asiakas taulusta.
  * @return kaikki asiakas tiedot.
  */
-    public List<Asiakas> haeAsiakas() {
+    @Override
+    public List<Asiakas> haeTiedot() {
         List<Asiakas> asiakkaat = new ArrayList<Asiakas>();
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
@@ -70,7 +71,7 @@ public class AsiakasTietovarasto extends Tietovarasto {
  * lisaaAsiakas lisää asiakkaan kantaan.
  * @param uusiasiakas, lisättävät asiakas.
  */
-    public void lisaaAsiakas(Asiakas uusiasiakas) {
+    public void lisaaTieto(Asiakas uusiasiakas) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
@@ -105,7 +106,8 @@ public class AsiakasTietovarasto extends Tietovarasto {
  * poistaAsiakas poistaa asiakkaan kannasta.
  * @param id asiakkaan id joka poistetaan.
  */
-    public void poistaAsiakas(int id) {
+    @Override
+    public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
@@ -118,7 +120,6 @@ public class AsiakasTietovarasto extends Tietovarasto {
 
             poistolause.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);
@@ -167,19 +168,10 @@ public class AsiakasTietovarasto extends Tietovarasto {
         }    }
 
     @Override
-    public List<?> haeTiedot() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void lisaaTieto(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
-    @Override
-    public void poistaTieto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

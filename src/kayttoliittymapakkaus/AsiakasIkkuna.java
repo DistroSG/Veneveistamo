@@ -35,7 +35,7 @@ public final class AsiakasIkkuna extends Ikkuna {
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
-        rekisteri.poistaAsiakas(id);
+        rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
 
@@ -44,7 +44,7 @@ public final class AsiakasIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            rekisteri.lisaaAsiakas(new Asiakas(id, arvot[1],arvot[2],arvot[3],arvot[4],arvot[5],arvot[6],arvot[7],arvot[8]));
+            rekisteri.lisaaTieto(new Asiakas(id, arvot[1],arvot[2],arvot[3],arvot[4],arvot[5],arvot[6],arvot[7],arvot[8]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -55,7 +55,7 @@ public final class AsiakasIkkuna extends Ikkuna {
 
     @Override
     public void haeKaikkiTiedot() {
-        for (Asiakas asiakas : rekisteri.haeAsiakas()) {
+        for (Asiakas asiakas : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList(asiakas.getId(), asiakas.getHenkilotunnus(), asiakas.getSalasana(), asiakas.getSukunimi(), asiakas.getEtunimi(), asiakas.getSahkoposti(), asiakas.getSukupuoli(), asiakas.getPuhelinnumero(), asiakas.getAsiakastyyppi()));
         }
     }

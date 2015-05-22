@@ -33,7 +33,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
     @Override
     public void suoritaPoisto() {
         int id = (int) malli.getValueAt(taulukko.getSelectedRow(), 0);
-        rekisteri.poistaArvostelu(id);
+        rekisteri.poistaTieto(id);
         paivitaValintaLista();
     }
 
@@ -43,7 +43,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
         try {
             int id = Integer.parseInt(arvot[0]);
             int asiakasID = Integer.parseInt(arvot[1]);
-            rekisteri.lisaaArvostelu(new Arvostelu(id,asiakasID, arvot[2], arvot[3], arvot[4], arvot[5]));
+            rekisteri.lisaaTieto(new Arvostelu(id,asiakasID, arvot[2], arvot[3], arvot[4], arvot[5]));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -54,7 +54,7 @@ public final class ArvosteluIkkuna extends Ikkuna {
 
 @Override
     public void haeKaikkiTiedot() {
-        for (Arvostelu arvostelu : rekisteri.haeKaikkArvostelut()) {
+        for (Arvostelu arvostelu : rekisteri.haeTiedot()) {
             malli.addRow(Arrays.asList( arvostelu.getId(), arvostelu.getAsiakasid(), arvostelu.getArvostelu(), arvostelu.getPikkuarvostelu(),arvostelu.getEtunimi(), arvostelu.getSukunimi()));
         }
     }

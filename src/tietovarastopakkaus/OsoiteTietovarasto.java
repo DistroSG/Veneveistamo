@@ -120,34 +120,25 @@ public class OsoiteTietovarasto extends Tietovarasto {
  * poistaOsoite poistaa osoite kannasta.
  * @param id osoitteen id joka poistetaan.
  */
-    public boolean poistaOsoite(int id) {
+    @Override
+    public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
-            return false;
+            return;
         }
-        PreparedStatement poistaminenlause = null;
+        PreparedStatement poistolause = null;
         try {
-            String poistaaSql = "delete from osoite WHERE id = ?";
+            String poistoSql = "delete from osoite where id=?";
+            poistolause = yhteys.prepareStatement(poistoSql);
+            poistolause.setInt(1, id);
 
-            poistaminenlause = yhteys.prepareStatement(poistaaSql);
-
-            poistaminenlause.setInt(1, id);
-            if (poistaminenlause.executeUpdate() > 0) {
-                return true;
-            }
-            return false;
+            poistolause.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         } finally {
-            YhteydenHallinta.suljeLause(poistaminenlause);
+            YhteydenHallinta.suljeLause(poistolause);
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
 
-    @Override
-    public void poistaTieto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
