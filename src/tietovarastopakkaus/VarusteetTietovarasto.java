@@ -30,19 +30,18 @@ public class VarusteetTietovarasto extends Tietovarasto {
 
     public List<Varusteet> haeTiedot() {
         List<Varusteet> Varusteet = new ArrayList<Varusteet>();
-        Connection yhteys = yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys != null) {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                    String hakuSql = "select Id, Varusteet, Kuvaus, Kuva, Takuu_id, Hinta, Alv from Varusteet";
+                    String hakuSql = "select id, varusteet, kuvaus, takuu_id, hinta, alv from varusteet";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
                 while (tulosjoukko.next()) {
-                    Varusteet.add(new Varusteet(tulosjoukko.getInt(1), tulosjoukko.getString(2),
-                       tulosjoukko.getString(3),tulosjoukko.getString(4),
-                       tulosjoukko.getInt(5),tulosjoukko.getDouble(6),tulosjoukko.getDouble(7)));
+                    Varusteet.add(new Varusteet(tulosjoukko.getInt(1), tulosjoukko.getString(2),tulosjoukko.getString(3),
+                       tulosjoukko.getInt(4),tulosjoukko.getDouble(5),tulosjoukko.getInt(6)));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -55,25 +54,53 @@ public class VarusteetTietovarasto extends Tietovarasto {
         return Varusteet;
     }
 
-    public void lisaaVarusteet(Varusteet uusiVarusteet) {
+//    public void lisaaTieto(Varusteet uusiVarusteet) {
+//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+//        if (yhteys == null) {
+//            return;
+//        }
+//        PreparedStatement lisayslause = null;
+//        try {
+//            String lisaaSql = "insert into Varusteet "
+//                    + "(Id,Varusteet,Kuvaus,Kuva,Takuu_id,Hinta,Alv) "
+//                    + "values (?,?,?,?,?,?,?)";
+//            lisayslause = yhteys.prepareStatement(lisaaSql);
+//
+//            lisayslause.setInt(1, uusiVarusteet.getId());
+//            lisayslause.setString(2, uusiVarusteet.getVarusteet());
+//            lisayslause.setString(3, uusiVarusteet.getKuvaus());
+//            lisayslause.setString(4, uusiVarusteet.getKuva());
+//            lisayslause.setInt(5, uusiVarusteet.getTakuu_id());
+//            lisayslause.setDouble(6, uusiVarusteet.getHinta());
+//            lisayslause.setDouble(7, uusiVarusteet.getAlv());
+//            lisayslause.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            YhteydenHallinta.suljeLause(lisayslause);
+//            YhteydenHallinta.suljeYhteys(yhteys);
+//        }
+//    }
+    
+    @Override
+    public void lisaaTieto(Object object) {
+        Varusteet uusiVarusteet = (Varusteet) object;
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
         }
         PreparedStatement lisayslause = null;
         try {
-            String lisaaSql = "insert into Varusteet "
-                    + "(Id,Varusteet,Kuvaus,Kuva,Takuu_id,Hinta,Alv) "
-                    + "values (?,?,?,?,?,?,?)";
+            String lisaaSql = "insert into varusteet"
+                    + "(id,varusteet,kuvaus,takuu_id,hinta,alv) values (?,?,?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiVarusteet.getId());
             lisayslause.setString(2, uusiVarusteet.getVarusteet());
             lisayslause.setString(3, uusiVarusteet.getKuvaus());
-            lisayslause.setString(4, uusiVarusteet.getKuva());
-            lisayslause.setInt(5, uusiVarusteet.getTakuu_id());
-            lisayslause.setDouble(6, uusiVarusteet.getHinta());
-            lisayslause.setDouble(7, uusiVarusteet.getAlv());
+            lisayslause.setInt(4, uusiVarusteet.getTakuu_id());
+            lisayslause.setDouble(5, uusiVarusteet.getHinta());
+            lisayslause.setInt(6, uusiVarusteet.getAlv());
             lisayslause.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,25 +110,24 @@ public class VarusteetTietovarasto extends Tietovarasto {
         }
     }
 
-    public boolean Muuta(Varusteet uusiVarusteet) {
+    public boolean muutaTietoja(Varusteet uusiVarusteet) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return false;
         }
         PreparedStatement muuttamislause = null;
         try {
-            String muutaSql = "update Varusteet "
-                    + " set Varusteet=?,Kuvaus=?,Kuva=?,Takuu_id=?,Hinta=?,Alv=? "
-                    + "where Id=?";
+            String muutaSql = "update varusteet "
+                    + " set varusteet=?,kuvaus=?,takuu_id=?,hinta=?,alv=? "
+                    + "where id=?";
             muuttamislause = yhteys.prepareStatement(muutaSql);
 
-            muuttamislause.setInt(7, uusiVarusteet.getId());
+            muuttamislause.setInt(6, uusiVarusteet.getId());
             muuttamislause.setString(1, uusiVarusteet.getVarusteet());
             muuttamislause.setString(2, uusiVarusteet.getKuvaus());
-            muuttamislause.setString(3, uusiVarusteet.getKuva());
-            muuttamislause.setInt(4, uusiVarusteet.getTakuu_id());
-            muuttamislause.setDouble(5, uusiVarusteet.getHinta());
-            muuttamislause.setDouble(6, uusiVarusteet.getAlv());
+            muuttamislause.setInt(3, uusiVarusteet.getTakuu_id());
+            muuttamislause.setDouble(4, uusiVarusteet.getHinta());
+            muuttamislause.setInt(5, uusiVarusteet.getAlv());
             if(muuttamislause.executeUpdate()>0) {
                 return true;
             }
@@ -116,14 +142,14 @@ public class VarusteetTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }     
     }
-    public void poistaVarusteet(int id) {
+    public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
         if (yhteys == null) {
             return;
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from Varusteet where Id=?";               
+            String poistoSql = "delete from varusteet where id=?";               
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, id);
             
@@ -137,19 +163,8 @@ public class VarusteetTietovarasto extends Tietovarasto {
     }
 
     @Override
-    public void lisaaTieto(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean muutaTietoja(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void poistaTieto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
 }

@@ -15,9 +15,9 @@ public final class VarusteetIkkuna extends Ikkuna {
         haeKaikkiTiedot();
     }
 
-    public void haeTiedot() {
+    public void haeKaikkiTiedot() {
         for (Varusteet varusteet : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(varusteet.getId(), varusteet.getVarusteet(), varusteet.getKuvaus(), varusteet.getKuva(), varusteet.getTakuu_id(), varusteet.getHinta(), varusteet.getAlv()));
+            malli.addRow(Arrays.asList(varusteet.getId(), varusteet.getVarusteet(), varusteet.getKuvaus(), varusteet.getTakuu_id(), varusteet.getHinta(), varusteet.getAlv()));
         }
     }
 
@@ -26,10 +26,10 @@ public final class VarusteetIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(arvot[0]);
-        int takuu_id = Integer.parseInt(arvot[4]);
-        double hinta = Double.parseDouble(arvot[5]);
-        double alv = Double.parseDouble(arvot[6]);
-        rekisteri.muutaTietoja(new Varusteet(id, arvot[1], arvot[2], arvot[3], takuu_id, hinta, alv));
+        int takuu_id = Integer.parseInt(arvot[3]);
+        double hinta = Double.parseDouble(arvot[4]);
+        int alv = Integer.parseInt(arvot[5]);
+        rekisteri.muutaTietoja(new Varusteet(id, arvot[1], arvot[2], takuu_id, hinta, alv));
         paivitaValintaLista();
     }
 
@@ -38,10 +38,10 @@ public final class VarusteetIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int takuu_id = Integer.parseInt(arvot[4]);
-            double hinta = Double.parseDouble(arvot[5]);
-            double alv = Double.parseDouble(arvot[6]);
-            rekisteri.lisaaTieto(new Varusteet(id, arvot[1], arvot[2], arvot[3], takuu_id, hinta, alv));
+            int takuu_id = Integer.parseInt(arvot[3]);
+            double hinta = Double.parseDouble(arvot[4]);
+            int alv = Integer.parseInt(arvot[5]);
+            rekisteri.lisaaTieto(new Varusteet(id, arvot[1], arvot[2], takuu_id, hinta, alv));
             
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
@@ -58,12 +58,6 @@ public final class VarusteetIkkuna extends Ikkuna {
         paivitaValintaLista();
     }
 
-    @Override
-    public void haeKaikkiTiedot() {
-        for (Varusteet varusteet : rekisteri.haeTiedot()) {
-	            malli.addRow(Arrays.asList(varusteet.getId(), varusteet.getVarusteet(), 
-                             varusteet.getKuvaus(), varusteet.getKuva(), varusteet.getHinta(), varusteet.getAlv()));
-	        }
-    }
+    
 
 }
