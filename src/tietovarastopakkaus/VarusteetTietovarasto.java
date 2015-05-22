@@ -54,34 +54,6 @@ public class VarusteetTietovarasto extends Tietovarasto {
         return Varusteet;
     }
 
-//    public void lisaaTieto(Varusteet uusiVarusteet) {
-//        Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
-//        if (yhteys == null) {
-//            return;
-//        }
-//        PreparedStatement lisayslause = null;
-//        try {
-//            String lisaaSql = "insert into Varusteet "
-//                    + "(Id,Varusteet,Kuvaus,Kuva,Takuu_id,Hinta,Alv) "
-//                    + "values (?,?,?,?,?,?,?)";
-//            lisayslause = yhteys.prepareStatement(lisaaSql);
-//
-//            lisayslause.setInt(1, uusiVarusteet.getId());
-//            lisayslause.setString(2, uusiVarusteet.getVarusteet());
-//            lisayslause.setString(3, uusiVarusteet.getKuvaus());
-//            lisayslause.setString(4, uusiVarusteet.getKuva());
-//            lisayslause.setInt(5, uusiVarusteet.getTakuu_id());
-//            lisayslause.setDouble(6, uusiVarusteet.getHinta());
-//            lisayslause.setDouble(7, uusiVarusteet.getAlv());
-//            lisayslause.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            YhteydenHallinta.suljeLause(lisayslause);
-//            YhteydenHallinta.suljeYhteys(yhteys);
-//        }
-//    }
-    
     @Override
     public void lisaaTieto(Object object) {
         Varusteet uusiVarusteet = (Varusteet) object;
