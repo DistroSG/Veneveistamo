@@ -77,7 +77,7 @@ public abstract class Ikkuna extends JFrame {
      */
     protected String[] arvot;
     private String[] sarakenimet;
-    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu", "Ilmoitus", "Vene Has Materiaali", "Asiakas Has VeneTilaus", "Vene Has Perusvarit", "Varusteet", "Vene"};
+    private final String[] comboboxItems = {"Puhelinnumero", "Toimisto", "Henkilöstö", "Tehtävä", "Henkilöstö has tehtävä", "Maksu", "Materiaali", "Perusvarit", "Asiakas", "Vene Tilaus", "Kuljetus", "Malli", "Osoite", "Arvostelu", "Ilmoitus", "Vene Has Materiaali", "Asiakas Has VeneTilaus", "Vene Has Perusvarit", "Varusteet", "Vene", "Vene Has Varusteet"};
     private final SortedComboBoxModel<String> comboboxModel = new SortedComboBoxModel<>(comboboxItems);
     private final JComboBox<String> yhdistelmä = new JComboBox<>(comboboxModel);
 
@@ -274,6 +274,10 @@ public abstract class Ikkuna extends JFrame {
             sarakenimet = new String[]{"Vene ID", "Malli ID", "Malli", "Takuu ID", "Hinta", "Alv"};
 
             new VeneIkkuna("Vene", sarakenimet).setVisible(true);
+        } else if (yhdistelmä.getSelectedItem() == "Vene Has Varusteet") {
+            sarakenimet = new String[]{"Vene ID", "Erikoisvarusteet ID", "Vakiovarusteet"};
+
+            new VeneHasVarusteetIkkuna("Vene Has Varusteet", sarakenimet).setVisible(true);
         }
         
         this.dispose();
