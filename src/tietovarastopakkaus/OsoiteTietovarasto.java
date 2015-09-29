@@ -95,7 +95,7 @@ public class OsoiteTietovarasto extends Tietovarasto {
         PreparedStatement paivitaminenlause = null;
         try {
 
-            String paivitaSql = "UPDATE Osoite "
+            String paivitaSql = "UPDATE osoite "
                     + "SET katuosoite = ?, postinumero = ?, toimipaikka = ?, yrityksennimi = ?, venetilaus_id = ? "
                     + "WHERE id = ?";
             paivitaminenlause = yhteys.prepareStatement(paivitaSql);

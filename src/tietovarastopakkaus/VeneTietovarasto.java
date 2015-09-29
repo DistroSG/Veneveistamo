@@ -30,14 +30,13 @@ public class VeneTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT vene.id, malliID, malli.malli, takuuID, hinta, alv FROM vene INNER JOIN malli ON vene.malliID=malli.id;";
+                String hakuSql = "SELECT vene.id, malliID, malli.malli, takuuID, vene.hinta, alv FROM vene INNER JOIN malli ON vene.malliID=malli.id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
-                
 
                 while (tulosjoukko.next()) {
                     veneet.add(new Vene(tulosjoukko.getInt(1),
-                            tulosjoukko.getInt(2), tulosjoukko.getString(3),tulosjoukko.getInt(4), tulosjoukko.getInt(5), tulosjoukko.getInt(6)));
+                            tulosjoukko.getInt(2), tulosjoukko.getString(3), tulosjoukko.getInt(4), tulosjoukko.getInt(5), tulosjoukko.getInt(6)));
 
                 }
 
@@ -113,7 +112,6 @@ public class VeneTietovarasto extends Tietovarasto {
             muutoslause.setInt(5, uusiVene.getId());
             return muutoslause.executeUpdate() > 0;
         } catch (Exception e) {
-
             return false;
         } finally {
             YhteydenHallinta.suljeLause(muutoslause);

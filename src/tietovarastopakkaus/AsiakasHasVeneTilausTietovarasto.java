@@ -9,8 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
-
+public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto {
 
     /**
      * Palautta kaikki AsiakasHasVeneTilaus yhteydet.
@@ -25,7 +24,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT asiakas_id, veneTilaus_id FROM asiakas_has_venetilaus;";
+                String hakuSql = "SELECT asiakas_id, veneTilaus_id FROM asiakas_has_veneTilaus;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
@@ -57,7 +56,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         }
         PreparedStatement lisayslause = null;
         try {
-            String lisaaSql = "insert into asiakas_has_venetilaus "
+            String lisaaSql = "insert into asiakas_has_veneTilaus "
                     + "(asiakas_id, veneTilaus_id) values (?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
@@ -105,7 +104,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         }
         PreparedStatement muutoslause = null;
         try {
-            String muutaSql = "update asiakas_has_venetilaus "
+            String muutaSql = "update asiakas_has_veneTilaus "
                     + " set veneTilaus_id=? where asiakas_id=? and veneTilaus_id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
@@ -161,7 +160,7 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from asiakas_has_venetilaus where asiakas_id=? AND veneTilaus_id=?  ";
+            String poistoSql = "delete from asiakas_has_veneTilaus where asiakas_id=? AND veneTilaus_id=?  ";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, venetilausID);
             poistolause.setInt(2, asiakasID);
@@ -175,4 +174,3 @@ public class AsiakasHasVeneTilausTietovarasto extends Tietovarasto{
         }
     }
 }
-

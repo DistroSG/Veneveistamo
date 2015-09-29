@@ -37,8 +37,9 @@ public final class MalliIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
 
         int id = Integer.parseInt(arvot[0]);
-        int masto = Integer.parseInt(arvot[2]);
-        rekisteri.muutaTietoja(new Malli(id, arvot[1], masto));
+        int masto = Integer.parseInt(arvot[3]);
+        double hinta = Double.parseDouble(arvot[2]);
+        rekisteri.muutaTietoja(new Malli(id, arvot[1], hinta, masto));
         paivitaValintaLista();
 
     }
@@ -60,8 +61,9 @@ public final class MalliIkkuna extends Ikkuna {
         arvot = syottopaneeli.getArvot();
         try {
             int id = Integer.parseInt(arvot[0]);
-            int masto = Integer.parseInt(arvot[2]);
-            rekisteri.lisaaTieto(new Malli(id, arvot[1], masto));
+            int masto = Integer.parseInt(arvot[3]);
+            double hinta = Double.parseDouble(arvot[2]);
+            rekisteri.lisaaTieto(new Malli(id, arvot[1], hinta, masto));
             syottopaneeli.tyhjennaKentat();
             paivitaValintaLista();
 
@@ -76,7 +78,7 @@ public final class MalliIkkuna extends Ikkuna {
     @Override
     public void haeKaikkiTiedot() {
         for (Malli malli1 : rekisteri.haeTiedot()) {
-            malli.addRow(Arrays.asList(malli1.getId(), malli1.getMalli(), malli1.getMasto()));
+            malli.addRow(Arrays.asList(malli1.getId(), malli1.getMalli(), malli1.getHinta(), malli1.getMasto()));
         }
     }
 

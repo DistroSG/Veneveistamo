@@ -23,8 +23,8 @@ public class AsiakasTietovarasto extends Tietovarasto {
     }
 
     public AsiakasTietovarasto() {
-        this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
-                "bb372d8eaf1594", "c887b8c8");
+       this("com.mysql.jdbc.Driver", "jdbc:mysql://84.248.87.133:3306/veneveistamo",
+                "admin", "kek12345");
     }
 /**
  * haeAsiakas Hakee kaikki tiedot asiakas taulusta.
@@ -140,7 +140,7 @@ public class AsiakasTietovarasto extends Tietovarasto {
         PreparedStatement paivitaminenlause = null;
         try {
 
-            String paivitaSql = "UPDATE Asiakas "
+            String paivitaSql = "UPDATE asiakas "
                     + "SET henkilotunnus = ?, salsana = ?, sukunimi = ?, etunimi = ?, sahkoposti = ?, sukupuoli = ?, puhelinnumero = ?, asiakastyyppi = ? "
                     + "WHERE id = ?";
             paivitaminenlause = yhteys.prepareStatement(paivitaSql);

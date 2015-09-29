@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class MalliTietovarasto extends Tietovarasto {
 
-      /**
+    /**
      * Palautta kaikki mallien tiedot.
      *
      * @return kaikki mallien tiedot.
@@ -35,13 +35,13 @@ public class MalliTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT id, malli, masto FROM malli;";
+                String hakuSql = "SELECT id, malli, hinta, masto FROM malli;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
                 while (tulosjoukko.next()) {
                     mallit.add(new Malli(tulosjoukko.getInt(1),
-                            tulosjoukko.getString(2),tulosjoukko.getInt(3)));
+                            tulosjoukko.getString(2), tulosjoukko.getDouble(3), tulosjoukko.getInt(4)));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -53,6 +53,7 @@ public class MalliTietovarasto extends Tietovarasto {
         }
         return mallit;
     }
+
     /**
      * Lisätä uusi malli.
      *
@@ -68,12 +69,13 @@ public class MalliTietovarasto extends Tietovarasto {
         PreparedStatement lisayslause = null;
         try {
             String lisaaSql = "insert into malli "
-                    + "(id,malli,masto) values (?,?,?)";
+                    + "(id, malli, hinta, masto) values (?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
             lisayslause.setInt(1, uusiMalli.getId());
             lisayslause.setString(2, uusiMalli.getMalli());
-            lisayslause.setInt(3, uusiMalli.getMasto());
+            lisayslause.setDouble(3, uusiMalli.getHinta());
+            lisayslause.setInt(4, uusiMalli.getMasto());
             lisayslause.executeUpdate();
         } catch (SQLException ex) {
             if (ex.getErrorCode() == 1062) {
@@ -84,6 +86,7 @@ public class MalliTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
+
     /**
      * Muuta mallien tiedot.
      *
@@ -100,12 +103,13 @@ public class MalliTietovarasto extends Tietovarasto {
         PreparedStatement muutoslause = null;
         try {
             String muutaSql = "update malli "
-                    + " set malli=?, masto=? where id=?";
+                    + " set malli=?, hinta=?, masto=? where id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
 
-            muutoslause.setInt(3, uusiMalli.getId());
+            muutoslause.setInt(4, uusiMalli.getId());
             muutoslause.setString(1, uusiMalli.getMalli());
-            muutoslause.setInt(2, uusiMalli.getMasto());
+            muutoslause.setDouble(2, uusiMalli.getHinta());
+            muutoslause.setInt(3, uusiMalli.getMasto());
             if (muutoslause.executeUpdate() > 0) {
                 return true;
             } else {
@@ -119,6 +123,7 @@ public class MalliTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
+
     /**
      * Poista malli.
      *

@@ -13,17 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *VeneTilaustietovarasto luokka jonka avulla muodostetaan yhteys oikeen tauluun kannassa.
- * 
+ * VeneTilaustietovarasto luokka jonka avulla muodostetaan yhteys oikeen tauluun
+ * kannassa.
+ *
  * @author Axel
  * @version 1.0
  */
 public class VeneTilausTietovarasto extends Tietovarasto {
-/**
- * Hakee kaikki tiedot VeneTilaus taulusta.
- * 
- * @return Venetilaus tiedot.
- */
+
+    /**
+     * Hakee kaikki tiedot VeneTilaus taulusta.
+     *
+     * @return Venetilaus tiedot.
+     */
     @Override
     public List<VeneTilaus> haeTiedot() {
         List<VeneTilaus> venetilaus = new ArrayList<>();
@@ -32,8 +34,8 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             PreparedStatement hakulause = null;
             ResultSet tulosjoukko = null;
             try {
-                String hakuSql = "SELECT venetilaus.id, vene_id, henkilosto_id, hinta, kuljetus_id,kuljetus.vastaanottaja , "
-                        + "vari, edistyminen FROM venetilaus INNER JOIN kuljetus ON venetilaus.kuljetus_id=kuljetus.id;";
+                String hakuSql = "SELECT veneTilaus.id, vene_id, henkilosto_id, hinta, kuljetus_id,kuljetus.vastaanottaja , "
+                        + "vari, edistyminen FROM veneTilaus INNER JOIN kuljetus ON veneTilaus.kuljetus_id=kuljetus.id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
 
@@ -42,7 +44,6 @@ public class VeneTilausTietovarasto extends Tietovarasto {
                             tulosjoukko.getInt(2), tulosjoukko.getInt(3), tulosjoukko.getDouble(4), tulosjoukko.getInt(5), tulosjoukko.getString(6), tulosjoukko.getString(7), tulosjoukko.getString(8)));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 YhteydenHallinta.suljeTulosjoukko(tulosjoukko);
                 YhteydenHallinta.suljeLause(hakulause);
@@ -51,11 +52,12 @@ public class VeneTilausTietovarasto extends Tietovarasto {
         }
         return venetilaus;
     }
-/**
- * Lisätään uusi VeneTilaus tieto tietokantaan.
- * 
- * @param object VeneTilaus 
- */
+
+    /**
+     * Lisätään uusi VeneTilaus tieto tietokantaan.
+     *
+     * @param object VeneTilaus
+     */
     @Override
     public void lisaaTieto(Object object) {
         VeneTilaus uusiVeneTilaus = (VeneTilaus) object;
@@ -65,7 +67,7 @@ public class VeneTilausTietovarasto extends Tietovarasto {
         }
         PreparedStatement lisayslause = null;
         try {
-            String lisaaSql = "insert into venetilaus"
+            String lisaaSql = "insert into veneTilaus"
                     + "(id, vene_id, henkilosto_id, hinta, kuljetus_id, vari, edistyminen) values (?,?,?,?,?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
 
@@ -84,12 +86,13 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-/**
- * Muutetaan tietoa VeneTilaus tietokannassa.
- * 
- * @param object VeneTilaus
- * @return palauttaa true, jos muuttaminen on onnistunut.
- */
+
+    /**
+     * Muutetaan tietoa VeneTilaus tietokannassa.
+     *
+     * @param object VeneTilaus
+     * @return palauttaa true, jos muuttaminen on onnistunut.
+     */
     @Override
     public boolean muutaTietoja(Object object) {
         VeneTilaus uusiVeneTilaus = (VeneTilaus) object;
@@ -100,7 +103,7 @@ public class VeneTilausTietovarasto extends Tietovarasto {
         PreparedStatement muutoslause = null;
         try {
 
-            String muutaSql = "update venetilaus "
+            String muutaSql = "update veneTilaus "
                     + "set vene_id=?,henkilosto_id=?,hinta=?,kuljetus_id=?,vari=?,edistyminen=? "
                     + "where id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
@@ -125,11 +128,12 @@ public class VeneTilausTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-/**
- * Poistaa tiedon VeneTilaus taulusta.
- * 
- * @param id poistetaan tieto ID:en perusteella.
- */
+
+    /**
+     * Poistaa tiedon VeneTilaus taulusta.
+     *
+     * @param id poistetaan tieto ID:en perusteella.
+     */
     @Override
     public void poistaTieto(int id) {
         Connection yhteys = YhteydenHallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
@@ -138,7 +142,7 @@ public class VeneTilausTietovarasto extends Tietovarasto {
         }
         PreparedStatement poistolause = null;
         try {
-            String poistoSql = "delete from venetilaus where id=?";
+            String poistoSql = "delete from veneTilaus where id=?";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, id);
 

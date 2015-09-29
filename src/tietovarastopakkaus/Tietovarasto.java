@@ -54,8 +54,8 @@ public abstract class Tietovarasto {
      * Luoda uutta yhteyttä veneveistämön tietokannon kanssa.
      */
     public Tietovarasto() {
-        this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
-                "bb372d8eaf1594", "c887b8c8");
+        this("com.mysql.jdbc.Driver", "jdbc:mysql://84.248.87.133:3306/veneveistamo",
+                "admin", "kek12345");
     }
 
     /**

@@ -22,8 +22,8 @@ public class ArvosteluTietovarasto {
     }
 
     public ArvosteluTietovarasto() {
-        this("com.mysql.jdbc.Driver", "jdbc:mysql://eu-cdbr-azure-north-c.cloudapp.net:3306/veneveistamo",
-                "bb372d8eaf1594", "c887b8c8");
+        this("com.mysql.jdbc.Driver", "jdbc:mysql://84.248.87.133:3306/veneveistamo",
+                "admin", "kek12345");
     }
 /**
  * haeKaikkiArvostelut Hakee kaikki tiedot arvostelu taulusta.
@@ -134,7 +134,7 @@ public class ArvosteluTietovarasto {
         PreparedStatement paivitaminenlause = null;
         try {
 
-            String paivitaSql = "UPDATE Arvostelu "
+            String paivitaSql = "UPDATE arvostelu "
                     + "SET arvostelu = ?, pikkuarvostelu = ? "
                     + "WHERE id = ? and asiakas_id = ?";
             paivitaminenlause = yhteys.prepareStatement(paivitaSql);

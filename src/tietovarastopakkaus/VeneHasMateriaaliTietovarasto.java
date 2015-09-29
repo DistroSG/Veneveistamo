@@ -121,6 +121,7 @@ public class VeneHasMateriaaliTietovarasto extends Tietovarasto {
             return muutoslause.executeUpdate() > 0;
         } catch (Exception e) {
             return false;
+           
         } finally {
             YhteydenHallinta.suljeLause(muutoslause);
             YhteydenHallinta.suljeYhteys(yhteys);

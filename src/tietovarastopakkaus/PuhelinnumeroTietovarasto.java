@@ -34,7 +34,7 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
                         + "JOIN veneveistamo.toimisto ON toimisto.id = puhelinnumero.toimisto_id;";
                 hakulause = yhteys.prepareStatement(hakuSql);
                 tulosjoukko = hakulause.executeQuery();
-                
+
                 while (tulosjoukko.next()) {
                     puhelinnumerot.add(new Puhelinnumero(tulosjoukko.getInt(1),
                             tulosjoukko.getInt(2), tulosjoukko.getInt(3), tulosjoukko.getString(4)));
@@ -66,12 +66,12 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
             String lisaaSql = "insert into puhelinnumero "
                     + "(id,puhelinnumero,toimisto_id) values (?,?,?)";
             lisayslause = yhteys.prepareStatement(lisaaSql);
-            
+
             lisayslause.setInt(1, uusiPuhelinnumero.getId());
             lisayslause.setInt(2, uusiPuhelinnumero.getPuhelinnumero());
             lisayslause.setInt(3, uusiPuhelinnumero.getToimistoID());
             lisayslause.executeUpdate();
-            
+
         } catch (SQLException ex) {
             if (ex.getErrorCode() == 1062) {
                 idVirheIlmoitus();
@@ -102,7 +102,7 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
                     + " set puhelinnumero=?,toimisto_id=? "
                     + "where id=?";
             muutoslause = yhteys.prepareStatement(muutaSql);
-            
+
             muutoslause.setInt(1, uusiPuhelinnumero.getPuhelinnumero());
             muutoslause.setInt(2, uusiPuhelinnumero.getToimistoID());
             muutoslause.setInt(3, uusiPuhelinnumero.getId());
@@ -131,7 +131,7 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
             String poistoSql = "delete from puhelinnumero where id=?";
             poistolause = yhteys.prepareStatement(poistoSql);
             poistolause.setInt(1, puhelinnumeroID);
-            
+
             poistolause.executeUpdate();
         } catch (Exception e) {
         } finally {
@@ -139,5 +139,5 @@ public class PuhelinnumeroTietovarasto extends Tietovarasto {
             YhteydenHallinta.suljeYhteys(yhteys);
         }
     }
-    
+
 }
